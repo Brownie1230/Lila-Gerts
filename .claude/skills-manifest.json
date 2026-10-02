@@ -1,0 +1,1171 @@
+[
+  {
+    "name": "a-b-test-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/a-b-test-design",
+    "desc": "Design an A/B experiment — hypothesis, variants, primary metric, and sample size. Use when a change can be measured quantitatively at scale. For observing behaviour qualitatively, use `test-scenario`."
+  },
+  {
+    "name": "accessibility-audit",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/accessibility-audit",
+    "desc": "Audit an existing interface against WCAG, producing findings with severity ratings and remediation steps. Use when you have a design or build to assess now. Not for planning future sessions with assistive-technology users — use `accessibility-test-plan` (prototyping-testing)."
+  },
+  {
+    "name": "accessibility-test-plan",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/accessibility-test-plan",
+    "desc": "Plan accessibility testing — assistive technologies, participant criteria, WCAG coverage, and session protocol. Use when scheduling testing with real AT users. Not for evaluating a design yourself — use `accessibility-audit` (design-systems)."
+  },
+  {
+    "name": "adaptive-communication",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "adaptive-communication/skills/adaptive-communication",
+    "desc": "Use when detecting ambiguous user intent, hedging language, open-ended framing, personal context before requests, or when unsure whether user wants exploration vs direct answer. Applies to all conversations."
+  },
+  {
+    "name": "aesthetic-usability",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/aesthetic-usability",
+    "desc": "Apply the Aesthetic-Usability Effect — polished, consistent interfaces are perceived as more usable and forgive minor friction. Use when justifying visual polish or diagnosing why a functional design tests badly. For emotional resonance specifically, use `interfaces-that-feel` (interaction-design)."
+  },
+  {
+    "name": "affinity-diagram",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/affinity-diagram",
+    "desc": "Cluster many qualitative data points into themes and insight statements. Use when synthesising across multiple sessions or sources. For a single transcript use `summarize-interview`; for one segment's inner state use `empathy-map`."
+  },
+  {
+    "name": "animation-principles",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/animation-principles",
+    "desc": "Apply animation principles — easing, staging, follow-through — to one specific UI motion. Use when tuning how an animation feels. For product-wide duration and easing tokens use `motion-system` (design-systems); for a full interaction spec use `micro-interaction-spec`."
+  },
+  {
+    "name": "awesome-claude-design",
+    "repo": "rohitg00/awesome-claude-design",
+    "sha": "7f60ee56",
+    "path": "(SKILL.md wrapper written locally; references/ is upstream)",
+    "desc": "Reference library of production DESIGN.md files grouped by aesthetic family (editorial, terminal, warm, data-dense, cinematic, playful, glass, brutalist, indie), brand-remix recipes, and prompt packs for art-directing a UI. Use when choosing or defining a visual direction for a site or app, when the user names a brand or vibe to emulate (\"make it feel like Linear / Vercel / Stripe / Warp\"), when writing or auditing a DESIGN.md or design token set, or when a build needs an opinionated aesthetic instead of default framework styling."
+  },
+  {
+    "name": "banner-design",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": "cli/assets/skills/banner-design",
+    "desc": "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with optional generated or supplied visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, website hero, print. Styles: minimalist, gradient, bold typography, photo-based, illustrated, geometric, retro, glassmorphism, 3D, neon, duotone, editorial, collage."
+  },
+  {
+    "name": "behavioural-analytics",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/behavioural-analytics",
+    "desc": "Read funnels, retention curves, and event data as a designer — separating a design problem from a tracking artefact. Use when handed product data you did not design and asked why people drop off. For choosing what to measure, use `metrics-definition` (ux-strategy); for running a controlled test, use `a-b-test-design` (prototyping-testing)."
+  },
+  {
+    "name": "bencium-aeo",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "bencium-aeo/skills/bencium-aeo",
+    "desc": "Generate AEO-optimized content (Answer Engine Optimization) for AI search visibility - ChatGPT, Claude, Gemini, AI Overviews. Use when optimizing websites for AI citations, creating FAQ schemas, evidence panels, or analyzing content for LLM extraction readiness."
+  },
+  {
+    "name": "bencium-code-conventions",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "bencium-code-conventions/skills/bencium-code-conventions",
+    "desc": "Bence's code style, tech stack, and workflow conventions"
+  },
+  {
+    "name": "bencium-controlled-ux-designer",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "bencium-controlled-ux-designer/skills/bencium-controlled-ux-designer",
+    "desc": "Expert UI/UX design guidance for unique, accessible interfaces. Use for visual decisions, colors, typography, layouts. Always ask before making design decisions. Use this skill when the user asks to build web components, pages, or applications."
+  },
+  {
+    "name": "bencium-impact-designer",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "bencium-impact-designer/skills/bencium-impact-designer",
+    "desc": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, or applications. Generates creative, polished code that avoids generic AI aesthetics. Based on Anthropic's Frontend Designer Skill"
+  },
+  {
+    "name": "bencium-innovative-ux-designer",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "bencium-innovative-ux-designer/skills/bencium-innovative-ux-designer",
+    "desc": "Develop an independent visual language and turn the human-chosen direction into a production-ready graphic, brand, campaign, publication, web, or product system. Use when originality and differentiation matter enough to escape generic AI and Big Tech aesthetics. Guides a minimum-evidence start, ten isolated typography-led HTML design directions made only from type, color, and space, visual-first human judgement, explicit commitment, and concrete Round 2 production. Do not use for routine UI fixes, small components, or applying an existing design system."
+  },
+  {
+    "name": "brand",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": "cli/assets/skills/brand",
+    "desc": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides."
+  },
+  {
+    "name": "brandkit",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/brandkit",
+    "desc": "Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems. Optimized for intentional logo concepting, refined composition, sparse typography, strong symbolic meaning, premium mockups, art-directed imagery, and flexible grid layouts."
+  },
+  {
+    "name": "business-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/business-design",
+    "desc": "Read financials, map competitive landscapes, and argue design decisions in the language of value. Use when defending design to commercial stakeholders. For the live negotiation itself, use `design-negotiation` (designer-toolkit)."
+  },
+  {
+    "name": "card-sort-analysis",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/card-sort-analysis",
+    "desc": "Analyse open or closed card sort results into a proposed grouping and label set. Use after running a sort study. For turning that evidence into a full structure, use `information-architecture` (ux-strategy)."
+  },
+  {
+    "name": "case-study",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/case-study",
+    "desc": "Craft a portfolio case study with narrative arc, process evidence, and outcomes. Use when telling a project's story to an external audience. For an internal stakeholder deck, use `presentation-deck`."
+  },
+  {
+    "name": "click-test-plan",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/click-test-plan",
+    "desc": "Design first-click and click tests for findability and navigation. Use when testing whether people can locate something. For full task-based observation, use `test-scenario`."
+  },
+  {
+    "name": "color-system",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/color-system",
+    "desc": "Build a product colour system — tonal scales, semantic roles, and contrast compliance. Use when defining or rebuilding colour from scratch. For dark-mode adaptation use `dark-mode-design`; for chart palettes use `data-visualization`; for multi-brand token architecture use `theming-system` (design-systems)."
+  },
+  {
+    "name": "competitive-analysis",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/competitive-analysis",
+    "desc": "Compare UX patterns, features, strengths, and gaps across rival products. Use when you need to know what others actually do. For deliberately adopting their conventions, use `jakobs-law` (interaction-design)."
+  },
+  {
+    "name": "component-spec",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/component-spec",
+    "desc": "Specify one component — props, states, variants, accessibility, and usage rules. Use when defining a library component. For the reusable doc scaffold use `documentation-template`; for a problem-solution pattern use `pattern-library`."
+  },
+  {
+    "name": "concept-selection",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/concept-selection",
+    "desc": "Choose between competing concepts against criteria fixed in advance, and record what each rejected concept was testing. Use when several directions are alive and one has to win. For picking which problem to work on, use `opportunity-framework` (ux-strategy); for deciding by production traffic, use `a-b-test-design`."
+  },
+  {
+    "name": "content-strategy",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/content-strategy",
+    "desc": "Define what content a product needs, how it is structured, and who owns it. Use when content itself is the problem. For the words in the interface use `ux-writing` (designer-toolkit); for structural hierarchy use `information-architecture`."
+  },
+  {
+    "name": "conversational-ux",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/conversational-ux",
+    "desc": "Design voice and conversational interfaces — dialog flows, error recovery, and persona. Use when the interface speaks and listens rather than being tapped. For graphical input collection, use `form-design`."
+  },
+  {
+    "name": "critique-affordance",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-affordance",
+    "desc": "Critique a rendered screen's affordances — what looks clickable, state visibility, CTA clarity, and action discoverability. Use when reviewing an existing screen. For sizing and positioning targets in new work, use `fitts-law` (interaction-design)."
+  },
+  {
+    "name": "critique-brand-consistency",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-brand-consistency",
+    "desc": "Critique a rendered screen against mood.md, voice.md, and tokens.md. Use when those brand files exist and you are checking compliance. For defining the visual language itself, use `illustration-style` (ui-design)."
+  },
+  {
+    "name": "critique-color",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-color",
+    "desc": "Critique a rendered screen's colour — contrast ratios, palette coherence, and semantic meaning. Use when reviewing one screen. For a product-wide WCAG audit use `accessibility-audit` (design-systems); for building the palette use `color-system` (ui-design)."
+  },
+  {
+    "name": "critique-composition",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-composition",
+    "desc": "Critique a rendered screen's composition — balance, whitespace, rhythm, and gestalt grouping. Use when a layout feels off but hierarchy is fine. For emphasis and eye flow specifically, use `critique-visual-hierarchy`."
+  },
+  {
+    "name": "critique-information-density",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-information-density",
+    "desc": "Critique a rendered screen's density — cognitive load, content prioritisation, scanning patterns, and progressive disclosure. Use when a screen feels overwhelming. For the underlying choice-count principle, use `hicks-law` (interaction-design)."
+  },
+  {
+    "name": "critique-typography",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-typography",
+    "desc": "Critique a rendered screen's typography — scale usage, readability, consistency, and token compliance. Use when reviewing type on a screen. For defining the scale itself, use `typography-scale` (ui-design)."
+  },
+  {
+    "name": "critique-visual-hierarchy",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "visual-critique/skills/critique-visual-hierarchy",
+    "desc": "Critique a rendered screen's hierarchy — entry point, eye flow, weight distribution, and emphasis. Use when attention lands in the wrong place. For establishing hierarchy in new work, use `visual-hierarchy` (ui-design)."
+  },
+  {
+    "name": "dark-mode-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/dark-mode-design",
+    "desc": "Adapt an existing palette to dark mode — surface elevation, contrast rebalancing, and desaturation rules. Use when you already have a light palette to translate. For building the base palette first, use `color-system`."
+  },
+  {
+    "name": "data-visualization",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/data-visualization",
+    "desc": "Select chart types and design data encodings — marks, axes, labels, and accessible chart styling. Use when presenting data graphically. Owns chart selection and encoding only; the categorical colour ramp itself belongs to `color-system`."
+  },
+  {
+    "name": "deploy-to-vercel",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/deploy-to-vercel",
+    "desc": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\"."
+  },
+  {
+    "name": "design",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": "cli/assets/skills/design",
+    "desc": "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini, Atlas Cloud, or MuAPI AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTML→screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads."
+  },
+  {
+    "name": "design-audit",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "design-audit/skills/design-audit",
+    "desc": "Premium UI/UX design audit and refinement skill. Conducts systematic visual audits of existing apps and produces phased, implementation-ready design plans. Use this skill whenever the user asks to audit a UI, improve an app's visual design, make an interface feel more polished or premium, review design consistency, fix visual hierarchy, or refine spacing/typography/color. Also trigger when the user says \"design review\", \"make it look better\", \"UI polish\", \"visual refinement\", \"design pass\", \"audit the design\", or references making an app feel more professional. This skill is purely visual — it does not touch functionality, logic, or features. It elevates what exists."
+  },
+  {
+    "name": "design-brief",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/design-brief",
+    "desc": "Write a project brief — problem space, constraints, audience, and success criteria. Use at kickoff for one specific project. For long-horizon aspiration use `north-star-vision`; for reusable decision rules use `design-principles`."
+  },
+  {
+    "name": "design-critique",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/design-critique",
+    "desc": "Facilitate a structured team critique — framing, feedback rules, and actionable outcomes. Use when running a session with people in the room. For a solo expert review, use `heuristic-evaluation` (prototyping-testing)."
+  },
+  {
+    "name": "design-debt-audit",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/design-debt-audit",
+    "desc": "Inventory and prioritise accumulated design inconsistencies across a product. Use when drift has built up over time. For token coverage specifically use `design-token-audit` (designer-toolkit); for WCAG gaps use `accessibility-audit` (design-systems)."
+  },
+  {
+    "name": "design-impact-reporting",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/design-impact-reporting",
+    "desc": "Communicate design's contribution to business and user outcomes in stakeholder language. Use when reporting results upward. For choosing the metrics in the first place, use `metrics-definition` (ux-strategy)."
+  },
+  {
+    "name": "design-negotiation",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/design-negotiation",
+    "desc": "Advocate for design quality, scope, and timeline with partners and leadership using evidence and shared goals. Use in the conversation itself. For the commercial vocabulary behind it, use `business-design` (ux-strategy)."
+  },
+  {
+    "name": "design-principles",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/design-principles",
+    "desc": "Define actionable principles that resolve trade-offs when the team disagrees. Use when the same decisions keep getting relitigated. For a single project's framing, use `design-brief`."
+  },
+  {
+    "name": "design-qa-checklist",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/design-qa-checklist",
+    "desc": "Build a QA checklist for verifying that a build matches the design. Use at implementation review. For the spec engineers build from, use `handoff-spec`."
+  },
+  {
+    "name": "design-rationale",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/design-rationale",
+    "desc": "Write rationale connecting decisions to user needs, business goals, and principles. Use when a decision needs defending in writing. For a live conversation, use `design-negotiation`."
+  },
+  {
+    "name": "design-review-process",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/design-review-process",
+    "desc": "Establish review gates — criteria, checkpoints, and approval flow. Use when work ships without consistent review. For running one individual session, use `design-critique`."
+  },
+  {
+    "name": "design-sprint",
+    "repo": "wondelai/skills",
+    "sha": "c1729964",
+    "path": "design-sprint",
+    "desc": "Run a structured 5-day process to prototype, test, and validate product ideas with real users. Use when the user mentions \"design sprint\", \"validate before we build\", \"rapid prototype\", \"test with users\", or \"should we build this\". Also trigger when a team is stuck in endless debate over a high-stakes product decision, or wants to de-risk a costly idea before investing in development. Covers mapping, sketching, deciding, prototyping, and testing across Monday-Friday. For ongoing experimentation and MVPs, see lean-startup. For customer job analysis, see jobs-to-be-done. For non-leading user interviews, see mom-test."
+  },
+  {
+    "name": "design-sprint-plan",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/design-sprint-plan",
+    "desc": "Plan and facilitate a design sprint from challenge framing through prototype testing. Use when compressing discovery into days. For ongoing team cadence, use `team-workflow`."
+  },
+  {
+    "name": "design-system",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": "cli/assets/skills/design-system",
+    "desc": "Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-compliant presentations."
+  },
+  {
+    "name": "design-system-adoption",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/design-system-adoption",
+    "desc": "Create adoption strategy and enablement materials to drive design system usage. Use when the system exists but teams ignore it. For contribution and versioning rules, use `design-system-governance` (design-systems)."
+  },
+  {
+    "name": "design-system-governance",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/design-system-governance",
+    "desc": "Define how the system evolves — contribution model, versioning, deprecation, and change management. Use when multiple teams contribute. For driving uptake use `design-system-adoption` (designer-toolkit); for design file history use `version-control-strategy` (design-ops)."
+  },
+  {
+    "name": "design-taste-frontend",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/taste-skill",
+    "desc": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check."
+  },
+  {
+    "name": "design-taste-frontend-v1",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/taste-skill-v1",
+    "desc": "The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you need exact backward compatibility."
+  },
+  {
+    "name": "design-token",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/design-token",
+    "desc": "Define and organise tokens for colour, spacing, type, and elevation with naming and usage rules. Use when establishing the token layer. For auditing existing usage use `design-token-audit` (designer-toolkit); for multi-brand mapping use `theming-system`."
+  },
+  {
+    "name": "design-token-audit",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/design-token-audit",
+    "desc": "Audit token usage across a product for coverage, drift, and hard-coded values. Use when tokens exist and you suspect they are being bypassed. For defining tokens in the first place, use `design-token` (design-systems)."
+  },
+  {
+    "name": "diary-study-plan",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/diary-study-plan",
+    "desc": "Design a diary study — prompts, cadence, duration, participant criteria, and analysis frame. Use when behaviour unfolds over days or weeks. For a single-session study, use `usability-test-plan`."
+  },
+  {
+    "name": "documentation-template",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/documentation-template",
+    "desc": "Generate a reusable documentation scaffold for components, patterns, or guidelines. Use when standardising how the system is documented. For the content of one component's spec, use `component-spec`."
+  },
+  {
+    "name": "doherty-threshold",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/doherty-threshold",
+    "desc": "Apply the Doherty Threshold — keep system response under 400ms to preserve user flow. Use when diagnosing perceived slowness or setting a performance budget. For what to show during unavoidable waits, use `loading-states`."
+  },
+  {
+    "name": "empathy-map",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/empathy-map",
+    "desc": "Build a Says, Thinks, Does, Feels map for one user or segment. Use when sharing user understanding quickly. For a composite archetype with goals and behaviours use `user-persona`; for cross-session themes use `affinity-diagram`."
+  },
+  {
+    "name": "error-handling-ux",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/error-handling-ux",
+    "desc": "Design error prevention, detection, and recovery across a product — message content, placement, and escape routes. Use when errors span multiple flows. For validation inside a single form, use `form-design`."
+  },
+  {
+    "name": "eu-ai-act-reviewer",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "eu-ai-act-reviewer/skills/eu-ai-act-reviewer",
+    "desc": "Review user journeys, public content, and codebases for potentially relevant EU AI Act provisions, with exact official citations, evidence gaps, application dates, and plain-language next actions. Use for EU AI Act issue-spotting, not final legal or compliance decisions."
+  },
+  {
+    "name": "experience-map",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/experience-map",
+    "desc": "Map the full ecosystem of touchpoints, channels, and relationships across a service. Use when the experience spans more than one product. For one persona's linear journey use `journey-map` (design-research); for backstage operations use `service-blueprint`."
+  },
+  {
+    "name": "feedback-patterns",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/feedback-patterns",
+    "desc": "Design confirmations, status updates, and notifications that tell users an action registered. Use when the system must acknowledge success or change. For waiting states use `loading-states`; for failures use `error-handling-ux`."
+  },
+  {
+    "name": "fitts-law",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/fitts-law",
+    "desc": "Apply Fitts's Law — target acquisition time depends on size and distance. Use when sizing and positioning controls, especially for touch. For how many controls to show at once, use `hicks-law`."
+  },
+  {
+    "name": "form-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/form-design",
+    "desc": "Design a form end to end — field order, grouping, validation, and completion. Use when the artifact is a form. For product-wide error strategy use `error-handling-ux`; for first-run signup use `onboarding-design`."
+  },
+  {
+    "name": "frontend-design",
+    "repo": "anthropics/claude-code",
+    "sha": "52c76441",
+    "path": "plugins/frontend-design/skills/frontend-design",
+    "desc": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+  },
+  {
+    "name": "frontend-design-pro",
+    "repo": "claudekit/frontend-design-pro-demo",
+    "sha": "756b8d99",
+    "path": ".claude/skills/frontend-design-pro",
+    "desc": "Creates jaw-dropping, production-ready frontend interfaces AND delivers perfectly matched real photos (Unsplash/Pexels direct links) OR flawless custom image-generation prompts for hero images, backgrounds, and illustrations. Zero AI slop, zero fake URLs."
+  },
+  {
+    "name": "full-output-enforcement",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/output-skill",
+    "desc": "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output."
+  },
+  {
+    "name": "gesture-patterns",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/gesture-patterns",
+    "desc": "Design gesture interactions for touch and pointer — swipe, drag, long-press, and their discoverability. Use when input is gestural. For OS-standard gestures on iOS and Android, use `platform-conventions` (ui-design)."
+  },
+  {
+    "name": "gpt-taste",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/gpt-tasteskill",
+    "desc": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing."
+  },
+  {
+    "name": "hallmark",
+    "repo": "nutlope/hallmark",
+    "sha": "13ac0ec7",
+    "path": "skills/hallmark",
+    "desc": "Anti-AI-slop design skill for greenfield pages, audits, redesigns, and design extraction from URLs or screenshots. Use when the user asks to build a new app or landing page, wants to redesign something, invokes Hallmark by name, or uses audit/redesign/study."
+  },
+  {
+    "name": "handoff-spec",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/handoff-spec",
+    "desc": "Write the implementation handoff — measurements, behaviours, assets, states, and edge cases. Use when engineering picks up the work. For verifying the result afterwards use `design-qa-checklist`; for reusable library components use `component-spec` (design-systems)."
+  },
+  {
+    "name": "heuristic-evaluation",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/heuristic-evaluation",
+    "desc": "Run an expert review against Nielsen's heuristics and domain criteria, with severity ratings. Use when you need findings without recruiting participants. For a facilitated team feedback session, use `design-critique` (design-ops)."
+  },
+  {
+    "name": "hicks-law",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/hicks-law",
+    "desc": "Apply Hick's Law — decision time grows with the number of simultaneous choices. Use when a screen offers too many options at once. For how many items survive in memory afterwards, use `millers-law`."
+  },
+  {
+    "name": "high-end-visual-design",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/soft-skill",
+    "desc": "Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic."
+  },
+  {
+    "name": "human-architect-mindset",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "human-architect-mindset/skills/human-architect-mindset",
+    "desc": "Systematic architectural thinking for irreplaceable human capabilities - domain modeling, systems thinking, constraint navigation, and AI-aware problem decomposition. Use proactively when detecting architectural decisions, system design discussions, or multi-component planning."
+  },
+  {
+    "name": "hungarian-humanizer",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "hungarian-humanizer/skills/hungarian-humanizer",
+    "desc": "Detect and remove AI-generated markers from Hungarian text, making it sound like a native Hungarian speaker wrote it. Use when asked to \"humanize\", \"naturalize\", or \"remove AI feel\" from Hungarian text, or when editing .md/.txt files containing Hungarian content. Identifies 26 patterns (12 Hungarian-specific + 14 universal) and 4 style markers."
+  },
+  {
+    "name": "icon-system",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/icon-system",
+    "desc": "Specify an icon system — grid, sizing, stroke weight, naming, categories, and implementation. Use when standardising iconography. For broader illustration, use `illustration-style` (ui-design)."
+  },
+  {
+    "name": "illustration-style",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/illustration-style",
+    "desc": "Define an illustration style guide — visual language, colour usage, and application rules. Use when commissioning or standardising illustration. For icons, use `icon-system` (design-systems)."
+  },
+  {
+    "name": "image-to-code",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/image-to-code-skill",
+    "desc": "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific images instead of tiny compressed boards, generate fresh standalone images for sections or detail views instead of cropping old ones, avoid lazy under-generation, avoid cards-inside-cards-inside-cards UI, and keep the hero clean, spacious, readable, and visible on a small laptop."
+  },
+  {
+    "name": "imagegen-frontend-mobile",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/imagegen-frontend-mobile",
+    "desc": "Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-generic creative direction, textured surfaces, image-led composition, tasteful custom iconography, and clean phone mockup framing. By default, screens should be shown inside a subtle premium iPhone or similar phone mockup with a visible frame, while the main focus stays on the app content itself. This skill generates images only. It does not write code."
+  },
+  {
+    "name": "imagegen-frontend-web",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/imagegen-frontend-web",
+    "desc": "Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections produces 8 images. Never compress multiple sections into one image. Enforces composition variety (not always left-text / right-image), background-image freedom, varied CTAs, varied hero scales (giant / mid / mini minimalist), narrative concept spine, second-read moments, and a single consistent palette across all images. Optimized for landing pages, marketing sites, and product comps that developers or coding models can accurately recreate."
+  },
+  {
+    "name": "img2threejs",
+    "repo": "img2threejs/img2threejs",
+    "sha": "6e60b5e2",
+    "path": ".",
+    "desc": "Turn an object or character reference image into a quality-gated, animation-ready procedural Three.js model built in code. Use for image-to-3D reconstruction, detail-accurate object rebuilds, stylized/likeness-maximized human characters, sculpt specs, and staged code generation."
+  },
+  {
+    "name": "impeccable",
+    "repo": "pbakaus/impeccable",
+    "sha": "508d7e89",
+    "path": ".claude/skills/impeccable",
+    "desc": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks."
+  },
+  {
+    "name": "industrial-brutalist-ui",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/brutalist-skill",
+    "desc": "Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified blueprints."
+  },
+  {
+    "name": "information-architecture",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/information-architecture",
+    "desc": "Design content structure, hierarchy, labelling, and the navigation model. Use when organising what exists. For the UI that exposes it use `navigation-patterns` (interaction-design); for user-generated grouping evidence use `card-sort-analysis` (design-research)."
+  },
+  {
+    "name": "insurgent-campaign",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "insurgent-campaign/skills/insurgent-campaign",
+    "desc": "Grassroots-first campaign design for anyone being outspent — startups vs. incumbents, NGOs vs. corporate comms, movements vs. state-backed machines, solo brands vs. big-budget competitors. Ideates awareness, launch, fundraising, mobilization, community-build, counter-narrative, referral, founder-story, and coalition campaigns. Triggers on \"campaign plan\", \"marketing strategy\", \"ad budget\", \"should I advertise\", \"paid vs organic\", \"launch plan\", \"grassroots\", \"low budget marketing\", \"NGO campaign\", \"outspent\", \"competitor has bigger budget\", \"how do I compete without money\". Also trigger on any spend asymmetry, collapsing organic reach, rising CPAs, or a trust/credibility problem — even without the word \"campaign\". Nudge activation when the user debates buying ads, boosting posts, or hiring influencers; they are likely about to burn money on a channel that will not persuade."
+  },
+  {
+    "name": "interface-design",
+    "repo": "Dammyjay93/interface-design",
+    "sha": "2f9be320",
+    "path": ".claude/skills/interface-design",
+    "desc": "Craft-first interface design for dashboards, admin panels, SaaS apps, tools, settings pages, data interfaces, and interactive products. Use when designing, building, reviewing, auditing, or refining product UI where visual craft, layout hierarchy, tokens, states, visual direction, or design-system consistency matter. Not for marketing pages, landing pages, campaigns, or brand-only work."
+  },
+  {
+    "name": "interfaces-that-feel",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/interfaces-that-feel",
+    "desc": "Apply an emotional resonance lens to a UI that is technically correct but flat, prescribing changes at the copy, motion, and interaction layer. Use when a design tests fine but lands cold. For the polish-perception argument, use `aesthetic-usability` (ui-design)."
+  },
+  {
+    "name": "interview-script",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/interview-script",
+    "desc": "Write a structured interview guide — warm-up, core exploration, and wrap-up. Use before running interviews. For analysing what comes back, use `summarize-interview`."
+  },
+  {
+    "name": "jakobs-law",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/jakobs-law",
+    "desc": "Apply Jakob's Law — users expect your product to work like the others they already use. Use when deciding whether to innovate on a familiar pattern. For OS-mandated conventions specifically, use `platform-conventions` (ui-design)."
+  },
+  {
+    "name": "jobs-to-be-done",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/jobs-to-be-done",
+    "desc": "Map functional, emotional, and social jobs with outcome expectations. Use when reframing decisions around motivation rather than features. For who the user is, use `user-persona`."
+  },
+  {
+    "name": "journey-map",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/journey-map",
+    "desc": "Map one persona's end-to-end experience with stages, touchpoints, emotions, and pain points. Use when improving an existing experience. For the multi-channel ecosystem use `experience-map` (ux-strategy); for screen-level paths use `user-flow-diagram` (prototyping-testing)."
+  },
+  {
+    "name": "law-of-closure",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/law-of-closure",
+    "desc": "Apply the Law of Closure — the eye completes implied shapes from partial forms. Use when reducing visual weight by dropping borders or letting negative space suggest structure. For explicit containers, use `law-of-common-region`."
+  },
+  {
+    "name": "law-of-common-region",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/law-of-common-region",
+    "desc": "Apply the Law of Common Region — a shared container, background, or border groups elements regardless of spacing. Use when grouping must survive a tight layout. For grouping by spacing alone, use `law-of-proximity`."
+  },
+  {
+    "name": "law-of-continuity",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/law-of-continuity",
+    "desc": "Apply the Law of Continuity — the eye follows alignment and unbroken paths. Use when sequencing steps, aligning content, or designing carousels and timelines. For grouping rather than sequencing, use `law-of-proximity`."
+  },
+  {
+    "name": "law-of-figure-ground",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/law-of-figure-ground",
+    "desc": "Apply the Law of Figure-Ground — establish which layer is foreground and actionable versus background. Use when designing modals, overlays, and depth. For emphasising one element among peers, use `von-restorff-effect`."
+  },
+  {
+    "name": "law-of-proximity",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/law-of-proximity",
+    "desc": "Apply the Law of Proximity — spatial closeness groups elements more strongly than any other cue. Use when spacing alone must carry grouping. For grouping via containers use `law-of-common-region`; via shared appearance use `law-of-similarity`."
+  },
+  {
+    "name": "law-of-similarity",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/law-of-similarity",
+    "desc": "Apply the Law of Similarity — shared colour, shape, or size signals that elements belong to one category. Use when signalling relationships across distance. For grouping by position, use `law-of-proximity`."
+  },
+  {
+    "name": "layout-grid",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/layout-grid",
+    "desc": "Define a responsive grid — columns, gutters, margins, and breakpoint behaviour. Use when establishing page structure. For the spacing scale inside components use `spacing-system`; for cross-device behaviour use `responsive-design`."
+  },
+  {
+    "name": "loading-states",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/loading-states",
+    "desc": "Design waiting experiences — spinners, skeletons, optimistic updates, and progressive reveal. Use when content takes time to arrive. For the latency budget itself use `doherty-threshold`; for success confirmation use `feedback-patterns`."
+  },
+  {
+    "name": "localization-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/localization-design",
+    "desc": "Design for multiple languages, writing directions, and cultural contexts — text expansion, RTL mirroring, and locale formats. Use when shipping beyond one locale. For the words themselves, use `ux-writing` (designer-toolkit)."
+  },
+  {
+    "name": "metrics-definition",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/metrics-definition",
+    "desc": "Define UX metrics and KPIs that connect design decisions to measurable outcomes. Use when choosing what to measure. For presenting the results afterwards, use `design-impact-reporting` (design-ops)."
+  },
+  {
+    "name": "micro-interaction-spec",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/micro-interaction-spec",
+    "desc": "Specify one micro-interaction completely — trigger, rules, feedback, loops, and modes. Use when handing a single interaction to engineering. For motion craft alone use `animation-principles`; for multi-state components use `state-machine`."
+  },
+  {
+    "name": "millers-law",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/millers-law",
+    "desc": "Apply Miller's Law — chunk information into groups of about four to fit working memory. Use when grouping fields, menu items, or steps. For reducing the number of choices offered, use `hicks-law`."
+  },
+  {
+    "name": "minimalist-ui",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/minimalist-skill",
+    "desc": "Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows."
+  },
+  {
+    "name": "motion-system",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/motion-system",
+    "desc": "Define motion tokens — durations, easing vocabulary, and reduced-motion handling — for consistency product-wide. Use when standardising motion across a system. For crafting one specific animation, use `animation-principles` (interaction-design)."
+  },
+  {
+    "name": "naming-convention",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/naming-convention",
+    "desc": "Establish naming rules for components, tokens, and layers with patterns and worked examples. Use when names are inconsistent or being set. For what the tokens actually contain, use `design-token`."
+  },
+  {
+    "name": "navigation-patterns",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/navigation-patterns",
+    "desc": "Select and design a navigation pattern — tabs, drawer, hierarchy, or hub — matched to product structure and user tasks. Use when choosing how users move between sections. For the underlying content structure, use `information-architecture` (ux-strategy)."
+  },
+  {
+    "name": "negentropy-lens",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "negentropy-lens/skills/negentropy-lens",
+    "desc": "A decision-support framework that evaluates systems, architectures, and strategies through the entropy (decay) vs negentropy (growth) lens, while surfacing tacit knowledge gaps. Use this skill whenever the user is making architecture decisions, evaluating system designs, reviewing technical approaches, choosing between options, auditing existing systems, or planning strategies. Also trigger when the user explicitly asks to \"apply the negentropy lens\", mentions \"entropy\", \"negentropy\", \"tacit knowledge\", \"knowledge engine\", or \"flip the switch\". Nudge activation when you detect the user is at a decision point — even if they haven't asked for this lens — by briefly noting the entropic/negentropic dimension before proceeding."
+  },
+  {
+    "name": "north-star-vision",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/north-star-vision",
+    "desc": "Articulate a long-horizon product vision that aligns teams and anchors strategy. Use when direction is contested or absent. For near-term project scope, use `design-brief`."
+  },
+  {
+    "name": "onboarding-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/onboarding-design",
+    "desc": "Design the first-run experience — activation path, progressive disclosure, and time to first value. Use for a user's very first session. For the mechanics of the signup form itself, use `form-design`."
+  },
+  {
+    "name": "opportunity-framework",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/opportunity-framework",
+    "desc": "Identify, score, and prioritise design opportunities against impact and effort. Use when there are more ideas than capacity. For framing the one you choose, use `design-brief`."
+  },
+  {
+    "name": "parallel-concepts",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/parallel-concepts",
+    "desc": "Build several genuinely different solutions to the same problem at once, spread across what the user does rather than how it looks. Use when one direction is on the table and the team is about to refine it by default. For choosing between the concepts afterwards, use `concept-selection`."
+  },
+  {
+    "name": "pattern-library",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/pattern-library",
+    "desc": "Structure a pattern entry — problem context, solution, usage examples, and related patterns. Use when documenting a recurring solution rather than a component. For a single component's API, use `component-spec`."
+  },
+  {
+    "name": "peak-end-rule",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/peak-end-rule",
+    "desc": "Apply the Peak-End Rule — a flow is remembered by its most intense moment and its last. Use when designing completion, celebration, or cancellation moments. For sustaining engagement mid-flow, use `zeigarnik-effect`."
+  },
+  {
+    "name": "platform-conventions",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/platform-conventions",
+    "desc": "Design to iOS and Android conventions — what each OS mandates, where they diverge, and when to unify. Use when shipping native apps. For breakpoint adaptation use `responsive-design`; for matching competitor patterns use `jakobs-law` (interaction-design)."
+  },
+  {
+    "name": "presentation-deck",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/presentation-deck",
+    "desc": "Structure a design presentation for a specific audience and decision. Use when presenting internally. For a portfolio narrative use `case-study`; for the written argument use `design-rationale`."
+  },
+  {
+    "name": "prototype-strategy",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/prototype-strategy",
+    "desc": "Choose prototype fidelity and method to match the design question and the decision at stake. Use before building a prototype. For what to test once it exists, use `test-scenario`."
+  },
+  {
+    "name": "qual-quant-triangulation",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/qual-quant-triangulation",
+    "desc": "Reconcile what the numbers say with what users say, and design the study that settles it rather than restates it. Use when behavioural data and research findings point different ways. For reading the data on its own, use `behavioural-analytics`; for synthesising interviews on their own, use `affinity-diagram`."
+  },
+  {
+    "name": "readable-measure",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/readable-measure",
+    "desc": "Set line length and measure for comfortable reading across type sizes and breakpoints. Use when tuning body text. Covers measure only — for the full size and weight scale, use `typography-scale`."
+  },
+  {
+    "name": "redesign-existing-projects",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/redesign-skill",
+    "desc": "Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS."
+  },
+  {
+    "name": "relationship-design",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "relationship-design/skills/relationship-design (frontmatter name normalised locally)",
+    "desc": "Design AI-first interfaces that build ongoing relationships through memory, trust evolution, and collaborative planning, not just isolated screen interactions"
+  },
+  {
+    "name": "renaissance-architecture",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "renaissance-architecture/skills/renaissance-architecture",
+    "desc": "Software architecture and UI/UX principles for building genuinely new solutions, not derivative work. Use when designing features, architecting software, brainstorming apps, reviewing designs, or during strategy discussions. Focuses on first-principles thinking, simplicity where it matters, and creating rather than commenting."
+  },
+  {
+    "name": "research-repository",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/research-repository",
+    "desc": "Build a repository that makes findings findable, reusable, and cumulative across teams. Use when the same research keeps getting redone. For synthesising one study, use `affinity-diagram`."
+  },
+  {
+    "name": "responsive-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/responsive-design",
+    "desc": "Design layouts and interactions that adapt across screen sizes and input methods. Use when one design must serve many viewports. For the underlying column grid use `layout-grid`; for OS-specific patterns use `platform-conventions`."
+  },
+  {
+    "name": "scroll-craft",
+    "repo": "nateherkai/scroll-craft",
+    "sha": "75d81f74",
+    "path": "plugins/nateherk-design/skills/scroll-craft",
+    "desc": "Build premium scroll-driven landing pages for service, product, food, and drink brands. Plan the visitor journey, page grammar, emotional peak, and bespoke signature move. Create dimensional heroes with independent visual planes, restrained motion, and separate mobile composition. Use supplied photos and footage or generate photoreal assets through kie.ai, write semantic HTML, and verify desktop, mobile, and reduced-motion scroll states visually. Use for \"scrollcraft\", \"scroll craft\", \"layered hero\", \"premium hero\", \"cinematic hero\", \"scrollytelling\", \"scroll animation site\", \"a site where scrolling plays a video\", \"Apple-style landing page\", \"3D scroll world\", \"interactive landing page\", \"make my brand a scroll experience\", \"this looks like a template\", or requests for a distinctive website that feels like an experience rather than a document."
+  },
+  {
+    "name": "search-ux",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/search-ux",
+    "desc": "Design search — query input, zero results, refinement, and result presentation. Use when users retrieve rather than browse. For browse structure, use `navigation-patterns`."
+  },
+  {
+    "name": "serial-position-effect",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/serial-position-effect",
+    "desc": "Apply the Serial Position Effect — first and last items in a sequence are recalled best. Use when ordering menus, lists, and steps. For emphasising one item regardless of its position, use `von-restorff-effect` (ui-design)."
+  },
+  {
+    "name": "service-blueprint",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/service-blueprint",
+    "desc": "Map service delivery across frontstage actions, backstage processes, and supporting systems. Use when staff and operations are part of the experience. For the customer-visible layer only, use `experience-map`."
+  },
+  {
+    "name": "slides",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": "cli/assets/skills/slides",
+    "desc": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies."
+  },
+  {
+    "name": "spacing-system",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/spacing-system",
+    "desc": "Create a spacing scale from a base unit with rules for when each step applies. Use when standardising padding and margins. For page-level columns and gutters, use `layout-grid`."
+  },
+  {
+    "name": "stakeholder-alignment",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ux-strategy/skills/stakeholder-alignment",
+    "desc": "Build alignment artifacts — responsibility matrices, decision rights, and communication plans. Use when unclear ownership stalls decisions. For persuading in the moment, use `design-negotiation` (designer-toolkit)."
+  },
+  {
+    "name": "state-machine",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/state-machine",
+    "desc": "Model component behaviour as explicit states, events, and transitions. Use when a component has many interacting states that must be exhaustive. For the feel and feedback of a single interaction, use `micro-interaction-spec`."
+  },
+  {
+    "name": "stitch-design-taste",
+    "repo": "Leonxlnx/taste-skill",
+    "sha": "ce26fc25",
+    "path": "skills/stitch-skill",
+    "desc": "Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance."
+  },
+  {
+    "name": "summarize-interview",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/summarize-interview",
+    "desc": "Turn one interview transcript into themes, supporting quotes, and action items. Use immediately after a session. For synthesising many sessions at once, use `affinity-diagram`."
+  },
+  {
+    "name": "survey-design",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/survey-design",
+    "desc": "Design unbiased survey instruments — question wording, scales, and sampling — to measure attitudes at scale. Use when you need quantitative breadth. For behavioural experiments, use `a-b-test-design` (prototyping-testing)."
+  },
+  {
+    "name": "team-workflow",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/team-workflow",
+    "desc": "Design the team's operating rhythm — task management, collaboration rituals, and tooling. Use when the day-to-day cadence needs structure. For a time-boxed sprint, use `design-sprint-plan`."
+  },
+  {
+    "name": "teslers-law",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/teslers-law",
+    "desc": "Apply Tesler's Law — every process has irreducible complexity that someone must absorb. Use when deciding whether the product or the user carries it. For reducing apparent choice, use `hicks-law`."
+  },
+  {
+    "name": "test-scenario",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/test-scenario",
+    "desc": "Write realistic usability task scenarios with success criteria and facilitation notes. Use when you have a study and need the tasks. For the surrounding study design, use `usability-test-plan` (design-research)."
+  },
+  {
+    "name": "theming-system",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-systems/skills/theming-system",
+    "desc": "Design theming architecture — brand variants, dark mode, and high-contrast — mapped through token layers. Use when one system must serve multiple themes. For a single palette use `color-system` (ui-design); for dark mode craft use `dark-mode-design` (ui-design)."
+  },
+  {
+    "name": "typography-scale",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/typography-scale",
+    "desc": "Create a modular type scale with size, weight, and line-height relationships. Use when establishing typographic structure. For line length only use `readable-measure`; for judging type on an existing screen use `critique-typography` (visual-critique)."
+  },
+  {
+    "name": "ui-refactor",
+    "repo": "LovroPodobnik/refactoring-ui-skill",
+    "sha": "a9e776a7",
+    "path": ".claude/skills/ui-refactor",
+    "desc": "Tactical user interface design guide for fixing layouts, selecting colors/fonts, and creating professional UIs. Use when the user asks to \"make this look better,\" needs help with CSS/styling decisions, wants to create a design system, or needs to fix a cluttered interface."
+  },
+  {
+    "name": "ui-styling",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": "cli/assets/skills/ui-styling",
+    "desc": "Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user interfaces, implementing design systems, creating responsive layouts, adding accessible components (dialogs, dropdowns, forms, tables), customizing themes and colors, implementing dark mode, generating visual designs and posters, or establishing consistent styling patterns across applications."
+  },
+  {
+    "name": "ui-typography",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "typography/skills/typography",
+    "desc": "Professional typography rules for UI design, web applications, software interfaces, and all screen-based text. Enforces timeless typographic correctness that LLMs consistently get wrong: proper quote marks, dashes, spacing, hierarchy, and layout. ENFORCEMENT MODE: When generating ANY HTML, CSS, React, JSX, or UI code containing visible text, auto-apply every rule in this skill silently — do not ask, do not explain, just produce correct typography. AUDIT MODE: When reviewing or improving existing interfaces or legacy code, flag violations and provide fixes. Trigger on: any HTML/CSS/React artifact creation, \"build a landing page\", \"create a component\", \"design a UI\", \"fix the typography\", \"make this look professional\", \"review this layout\", web design, presentation design, dashboard creation, document generation, or any task producing visible text for humans. Even if the user doesn't mention typography, apply these rules whenever generating UI output."
+  },
+  {
+    "name": "ui-ux-pro-max",
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "sha": "09170eec",
+    "path": ".claude/skills/ui-ux-pro-max",
+    "desc": "UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility, interaction, responsive layout, typography, color, charts, and stack-specific UI implementation. Searchable local data: 79 searchable styles (50 active), 192 product palettes and reasoning profiles, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP presets, 25 chart types, and 22 stacks."
+  },
+  {
+    "name": "usability-test-plan",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/usability-test-plan",
+    "desc": "Design a usability study — research questions, methodology, participant criteria, metrics, and facilitation guide. Use when planning the study as a whole. For writing the task scenarios inside it, use `test-scenario` (prototyping-testing)."
+  },
+  {
+    "name": "user-flow-diagram",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/user-flow-diagram",
+    "desc": "Diagram screen-level paths, decision points, and branch logic. Use when specifying how a feature is traversed. For the emotional end-to-end arc, use `journey-map` (design-research)."
+  },
+  {
+    "name": "user-persona",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-research/skills/user-persona",
+    "desc": "Build research-grounded personas with goals, frustrations, and behavioural patterns. Use when decisions need a consistent user reference. For one session's emotional snapshot use `empathy-map`; for motivation framing use `jobs-to-be-done`."
+  },
+  {
+    "name": "ux-heuristics",
+    "repo": "wondelai/skills",
+    "sha": "c1729964",
+    "path": "ux-heuristics",
+    "desc": "Evaluate and improve interface usability using heuristic analysis. Use when the user mentions \"usability audit\", \"users are confused\", \"form usability\", \"navigation problems\", \"Nielsen heuristics\", \"cognitive walkthrough\", or \"is this easy to use\". Also trigger when reviewing a design for usability issues, improving form-completion rates, or evaluating information architecture and navigation. Covers Krug's laws, Nielsen's 10 heuristics, severity ratings, dark-pattern recognition, and accessibility. For visual design fixes, see refactoring-ui. For conversion-focused audits, see cro-methodology."
+  },
+  {
+    "name": "ux-writing",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "designer-toolkit/skills/ux-writing",
+    "desc": "Write interface copy — microcopy, error messages, empty states, and CTAs. Use when the words are the deliverable. For content structure and ownership, use `content-strategy` (ux-strategy)."
+  },
+  {
+    "name": "vanity-engineering-review",
+    "repo": "bencium/bencium-marketplace",
+    "sha": "8b152ec0",
+    "path": "vanity-engineering-review/skills/vanity-engineering-review",
+    "desc": "Reviews codebases, architectures, PRs, and technical plans for vanity engineering — code and systems built for the developer's ego, resume, or intellectual pleasure rather than delivering user or business value. Triggers on: \"review this code\", \"is this over-engineered\", \"code review\", \"architecture review\", \"complexity audit\", \"vanity check\", \"is this necessary\", \"simplify this\", \"tech debt review\", or any request to evaluate whether code or architecture is justified by actual requirements. Also trigger when the user shares a codebase and asks for feedback, when discussing framework/library choices, when reviewing PRs, or when someone is debating whether to refactor or rebuild. Nudge activation when you detect patterns of unnecessary abstraction, premature optimization, or resume-driven technology choices in code the user shares — even if they haven't asked for a vanity review."
+  },
+  {
+    "name": "vercel-cli-with-tokens",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/vercel-cli-with-tokens",
+    "desc": "Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. \"deploy to vercel\", \"set up vercel\", \"add environment variables to vercel\"."
+  },
+  {
+    "name": "vercel-composition-patterns",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/composition-patterns",
+    "desc": "React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, context providers, or component architecture. Includes React 19 API changes."
+  },
+  {
+    "name": "vercel-optimize",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/vercel-optimize",
+    "desc": "Use for Vercel cost and performance optimization on deployed projects, especially Next.js, SvelteKit, Nuxt, and limited Astro apps. Collect Vercel metrics, usage, project config, and code scan results first; investigate only metric-backed candidates; produce ranked recommendations grounded in verified files and version-aware Vercel/framework docs. Trigger for Vercel bill reduction, slow or expensive routes, caching opportunities, Function Invocations, Build Minutes, Fast Data Transfer, Core Web Vitals, Bot Management, Fluid compute, or cost breakdown requests."
+  },
+  {
+    "name": "vercel-react-best-practices",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/react-best-practices",
+    "desc": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements."
+  },
+  {
+    "name": "vercel-react-native-skills",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/react-native-skills",
+    "desc": "React Native and Expo best practices for building performant mobile apps. Use when building React Native components, optimizing list performance, implementing animations, or working with native modules. Triggers on tasks involving React Native, Expo, mobile performance, or native platform APIs."
+  },
+  {
+    "name": "vercel-react-view-transitions",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/react-view-transitions",
+    "desc": "Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements). Use this skill whenever the user wants to add page transitions, animate route changes, create shared element animations, animate enter/exit of components, animate list reorder, implement directional (forward/back) navigation animations, or integrate view transitions in Next.js. Also use when the user mentions view transitions, `startViewTransition`, `ViewTransition`, transition types, or asks about animating between UI states in React without third-party animation libraries."
+  },
+  {
+    "name": "version-control-strategy",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "design-ops/skills/version-control-strategy",
+    "desc": "Define version control for design files, components, and libraries — branching, naming, and release. Use when file history is chaotic. For design system contribution rules, use `design-system-governance` (design-systems)."
+  },
+  {
+    "name": "visual-hierarchy",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/visual-hierarchy",
+    "desc": "Establish hierarchy through size, weight, colour, spacing, and position so the eye lands in the intended order. Use when composing new work. For judging an existing screen, use `critique-visual-hierarchy` (visual-critique)."
+  },
+  {
+    "name": "von-restorff-effect",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "ui-design/skills/von-restorff-effect",
+    "desc": "Apply the Von Restorff Effect — the element that differs from its neighbours is the one remembered. Use when a single action must dominate. For overall ordering rather than single-element emphasis, use `visual-hierarchy`."
+  },
+  {
+    "name": "web-design-guidelines",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/web-design-guidelines",
+    "desc": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\"."
+  },
+  {
+    "name": "wireframe-spec",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "prototyping-testing/skills/wireframe-spec",
+    "desc": "Specify wireframe layout — content priority, component placement, and annotation. Use when defining structure before visual design. For grid mechanics, use `layout-grid` (ui-design)."
+  },
+  {
+    "name": "writing-guidelines",
+    "repo": "vercel-labs/agent-skills",
+    "sha": "063bee94",
+    "path": "skills/writing-guidelines",
+    "desc": "Review docs/prose for Writing Guidelines compliance. Use when asked to \"review my docs\", \"check writing style\", \"audit prose\", \"review docs voice and tone\", or \"check this page against the writing handbook\"."
+  },
+  {
+    "name": "zeigarnik-effect",
+    "repo": "Owl-Listener/designer-skills",
+    "sha": "9a6930cf",
+    "path": "interaction-design/skills/zeigarnik-effect",
+    "desc": "Apply the Zeigarnik Effect — incomplete tasks stay mentally active. Use when designing progress indicators, saved drafts, and return hooks. For the emotional shape of the ending, use `peak-end-rule`."
+  }
+]
