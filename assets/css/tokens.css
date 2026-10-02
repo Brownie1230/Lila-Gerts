@@ -1,0 +1,111 @@
+/* Lila Gerts design tokens. See DESIGN.md for rationale. */
+
+:root {
+  /* Brand chips, verbatim from the client reference boards */
+  --c-cherry:  #5D0703;
+  --c-inferno: #4E0000;
+  --c-velvet:  #8E1612;
+  --c-cream:   #EEDCC8;
+  --c-pearl:   #E9D4C3;
+  --c-rose:    #E3A0A8;
+  --c-sponge:  #E4C89B;
+
+  /* Semantic surface + ink, light theme */
+  --bg:          #F4E9DC;
+  --bg-sunk:     #EDDFCE;
+  --bg-raised:   #FBF4EA;
+  --ink:         #43120E;
+  --ink-soft:    #6E3A32;
+  --ink-faint:   #7B4B42;
+  --rule:        #D8C2AE;
+  --rule-strong: #BFA68F;
+
+  --accent:      var(--c-cherry);
+  --accent-deep: var(--c-inferno);
+  --accent-lift: var(--c-velvet);
+  --on-accent:   #F7EADB;
+
+  /* Type */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-text: "Onest", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-script: "Grand Hotel", "Cormorant Garamond", cursive; /* Latin only */
+
+  --step-display: clamp(2.6rem, 1.25rem + 4.5vw, 5rem);
+  --step-h2:      clamp(2rem, 1.2rem + 3.2vw, 3.5rem);
+  --step-h3:      clamp(1.35rem, 1.1rem + 1.1vw, 1.9rem);
+  --step-lead:    clamp(1.05rem, 0.98rem + 0.4vw, 1.3rem);
+  --step-body:    1.0625rem;
+  --step-small:   0.875rem;
+  --step-label:   0.75rem;
+
+  /* Space */
+  --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
+  --s-5: 1.5rem;  --s-6: 2rem;    --s-7: 3rem;    --s-8: 4rem;
+  --s-9: 6rem;    --s-10: 8rem;
+  --section-y: clamp(5rem, 10vw, 9rem);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --measure: 65ch;
+  --page: 1400px;
+
+  /* Shape: one radius for everything */
+  --radius: 2px;
+
+  /* Elevation, tinted to the brand hue */
+  --shadow-1: 0 1px 2px rgb(78 0 0 / 0.06), 0 8px 24px rgb(78 0 0 / 0.07);
+  --shadow-2: 0 2px 4px rgb(78 0 0 / 0.08), 0 24px 56px rgb(78 0 0 / 0.12);
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 180ms;
+  --dur-2: 420ms;
+  --dur-3: 760ms;
+
+  /* Layers */
+  --z-grain: 60;
+  --z-nav: 40;
+  --z-raised: 10;
+
+  color-scheme: light;
+}
+
+/* Dark mode: the brand inverts to its own cherry, it does not go neutral. */
+:root[data-theme="dark"],
+html:not([data-theme="light"]) :root { }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #2E0503;
+    --bg-sunk:   #230302;
+    --bg-raised: #45100C;
+    --ink:       #F2DFCC;
+    --ink-soft:  #D9B9A4;
+    --ink-faint: #B38E7C;
+    --rule:      #5E211A;
+    --rule-strong: #7D3328;
+    --accent:      var(--c-rose);
+    --accent-deep: #F0C3C8;
+    --accent-lift: #F2D2D6;
+    --on-accent:   #3A0604;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
+    --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:        #2E0503;
+  --bg-sunk:   #230302;
+  --bg-raised: #45100C;
+  --ink:       #F2DFCC;
+  --ink-soft:  #D9B9A4;
+  --ink-faint: #B38E7C;
+  --rule:      #5E211A;
+  --rule-strong: #7D3328;
+  --accent:      var(--c-rose);
+  --accent-deep: #F0C3C8;
+  --accent-lift: #F2D2D6;
+  --on-accent:   #3A0604;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
+  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
+  color-scheme: dark;
+}

@@ -1,17 +1,98 @@
-# Lila-Gerts
+# Lila Gerts
 
-A design/frontend workspace with a vendored Claude Code skill library.
+Шаблон сайта кондитерского ателье плюс библиотека дизайн-скилов, на которой он собран.
 
-- **[SKILLS.md](SKILLS.md)** — all 167 skills, what each is for, and the upstream commit each is
-  pinned to.
-- **[CLAUDE.md](CLAUDE.md)** — which skill to reach for on which kind of task.
-- **`.claude/skills/`** — the skills themselves, one directory each, available to any Claude Code
-  session opened in this repo.
-- **`.claude/skills-manifest.json`** — the same provenance data, machine-readable.
-- **`licenses/`** — upstream licence for each source repo.
+- **`index.html`** — страница. Открывается двойным кликом, сборка не нужна.
+- **[DESIGN.md](DESIGN.md)** — палитра, шрифты, сетка, правила. Главнее дефолтов любого скила.
+- **[SKILLS.md](SKILLS.md)** — 167 дизайн-скилов, что каждый умеет и из какого коммита взят.
+- **[CLAUDE.md](CLAUDE.md)** — какой скил брать под какую задачу.
 
-The library is assembled from 15 upstream repositories (Anthropic's `frontend-design`,
-`vercel-labs/agent-skills`, `Owl-Listener/designer-skills`, `pbakaus/impeccable`,
-`Leonxlnx/taste-skill`, `nextlevelbuilder/ui-ux-pro-max-skill`, `bencium/bencium-marketplace`,
-and others). Upstream licences are collected in [`licenses/`](licenses/README.md); three sources ship no
-licence file and are flagged there.
+## Посмотреть
+
+```bash
+python3 -m http.server 8000
+# откройте http://localhost:8000
+```
+
+Открывать файл напрямую через `file://` не стоит: иконки подключены через `<use href>`,
+браузер заблокирует их по политике одного источника.
+
+## Что внутри
+
+| Путь | Что это |
+|---|---|
+| `index.html` | единственная страница, семь секций |
+| `assets/css/tokens.css` | все цвета, размеры, тайминги. Правки начинайте отсюда |
+| `assets/css/app.css` | вёрстка и анимация |
+| `assets/css/fonts.css` + `assets/fonts/` | три self-hosted шрифта, 46 файлов, SIL OFL 1.1 |
+| `assets/js/app.js` | тема, мобильное меню, появление секций, валидация формы |
+| `assets/img/` | фирменные текстуры и зерно |
+| `assets/icons.svg` | спрайт из 11 иконок Phosphor |
+
+## Что сделано из ваших материалов
+
+Палитра собрана по двум вашим референсам: Black Cherry `#5D0703`, Red Inferno `#4E0000`,
+Cream Vanilla `#EEDCC8`, Mother of Pearl `#E9D4C3`, Pantone 3519 C. Из второго референса взят и
+приём: тёмная вишня над кремом. На странице он живёт как один полноэкранный блок Black Cherry, а
+в тёмной теме переворачивается, чтобы блок всегда контрастировал с фоном.
+
+Скрипт с вашего референса подобран как **Grand Hotel**. У него нет кириллицы, поэтому им набраны
+только латинские названия: логотип и имена коллекций. Заголовки идут **Cormorant Garamond**,
+текст и интерфейс — **Onest**. Оба с кириллицей.
+
+## Картинки: что нужно заменить
+
+Текстуры в `assets/img/` я сгенерировал: это абстрактные слоёные срезы из вашей палитры, а не
+фотографии. Фотостоки (Unsplash, Pexels, Wikimedia) закрыты сетевой политикой окружения, в
+котором собирался шаблон, поэтому ни одна чужая фотография сюда не попала и не подделывалась.
+
+Как текстура они рабочие, но съёмку не заменяют. Места под реальные фото помечены в разметке
+атрибутом `data-photo-slot`:
+
+| Слот | Файл сейчас | Размер исходника | Как кадрируется |
+|---|---|---|---|
+| `hero` | `hero-strata.jpg` | 2400×1500 | по высоте блока, срез крупно |
+| `collection-cherry` | `collection-cherry.jpg` | 1200×1500 | 4:5, вертикаль |
+| `collection-cream` | `collection-cream.jpg` | 1200×1500 | 16:10, горизонталь |
+| `collection-rose` | `collection-rose.jpg` | 1200×1500 | 16:10, горизонталь |
+| `atelier` | `atelier.jpg` | 1600×1200 | 21:9, широкая полоса |
+
+Фон секции Black Cherry это `band-wide.jpg` (2400×700), он подключён в `app.css`, а не в разметке.
+
+Положите свои файлы под теми же именами, и больше ничего менять не нужно. Если имена другие,
+поправьте `src` и `assets/css/app.css`.
+
+## Форма заказа
+
+Сейчас форма проверяет поля и показывает успешное состояние локально, никуда не отправляя. Чтобы
+включить отправку, добавьте адрес обработчика:
+
+```html
+<form class="form" id="order-form" data-endpoint="https://ваш-обработчик">
+```
+
+Скрипт отправит `POST` с JSON по полям `name`, `phone`, `date`, `occasion`, `note`.
+
+## Что заменить перед запуском
+
+Весь текст на странице шаблонный и написан правдоподобно, но это не ваши данные. Проверьте:
+
+- телефон, почту и адрес (встречаются в секции заказа и в футере);
+- составы, диаметры, сроки сборки и доставки;
+- два отзыва с именами;
+- ссылки на соцсети в футере, сейчас это заглушки `#`;
+- ссылку на политику обработки данных.
+
+## Проверено
+
+Светлая и тёмная тема, 1440 и 390 пикселей, контраст WCAG AA без единого провала в обеих темах,
+один `h1`, уровни заголовков без разрывов, все изображения с `alt` и размерами, все поля формы с
+подписями, навигация в одну строку и 72 пикселя высотой, видимый фокус с клавиатуры, работа при
+`prefers-reduced-motion`. Проверялось в Chromium через Playwright.
+
+Внешних запросов в рантайме нет: шрифты, иконки и картинки лежат рядом. Страница работает офлайн.
+
+## Лицензии
+
+Шрифты под SIL OFL 1.1, иконки Phosphor под MIT. Лицензии дизайн-скилов собраны в
+[`licenses/`](licenses/README.md).
