@@ -7,7 +7,7 @@
   /* Theme toggle. Persists per visitor; falls back to the system setting. */
   var root = document.documentElement;
   var toggle = document.getElementById("theme");
-  var glyph = toggle && toggle.querySelector("[data-theme-glyph]");
+  var glyph = toggle && toggle.querySelector("[data-glyph]");
 
   function currentlyDark() {
     if (root.dataset.theme) return root.dataset.theme === "dark";
@@ -16,10 +16,7 @@
   function paintToggle() {
     var dark = currentlyDark();
     if (toggle) toggle.setAttribute("aria-pressed", String(dark));
-    if (glyph) {
-      var use = glyph.querySelector("use");
-      if (use) use.setAttribute("href", "assets/icons.svg#i-" + (dark ? "sun" : "moon"));
-    }
+    if (glyph) glyph.textContent = dark ? "☀" : "☾";
   }
   if (toggle) {
     toggle.addEventListener("click", function () {
@@ -32,21 +29,9 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paintToggle);
   }
 
-  /* Headline split into masked lines, so it can rise line by line.
-     Purely additive: without this the h1 renders as written. */
-  var h1 = document.querySelector(".hero__copy h1");
-  if (h1 && !reduce) {
-    var parts = h1.innerHTML.split(/<br\s*\/?>/i);
-    if (parts.length > 1) {
-      h1.innerHTML = parts.map(function (part, i) {
-        return '<span class="line"><span style="--i:' + i + '">' + part.trim() + "</span></span>";
-      }).join("");
-    }
-  }
-
   /* Mobile menu. A disclosure, not an overlay: the page stays reachable behind it. */
   var burger = document.getElementById("burger");
-  var menu = document.getElementById("nav-menu");
+  var menu = document.getElementById("menu");
   var desktop = window.matchMedia("(min-width: 901px)");
 
   function syncMenu() {

@@ -82,6 +82,30 @@ All three are self-hosted from `assets/fonts/` (SIL OFL 1.1), subsets `latin`, `
 
 Emphasis inside a headline uses italic of the same family, never a second family.
 
+## House system
+
+Built on the system from the client's own portfolio (`bonifirmaarm-design/portfolio`),
+adopted at their request so this site is made the same way as their other work. What that
+brings, and what it overrides:
+
+- **Sticky first screen, stage over it.** The first screen is `position: sticky`; the content
+  block rides up over it with rounded top corners and a deep shadow, while the wordmark blurs
+  and shrinks on `animation-timeline: scroll(root)`. This is the page's one authorial device.
+- **Case spreads, not cards.** Each product line gets a plate with the main photograph, a second
+  photograph inset over its corner, a dash list of what it is, a two-column fact table and the
+  colours it comes in. Same structure three times, so it reads as a system.
+- **No eyebrows.** The house rule is zero; it overrides `design-taste-frontend`, which allows one
+  per three sections. Headings carry themselves.
+- **No "icon + title + text" cards** as page structure. Lists use a hairline dash marker.
+- **One icon, drawn by hand**, an arrow at stroke 1.6. This overrides the skill's "never hand-roll
+  an icon" rule, and the Phosphor sprite is gone with it.
+- **Browser surfaces are designed**: text selection, caret, accent colour, scrollbar, focus ring.
+- **Numbers and sums never wrap**: non-breaking space plus `white-space: nowrap`.
+- Container 1320px, side padding `clamp(20px, 5vw, 72px)`, section rhythm `clamp(64px, 9vw, 132px)`,
+  spreads separated by `clamp(72px, 11vw, 168px)`.
+
+The palette, the type and the brand stay Lila Gerts; only the construction is shared.
+
 ## Shape, depth, spacing
 
 - **Radius: 2px on everything.** Cards, images, buttons, inputs. One system, no mixing.
