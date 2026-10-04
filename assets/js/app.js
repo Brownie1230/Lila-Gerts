@@ -95,20 +95,11 @@
   /* Colour chips. Picking one carries the choice into the order form, so the
      control does something real instead of only looking like a control. */
   var noteField = document.getElementById("f-note");
-  var kindField = document.getElementById("f-kind");
+  var itemField = document.getElementById("f-item");
+  var colorField = document.getElementById("f-colors");
 
   function writeChoice(product, color) {
-    if (!noteField) return;
-    var line = product + ", цвет: " + color;
-    var rest = noteField.value.split("\n").filter(function (l) {
-      return l.trim() && l.indexOf(product + ", цвет:") !== 0;
-    });
-    noteField.value = [line].concat(rest).join("\n");
-    if (kindField) {
-      for (var i = 0; i < kindField.options.length; i++) {
-        if (kindField.options[i].text === product) { kindField.selectedIndex = i; break; }
-      }
-    }
+    if (colorField) colorField.value = color;
   }
 
   document.querySelectorAll("[data-palette]").forEach(function (group) {
@@ -128,6 +119,22 @@
       });
     });
   });
+
+  /* The order form reshapes itself around the item: a candle needs a scent and a
+     colour pair, a pet figurine needs photographs instead. */
+  function syncItemFields() {
+    if (!itemField) return;
+    var pet = /питомц/i.test(itemField.value);
+    document.querySelectorAll("[data-only]").forEach(function (el) {
+      var wants = el.dataset.only === "pet" ? pet : !pet && itemField.value !== "";
+      el.hidden = !wants;
+      el.querySelectorAll("input, select, textarea").forEach(function (f) { f.disabled = !wants; });
+    });
+  }
+  if (itemField) {
+    itemField.addEventListener("change", syncItemFields);
+    syncItemFields();
+  }
 
   /* Order form: inline validation, then a local success state.
      Template only. Point `endpoint` at the real handler before launch. */
@@ -171,27 +178,31 @@
     }
 
     status.dataset.state = "sending";
-    status.textContent = "Отправляем заявку";
+    status.textContent = "Отправляем заказ";
 
     if (!endpoint) {
       // No backend yet, so the request is handed to Telegram rather than
       // swallowed: the text goes to the clipboard and the chat opens.
       var data = new FormData(form);
-      var text = [
-        "Заявка с сайта Lila Gerts",
-        "Имя: " + (data.get("name") || ""),
-        "Связь: " + (data.get("contact") || ""),
-        "Интересует: " + (data.get("kind") || "не выбрано"),
-        "Пожелания: " + (data.get("note") || "")
-      ].join("\n");
+      var rows = [
+        ["Заказ", data.get("item")],
+        ["Аромат", data.get("scent")],
+        ["Цвета", data.get("colors")],
+        ["Имя", data.get("name")],
+        ["Телефон", data.get("phone")],
+        ["ПВЗ Ozon", data.get("pvz")],
+        ["Комментарий", data.get("note")]
+      ];
+      var text = "Заказ с сайта Lila Gerts\n" + rows
+        .filter(function (r) { return r[1]; })
+        .map(function (r) { return r[0] + ": " + r[1]; })
+        .join("\n");
 
-      var open = function () { window.open("https://t.me/Nina.G1999", "_blank", "noopener"); };
       var done = function (copied) {
         status.dataset.state = "sent";
         status.textContent = copied
-          ? "Заявка скопирована. Открываем Telegram, вставьте её в чат."
-          : "Напишите нам в Telegram, мы на связи.";
-        open();
+          ? "Заказ собран и скопирован. Отправка на почту ещё не подключена: пришлите текст в Telegram или на почту, и мы оформим."
+          : "Отправка на почту ещё не подключена. Напишите нам в Telegram или на почту, и мы оформим заказ.";
       };
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
@@ -208,11 +219,12 @@
     }).then(function (res) {
       if (!res.ok) throw new Error(String(res.status));
       status.dataset.state = "sent";
-      status.textContent = "Заявка принята. Отвечаем в течение дня.";
+      status.textContent = "Заказ принят. Напишем вам, чтобы подтвердить и согласовать оплату.";
       form.reset();
+      if (itemField) syncItemFields();
     }).catch(function () {
       status.dataset.state = "sent";
-      status.textContent = "Не удалось отправить. Напишите нам в Telegram или позвоните.";
+      status.textContent = "Не удалось отправить. Напишите нам в Telegram или на почту, заказ оформим вручную.";
     });
   });
 })();

@@ -8,6 +8,13 @@ Premium-consumer landing page for a handmade ceramics and candle studio, speakin
 buyers who choose by look and feel, with a soft tactile boutique language, built on native CSS,
 Cormorant Garamond, Onest, and the client's own Pantone palette.
 
+### Correction, 4 Oct (material)
+
+The pieces are **cast gypsum, not ceramic**. The mould is standard and only the ear shape
+changes between pet figurines; the value is the hand painting done from the buyer's photographs,
+so that is what the copy says. A figurine ships with five replaceable tea lights, which is why it
+carries no scent choice. Every candle set also ships with matches in a glass tube.
+
 ### Correction, 4 Oct
 
 The first build read the brief as a cake atelier. It is not. Lila Gerts makes **ceramic figurines
@@ -137,6 +144,22 @@ hero here, not texture.
 They are **not** a substitute for product photography. Slots marked `data-photo-slot` in
 `index.html` take real shots at the sizes listed in README.md. Stock photo hosts were unreachable
 from the build environment, so no stock imagery is used or faked.
+
+## Ordering
+
+Buyers do not want to negotiate in a chat: they pick, pay and leave. The order form therefore
+collects everything an Ozon shipment needs without any messenger: item, scent, colour pair, name,
+phone and pickup point. The form reshapes itself around the item, since a pet figurine takes
+photographs instead of a scent.
+
+Scents and items live as plain `<option>` lines in `index.html` so the range can be changed
+without touching code. The seller said the range will keep moving, so nothing about it is
+hard-coded elsewhere.
+
+"Ароматы", never "отдушки": men order more often than women here and read the first word faster.
+
+Orders reach the seller only once `data-endpoint` on the form names a handler. Until then the
+form composes the order and copies it, and says so plainly rather than claiming it was sent.
 
 ## Copy rules
 
