@@ -92,6 +92,43 @@
     targets.forEach(function (el) { io.observe(el); });
   }
 
+  /* Colour chips. Picking one carries the choice into the order form, so the
+     control does something real instead of only looking like a control. */
+  var noteField = document.getElementById("f-note");
+  var kindField = document.getElementById("f-kind");
+
+  function writeChoice(product, color) {
+    if (!noteField) return;
+    var line = product + ", цвет: " + color;
+    var rest = noteField.value.split("\n").filter(function (l) {
+      return l.trim() && l.indexOf(product + ", цвет:") !== 0;
+    });
+    noteField.value = [line].concat(rest).join("\n");
+    if (kindField) {
+      for (var i = 0; i < kindField.options.length; i++) {
+        if (kindField.options[i].text === product) { kindField.selectedIndex = i; break; }
+      }
+    }
+  }
+
+  document.querySelectorAll("[data-palette]").forEach(function (group) {
+    var product = group.dataset.palette;
+    group.querySelectorAll("button.sw").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var was = chip.getAttribute("aria-pressed") === "true";
+        group.querySelectorAll("button.sw").forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
+        chip.setAttribute("aria-pressed", String(!was));
+        if (was) return;
+        writeChoice(product, chip.dataset.color);
+        var form = document.getElementById("order-form");
+        if (form) {
+          form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+          window.setTimeout(function () { if (noteField) noteField.focus({ preventScroll: true }); }, reduce ? 0 : 500);
+        }
+      });
+    });
+  });
+
   /* Order form: inline validation, then a local success state.
      Template only. Point `endpoint` at the real handler before launch. */
   var form = document.getElementById("order-form");
@@ -137,12 +174,30 @@
     status.textContent = "Отправляем заявку";
 
     if (!endpoint) {
-      // No backend wired up yet: show the state the real handler will produce.
-      window.setTimeout(function () {
+      // No backend yet, so the request is handed to Telegram rather than
+      // swallowed: the text goes to the clipboard and the chat opens.
+      var data = new FormData(form);
+      var text = [
+        "Заявка с сайта Lila Gerts",
+        "Имя: " + (data.get("name") || ""),
+        "Связь: " + (data.get("contact") || ""),
+        "Интересует: " + (data.get("kind") || "не выбрано"),
+        "Пожелания: " + (data.get("note") || "")
+      ].join("\n");
+
+      var open = function () { window.open("https://t.me/Nina.G1999", "_blank", "noopener"); };
+      var done = function (copied) {
         status.dataset.state = "sent";
-        status.textContent = "Заявка принята. Отвечаем в течение дня.";
-        form.reset();
-      }, 650);
+        status.textContent = copied
+          ? "Заявка скопирована. Открываем Telegram, вставьте её в чат."
+          : "Напишите нам в Telegram, мы на связи.";
+        open();
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      } else {
+        done(false);
+      }
       return;
     }
 

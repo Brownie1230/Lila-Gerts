@@ -148,12 +148,12 @@
               <li>Горят ровно и не оставляют запаха гари</li>
               <li>Каждая свеча уезжает с биркой и в подарочной упаковке</li>
             </ul>
-            <ul class="palette">
-              <li class="sw"><i style="background:#8E1612"></i>вишня</li>
-              <li class="sw"><i style="background:#E3A0A8"></i>роза</li>
-              <li class="sw"><i style="background:#EEDCC8"></i>ваниль</li>
-              <li class="sw"><i style="background:#E4C89B"></i>медовый</li>
-            </ul>
+            <div class="palette" role="group" aria-label="Выбрать цвет свечи" data-palette="Свечи">
+              <button class="sw" type="button" aria-pressed="false" data-color="вишня"><i style="background:#8E1612"></i>вишня</button>
+              <button class="sw" type="button" aria-pressed="false" data-color="роза"><i style="background:#E3A0A8"></i>роза</button>
+              <button class="sw" type="button" aria-pressed="false" data-color="ваниль"><i style="background:#EEDCC8"></i>ваниль</button>
+              <button class="sw" type="button" aria-pressed="false" data-color="медовый"><i style="background:#E4C89B"></i>медовый</button>
+            </div>
           </div>
           <div data-reveal style="--d:90ms">
             <dl class="facts">
@@ -347,6 +347,14 @@
             <textarea id="f-note" name="note" placeholder="Повод, цвета, к какой дате"></textarea>
             <span class="help">Чем больше деталей, тем точнее предложим.</span>
           </div>
+          <div class="field field--check" data-field>
+            <label class="check" for="f-ok">
+              <input id="f-ok" name="consent" type="checkbox" required>
+              <span>Согласен на обработку имени и контакта для ответа на заявку. <a class="quiet" href="#privacy">Что это значит</a></span>
+            </label>
+            <span class="err" data-error>Без согласия мы не сможем ответить на заявку.</span>
+          </div>
+
           <div class="status" id="form-status" role="status" aria-live="polite"></div>
           <div>
             <button class="btn btn--primary" type="submit">Отправить заявку
@@ -354,6 +362,26 @@
             </button>
           </div>
         </form>
+      </div>
+    </section>
+
+    <section class="sec wrap" id="privacy">
+      <div class="sec-head" data-reveal>
+        <h2>Обработка данных</h2>
+        <p>Коротко и без юридического тумана: что происходит с тем, что вы отправляете через форму.</p>
+      </div>
+      <div class="paper-grid">
+        <ul class="did" data-reveal>
+          <li>Форма собирает имя, способ связи и текст пожеланий. Больше ничего.</li>
+          <li>Данные нужны ровно для одного: ответить вам и обсудить заказ.</li>
+          <li>Переписка идёт в Telegram и на почту <span class="nw">nina.gercik@mail.ru</span>, там же хранятся заявки.</li>
+          <li>Третьим лицам не передаём и в рассылки не добавляем.</li>
+        </ul>
+        <ul class="did" data-reveal style="--d:90ms">
+          <li>Отозвать согласие и попросить удалить переписку можно в любой момент, написав на ту же почту.</li>
+          <li>Если писать через Telegram напрямую, форма не участвует вовсе.</li>
+          <li>Текст описывает фактическую работу формы. Перед запуском его стоит показать юристу и при необходимости дополнить.</li>
+        </ul>
       </div>
     </section>
   </div>
@@ -386,7 +414,7 @@
     </div>
     <div class="foot-base">
       <span>Lila Gerts, 2026</span>
-      <a class="quiet" href="#">Политика обработки данных</a>
+      <a class="quiet" href="#privacy">Обработка данных</a>
     </div>
   </div>
 </footer>
