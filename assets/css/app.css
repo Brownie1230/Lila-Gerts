@@ -283,6 +283,46 @@ a.shot:hover .inset{transform:translateY(-10px)}
   .js [data-reveal]{opacity:0;transform:translateY(24px)}
   .js [data-reveal].is-in{opacity:1;transform:none;
     transition:opacity .75s var(--e),transform .75s var(--e);transition-delay:var(--d,0ms)}
+
+  /* A spread's list reads top to bottom, so it arrives top to bottom. */
+  .js .did li{opacity:0;transform:translateY(14px)}
+  .js [data-reveal].is-in .did li,.js .did.is-in li{opacity:1;transform:none;
+    transition:opacity .6s var(--e),transform .6s var(--e)}
+  .js .did li:nth-child(1){transition-delay:60ms}
+  .js .did li:nth-child(2){transition-delay:150ms}
+  .js .did li:nth-child(3){transition-delay:240ms}
+  .js .did li:nth-child(4){transition-delay:330ms}
+
+  /* Colour chips land after the list that explains them. */
+  .js .palette .sw{opacity:0;transform:translateY(10px) scale(.96)}
+  .js [data-reveal].is-in .palette .sw{opacity:1;transform:none;
+    transition:opacity .5s var(--e),transform .5s var(--e)}
+  .js .palette .sw:nth-child(1){transition-delay:380ms}
+  .js .palette .sw:nth-child(2){transition-delay:440ms}
+  .js .palette .sw:nth-child(3){transition-delay:500ms}
+  .js .palette .sw:nth-child(4){transition-delay:560ms}
+
+  /* Fact cells fill in as a grid, not as one block. */
+  .js .facts div{opacity:0}
+  .js [data-reveal].is-in .facts div{opacity:1;transition:opacity .55s var(--e)}
+  .js .facts div:nth-child(1){transition-delay:80ms}
+  .js .facts div:nth-child(2){transition-delay:160ms}
+  .js .facts div:nth-child(3){transition-delay:240ms}
+  .js .facts div:nth-child(4){transition-delay:320ms}
+}
+
+/* Scroll-driven depth on the spreads: the plate settles as it crosses the
+   viewport and the inset detail arrives a beat later. Progressive enhancement. */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .plate{animation:settle linear both;animation-timeline:view();animation-range:entry 0% entry 85%}
+    .inset{animation:arrive linear both;animation-timeline:view();animation-range:entry 10% entry 95%}
+    @keyframes settle{from{transform:scale(1.045) translateY(14px)}to{transform:none}}
+    @keyframes arrive{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:none}}
+    /* hover still wins once the spread has settled */
+    a.shot:hover .plate{animation:none;transform:translateY(-6px)}
+    a.shot:hover .inset{animation:none;transform:translateY(-10px)}
+  }
 }
 
 @media print{.nav,.grain,.tgl{display:none!important}body{background:#fff;color:#000}.hero{position:static}}
