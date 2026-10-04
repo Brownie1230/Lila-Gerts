@@ -155,8 +155,8 @@ a { color: inherit; }
   grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   align-items: center;
   gap: clamp(2rem, 5vw, 5rem);
-  padding-top: clamp(3rem, 6vw, 6rem);
-  padding-bottom: clamp(3rem, 6vw, 6rem);
+  padding-top: clamp(2rem, 3.5vw, 3.5rem);
+  padding-bottom: clamp(2rem, 3.5vw, 3.5rem);
 }
 .hero__copy { max-width: min(100%, 41rem); }
 .hero__copy h1 { margin-bottom: var(--s-5); }
@@ -222,7 +222,7 @@ a { color: inherit; }
 }
 .cherry::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: url("../img/band-wide.jpg") center / cover no-repeat;
+  background: url("../img/backdrop-velvet.jpg") center / cover no-repeat;
   opacity: 0.4;
 }
 .cherry::after {
@@ -343,8 +343,8 @@ a { color: inherit; }
 /* ---------- motion layer ---------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal] { opacity: 0; transform: translateY(26px); }
-  [data-reveal].is-in {
+  .js [data-reveal] { opacity: 0; transform: translateY(26px); }
+  .js [data-reveal].is-in {
     opacity: 1; transform: none;
     transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
     transition-delay: var(--reveal-delay, 0ms);
@@ -381,7 +381,8 @@ a { color: inherit; }
 /* ---------- refinements ---------- */
 
 /* The hero sits a touch higher than dead centre so the headline leads. */
-.hero { min-height: min(calc(100dvh - 72px), 840px); }
+.hero { min-height: min(calc(100dvh - 72px), 820px); }
+.hero__figure { min-height: 0; max-height: min(calc(100dvh - 160px), 700px); }
 
 /* The lead card is seven columns wide; its caption should not stretch across all of it. */
 .card--lead .card__body,
@@ -476,4 +477,128 @@ a { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .nav__burger span::before, .nav__burger span::after { transition: none; }
+}
+
+/* ======================================================================
+   Ceramics and candles rebuild. The brief changed from a cake atelier to
+   a handmade ceramics and candle studio; everything below serves that.
+   ====================================================================== */
+
+/* Wordmark: script "Lila" over serif caps "GERTS", after the client's logo. */
+.nav__brand { display: inline-flex; align-items: baseline; gap: 0.3em; font-family: var(--font-script); }
+.nav__brand-caps, .footer__caps {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-size: 0.74em;
+  text-transform: uppercase;
+}
+.footer__brand { display: inline-flex; align-items: baseline; gap: 0.3em; }
+
+/* Photo slots. Delete the <span class="slot-note"> when the real shot lands,
+   or hide every marker at once with .slot-note { display: none }. */
+.slot-note {
+  position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  z-index: 2;
+  font-family: var(--font-text);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: color-mix(in srgb, var(--bg-raised) 88%, transparent);
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--radius);
+  padding: 0.4em 0.8em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.hero__figure, .card__media, .band { position: relative; }
+.band img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+
+/* Marquee: one per page. It carries the four claims the client wrote herself,
+   so the motion is doing a job, not decorating. */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--rule);
+  padding-block: var(--s-4);
+  background: var(--bg-sunk);
+  --marquee-duration: 38s;
+}
+.marquee__track {
+  display: flex; align-items: center; gap: var(--s-5);
+  width: max-content;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.9vw, 1.6rem);
+  color: var(--ink-soft);
+  white-space: nowrap;
+  animation: slide var(--marquee-duration) linear infinite;
+}
+.marquee__track i { display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.5; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
+
+/* Claims list inside the signature block */
+.claims { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-5); }
+.claims li { display: flex; gap: var(--s-4); align-items: start; }
+.claims .icon { color: var(--c-rose); margin-top: 0.45em; flex: none; }
+.claims b { display: block; font-family: var(--font-display); font-size: var(--step-h3); font-weight: 500; line-height: 1.2; margin-bottom: 0.2em; }
+.claims span { font-size: var(--step-small); color: color-mix(in srgb, var(--c-cream) 76%, transparent); }
+.claims b { color: var(--c-cream); }
+:root[data-theme="dark"] .claims .icon { color: var(--c-cherry); }
+:root[data-theme="dark"] .claims b { color: var(--c-inferno); }
+:root[data-theme="dark"] .claims span { color: color-mix(in srgb, var(--c-inferno) 76%, transparent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .claims .icon { color: var(--c-cherry); }
+  :root:not([data-theme="light"]) .claims b { color: var(--c-inferno); }
+  :root:not([data-theme="light"]) .claims span { color: color-mix(in srgb, var(--c-inferno) 76%, transparent); }
+}
+
+.form__intro { font-size: var(--step-small); color: var(--ink-soft); margin-bottom: var(--s-2); }
+
+/* Card names are Russian now, so they drop the Latin-only script face. */
+.card__name { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em; }
+
+/* ---------- motion, raised for a product brand ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Headline arrives line by line: hierarchy, the first thing read first. */
+  .hero__copy h1 { --line-dur: 900ms; }
+  .hero__copy h1 > span.line {
+    display: block; overflow: hidden;
+  }
+  .hero__copy h1 > span.line > span {
+    display: block;
+    animation: lineUp var(--line-dur) var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 110ms);
+  }
+  @keyframes lineUp { from { transform: translateY(105%); } to { transform: none; } }
+
+  /* Cards lift on hover: feedback that the whole tile is the link. */
+  .card { transition: transform var(--dur-2) var(--ease); }
+  .card:hover { transform: translateY(-4px); }
+
+  /* Claims arrive one after another once the block is in view. */
+  .js .claims li { opacity: 0; transform: translateY(18px); }
+  .cherry [data-reveal].is-in .claims li,
+  .claims.is-in li {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
+  }
+  .claims li:nth-child(1) { transition-delay: 60ms; }
+  .claims li:nth-child(2) { transition-delay: 160ms; }
+  .claims li:nth-child(3) { transition-delay: 260ms; }
+  .claims li:nth-child(4) { transition-delay: 360ms; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The wide band breathes as it crosses the viewport: depth, not decoration. */
+    .band img {
+      animation: bandZoom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+    @keyframes bandZoom { from { transform: scale(1.12) translateY(-1.5%); } to { transform: scale(1.02) translateY(1.5%); } }
+  }
 }

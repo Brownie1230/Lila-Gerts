@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lila Gerts · Кондитерское ателье</title>
-<meta name="description" content="Кондитерское ателье Lila Gerts в Москве. Торты на заказ малыми партиями: Black Cherry, Cream Vanilla, Mother of Pearl.">
+<title>Lila Gerts · Керамические фигурки и свечи ручной работы</title>
+<meta name="description" content="Lila Gerts: керамические фигурки и свечи ручной работы. Безопасный состав, подарочная упаковка, индивидуальный заказ. Отправка в ПВЗ Ozon.">
 <meta name="theme-color" content="#F4E9DC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#2E0503" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Lila Gerts · Кондитерское ателье">
-<meta property="og:description" content="Торты на заказ малыми партиями. Москва.">
-<meta property="og:image" content="assets/img/hero-strata.jpg">
+<meta property="og:title" content="Lila Gerts · Керамические фигурки и свечи ручной работы">
+<meta property="og:description" content="Фигурки и свечи небольшими партиями. Безопасный состав, подарочная упаковка, индивидуальный заказ.">
+<meta property="og:image" content="assets/img/backdrop-rose.jpg">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 
@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <script>
-  // Applied before paint so the chosen theme does not flash.
+  document.documentElement.classList.add("js");
   try {
     var t = localStorage.getItem("lg-theme");
     if (t) document.documentElement.dataset.theme = t;
@@ -36,22 +36,22 @@
 
 <header class="nav" id="nav">
   <div class="shell nav__inner">
-    <a class="nav__brand" href="#main">Lila Gerts</a>
+    <a class="nav__brand" href="#main"><span class="script">Lila</span> <span class="nav__brand-caps">GERTS</span></a>
     <nav aria-label="Основная навигация" class="nav__menu" id="nav-menu" hidden>
       <ul class="nav__links">
-        <li><a class="link-quiet" href="#collections">Коллекции</a></li>
-        <li><a class="link-quiet" href="#process">Процесс</a></li>
-        <li><a class="link-quiet" href="#inside">Что внутри</a></li>
-        <li><a class="link-quiet" href="#reviews">Отзывы</a></li>
+        <li><a class="link-quiet" href="#catalog">Каталог</a></li>
+        <li><a class="link-quiet" href="#care">О свечах</a></li>
+        <li><a class="link-quiet" href="#custom">Свой заказ</a></li>
+        <li><a class="link-quiet" href="#delivery">Доставка</a></li>
       </ul>
-      <a class="btn btn--primary" href="#order">Заказать торт</a>
+      <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
     </nav>
     <div class="nav__right">
       <button class="theme-toggle" type="button" id="theme" aria-pressed="false">
         <svg class="icon" aria-hidden="true" data-theme-glyph style="font-size:1.1rem"><use href="assets/icons.svg#i-moon"></use></svg>
         <span class="u-visually-hidden">Переключить тёмную тему</span>
       </button>
-      <a class="btn btn--primary" href="#order">Заказать торт</a>
+      <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
       <button class="nav__burger" type="button" id="burger" aria-expanded="false" aria-controls="nav-menu">
         <span aria-hidden="true"></span>
         <span class="u-visually-hidden">Открыть меню</span>
@@ -62,194 +62,188 @@
 
 <main id="main">
 
-  <!-- Hero: asymmetric split. Four text elements max, no eyebrow. -->
+  <!-- Hero -->
   <section class="shell hero">
     <div class="hero__copy">
-      <h1>Торт, который<br>узнают по <em>срезу</em></h1>
-      <p class="hero__lead">Кондитерское ателье Lila Gerts в Москве. Собираем торты на заказ малыми партиями, под ваш повод и вкус.</p>
+      <h1>Керамика и свечи,<br>сделанные <em>вручную</em></h1>
+      <p class="hero__lead">Фигурки и свечи небольшими партиями. Каждую вещь собираем и расписываем руками, двух одинаковых не бывает.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#order">Заказать торт
-          <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"></use></svg>
+        <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
+          <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg>
         </a>
-        <a class="btn btn--ghost" href="#collections">Смотреть коллекции</a>
+        <a class="btn btn--ghost" href="#catalog">Смотреть каталог</a>
       </div>
     </div>
-    <!-- data-photo-slot: replace with a real cross-section shot, 2400x1500, см. README -->
+    <!-- PHOTO SLOT: витринный кадр, 2000x2500, вертикаль. См. README -->
     <figure class="hero__figure" data-photo-slot="hero" style="margin:0">
-      <img src="assets/img/hero-strata.jpg" width="2400" height="1500" fetchpriority="high"
-           alt="Срез торта: слои шоколадного бисквита, крема и розовой прослойки">
+      <img src="assets/img/backdrop-rose.jpg" width="2000" height="2500" fetchpriority="high"
+           alt="Розовая драпировка, фон витрины Lila Gerts">
+      <figcaption class="slot-note">Место под витринный кадр</figcaption>
     </figure>
   </section>
 
-  <!-- Collections: asymmetric 12-col grid, exactly three cells -->
-  <section class="shell section" id="collections">
+  <!-- Marquee: the one per page, carries the client's four claims -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
+      <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
+      <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
+      <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
+    </div>
+  </div>
+  <p class="u-visually-hidden">Безопасный состав, эстетика в каждой детали, подарочная упаковка, индивидуальный подход.</p>
+
+  <!-- Catalog: asymmetric grid, exactly three cells -->
+  <section class="shell section" id="catalog">
     <div class="collections__head" data-reveal>
-      <p class="eyebrow">Коллекции</p>
-      <h2>Три вкуса, с которых начинают</h2>
-      <p>Базовые линейки ателье. Каждую собираем под повод: меняем диаметр, высоту и плотность крема.</p>
+      <p class="eyebrow">Каталог</p>
+      <h2>Что мы делаем</h2>
+      <p>Три направления. Внутри каждого вещи меняются: что-то уходит в единственном экземпляре, что-то повторяем под заказ.</p>
     </div>
 
     <div class="collections">
-      <a class="card card--lead" href="#order" data-reveal>
-        <div class="card__media" data-photo-slot="collection-cherry">
-          <img src="assets/img/collection-cherry.jpg" width="1200" height="1500" loading="lazy"
-               alt="Тёмный срез: шоколадный бисквит и вишнёвая прослойка">
+      <a class="card card--lead" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
+        <div class="card__media" data-photo-slot="candles">
+          <img src="assets/img/backdrop-rose-2.jpg" width="1200" height="1500" loading="lazy"
+               alt="Свечи ручной работы на розовой драпировке">
+          <span class="slot-note">Фото свечей, 1200x1500</span>
         </div>
         <div class="card__body">
-          <span class="card__name script">Black Cherry</span>
-          <span class="card__ru">Чёрная вишня</span>
+          <span class="card__name">Свечи</span>
+          <span class="card__ru">десерты, цветы, сердца</span>
         </div>
-        <p class="card__note">Шоколадный бисквит, вишня в собственном соку, крем на сливочном сыре.</p>
+        <p class="card__note">Формы лепим сами. Горят ровно и не оставляют запаха гари, состав безопасный.</p>
       </a>
 
       <div class="card--stack">
-        <a class="card card--small" href="#order" data-reveal style="--reveal-delay:90ms">
-          <div class="card__media" data-photo-slot="collection-cream">
-            <img src="assets/img/collection-cream.jpg" width="1200" height="1500" loading="lazy"
-                 alt="Светлый срез: ванильный бисквит и сливочный крем">
+        <a class="card card--small" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal style="--reveal-delay:90ms">
+          <div class="card__media" data-photo-slot="figurines">
+            <img src="assets/img/backdrop-cream.jpg" width="2000" height="1250" loading="lazy"
+                 alt="Керамические фигурки на кремовой ткани">
+            <span class="slot-note">Фото фигурок, 1200x750</span>
           </div>
           <div class="card__body">
-            <span class="card__name script">Cream Vanilla</span>
-            <span class="card__ru">Сливочная ваниль</span>
+            <span class="card__name">Фигурки</span>
+            <span class="card__ru">котики и не только</span>
           </div>
-          <p class="card__note">Ванильный бисквит, крем-шантийи, тонкий слой солёной карамели.</p>
+          <p class="card__note">Керамика, роспись вручную. Каждая мордочка получается своя.</p>
         </a>
 
-        <a class="card card--small" href="#order" data-reveal style="--reveal-delay:180ms">
-          <div class="card__media" data-photo-slot="collection-rose">
-            <img src="assets/img/collection-rose.jpg" width="1200" height="1500" loading="lazy"
-                 alt="Розовый срез: малиновая прослойка и белый шоколад">
+        <a class="card card--small" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal style="--reveal-delay:180ms">
+          <div class="card__media" data-photo-slot="decor">
+            <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" loading="lazy"
+                 alt="Декор на перламутровой ткани">
+            <span class="slot-note">Фото декора, 1200x750</span>
           </div>
           <div class="card__body">
-            <span class="card__name script">Mother of Pearl</span>
-            <span class="card__ru">Перламутр</span>
+            <span class="card__name">Декор</span>
+            <span class="card__ru">подсвечники, мелочи</span>
           </div>
-          <p class="card__note">Розовый бисквит, малина, белый шоколад. Самый светлый срез в линейке.</p>
+          <p class="card__note">Небольшие вещи, которые собирают интерьер и хорошо уходят в подарок.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- The page's one colour-block switch, lifted from the client's reference board -->
-  <section class="section cherry">
+  <!-- The page's one colour-block switch: the client's headline claim about the candles -->
+  <section class="section cherry" id="care">
     <div class="shell cherry__grid">
       <div data-reveal>
-        <span class="cherry__name script">Black Cherry</span>
-        <h2>Наш самый тёмный срез</h2>
-        <p>Девять слоёв шоколадного бисквита и вишни. Крем мы не подслащиваем, чтобы вишня осталась кислой.</p>
+        <h2>Свечу можно жечь<br>дома и рядом с детьми</h2>
+        <p>Наши свечи безопасны и не выделяют опасных веществ при горении. Это первое, о чём спрашивают, и первое, что мы проверяем.</p>
         <p style="margin-top:2rem">
-          <a class="btn btn--ghost" href="#order">Заказать торт
-            <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"></use></svg>
+          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Спросить про состав
+            <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg>
           </a>
         </p>
       </div>
-      <!-- Template specs. Replace with the atelier's real product data before launch. -->
-      <dl class="cherry__spec" data-reveal style="--reveal-delay:120ms">
-        <div><dt>Слоёв</dt><dd>9</dd></div>
-        <div><dt>Диаметр</dt><dd>18, 22, 26 см</dd></div>
-        <div><dt>Сборка</dt><dd>3 дня</dd></div>
-      </dl>
+      <ul class="claims" data-reveal style="--reveal-delay:120ms">
+        <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg>
+          <span><b>Безопасный состав</b>Без опасных веществ при горении.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg>
+          <span><b>Эстетика в каждой детали</b>Форма, цвет и упаковка собираются как одно целое.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg>
+          <span><b>Качественная подарочная упаковка</b>Вещь приезжает готовой к вручению.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg>
+          <span><b>Индивидуальный стиль и подход</b>Цвет, размер и подпись подбираем под повод.</span></li>
+      </ul>
     </div>
   </section>
 
-  <!-- Process: scroll-snap rail. Verb labels, never "Шаг 1". -->
-  <section class="shell section" id="process">
+  <!-- Custom order: scroll-snap rail, verb labels -->
+  <section class="shell section" id="custom">
     <div data-reveal style="margin-bottom:var(--s-8)">
-      <p class="eyebrow">Как это работает</p>
-      <h2>От созвона до коробки</h2>
+      <p class="eyebrow">Свой заказ</p>
+      <h2>Как сделать по-своему</h2>
     </div>
-    <div class="rail" tabindex="0" aria-label="Этапы работы">
+    <div class="rail" tabindex="0" aria-label="Этапы индивидуального заказа">
       <article class="step" data-reveal>
-        <span class="step__k">Созвон</span>
-        <p>Обсуждаем повод, число гостей и ограничения по продуктам. Двадцать минут голосом или в переписке.</p>
+        <span class="step__k">Напишите</span>
+        <p>В Telegram или на почту. Расскажите про повод, цвета и к какой дате нужно.</p>
       </article>
       <article class="step" data-reveal style="--reveal-delay:80ms">
-        <span class="step__k">Проба</span>
-        <p>Привозим набор из трёх вкусов. Бисквит и крем выбираете до того, как мы начнём печь.</p>
+        <span class="step__k">Обсудим</span>
+        <p>Предложим форму и палитру, покажем похожие работы. Согласуем цену до начала.</p>
       </article>
       <article class="step" data-reveal style="--reveal-delay:160ms">
-        <span class="step__k">Сборка</span>
-        <p>Печём за два дня до события. Декор ставим в день выдачи, чтобы он не осел.</p>
+        <span class="step__k">Сделаем</span>
+        <p>Лепим, отливаем и расписываем. На этапе росписи присылаем фото.</p>
       </article>
       <article class="step" data-reveal style="--reveal-delay:240ms">
-        <span class="step__k">Доставка</span>
-        <p>Везём в холодильном боксе. Внутри МКАД доставка входит в стоимость заказа.</p>
+        <span class="step__k">Упакуем</span>
+        <p>Собираем в подарочную упаковку и готовим к отправке.</p>
       </article>
     </div>
   </section>
 
-  <!-- Inside: wide band image plus grouped chunks -->
-  <section class="section section--tight" id="inside">
+  <!-- Delivery: wide band plus a short pair of facts -->
+  <section class="section section--tight" id="delivery">
     <div class="shell">
-      <figure style="margin:0 0 var(--s-8)" data-reveal data-photo-slot="atelier">
-        <img src="assets/img/atelier.jpg" width="1600" height="1200" loading="lazy"
-             style="width:100%;aspect-ratio:21/9;object-fit:cover"
-             alt="Светлый срез торта крупным планом">
+      <figure class="band" data-reveal data-photo-slot="packaging" style="margin:0 0 var(--s-8)">
+        <img src="assets/img/backdrop-cream-2.jpg" width="2000" height="1250" loading="lazy"
+             alt="Светлая ткань, фон для кадра с упаковкой">
+        <figcaption class="slot-note">Место под кадр с упаковкой, 2000x860</figcaption>
       </figure>
-      <h2 data-reveal style="margin-bottom:var(--s-7)">Что внутри</h2>
       <div class="chunks">
         <div class="chunk" data-reveal>
-          <h3>Бисквит</h3>
-          <p>Печём в день сборки и не замораживаем. Поэтому торт живёт трое суток, а не две недели.</p>
-          <ul>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Мука без отбеливателя</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Фермерские яйца</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Пропитка на сиропе, не на алкоголе</li>
-          </ul>
+          <h3>Доставка</h3>
+          <p>Отправляем в удобный для вас ПВЗ Ozon. Хрупкое пакуем так, чтобы доехало целым.</p>
         </div>
         <div class="chunk" data-reveal style="--reveal-delay:90ms">
-          <h3>Крем</h3>
-          <p>База на сливочном сыре и сливках. Сахар кладём по нижней границе рецепта, вкус держит ягода.</p>
-          <ul>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Без растительных сливок</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Версия на эритрите по запросу</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Красители только натуральные</li>
-          </ul>
+          <h3>Упаковка</h3>
+          <p>Каждый заказ уезжает в подарочной упаковке. Открытка с подписью по вашей просьбе.</p>
         </div>
         <div class="chunk" data-reveal style="--reveal-delay:180ms">
-          <h3>Сроки</h3>
-          <p>Берём заказ за неделю. На выходные и праздники место уходит раньше, пишите заранее.</p>
-          <ul>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Семь дней до события</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Срочный заказ по согласованию</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"></use></svg> Выдача с 9 до 21</li>
-          </ul>
+          <h3>Связь</h3>
+          <p>Пишите в Telegram, отвечаем там же. Почта работает, если удобнее письмом.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quotes: asymmetric pair, three lines max -->
-  <section class="shell section" id="reviews">
-    <div class="quotes">
-      <figure class="quote" data-reveal>
-        <blockquote>«Заказывали на годовщину. Гости доели всё до крошки, у нас такого не случалось ни разу.»</blockquote>
-        <figcaption><b>Вера Коростелёва</b>годовщина, 40 гостей</figcaption>
-      </figure>
-      <figure class="quote" data-reveal style="--reveal-delay:120ms">
-        <blockquote>«Просила несладкий торт для отца. Сделали на эритрите, и разницы за столом никто не заметил.»</blockquote>
-        <figcaption><b>Полина Рудь</b>семейный ужин</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Order -->
+  <!-- Contact -->
   <section class="shell section" id="order">
     <div class="order">
       <div class="order__aside" data-reveal>
-        <h2>Расскажите про повод</h2>
-        <p>Отвечаем в тот же день. Если дата близко, лучше позвонить.</p>
+        <h2>Напишите нам</h2>
+        <p>Заказы и вопросы идут через Telegram: так быстрее всего показать варианты и согласовать детали.</p>
         <ul class="order__contacts">
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg>
-            <a class="link-quiet" href="tel:+79264183705">+7 926 418 37 05</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-telegram-logo"></use></svg>
+            <a class="link-quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">t.me/Nina.G1999</a></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-envelope-simple"></use></svg>
-            <a class="link-quiet" href="mailto:hello@lilagerts.ru">hello@lilagerts.ru</a></li>
+            <a class="link-quiet" href="mailto:nina.gercik@mail.ru">nina.gercik@mail.ru</a></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-map-pin"></use></svg>
-            Москва, Малый Гнездниковский переулок, 9с7</li>
+            Отправка в удобный для вас ПВЗ Ozon</li>
         </ul>
+        <p style="margin-top:var(--s-6)">
+          <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
+            <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg>
+          </a>
+        </p>
       </div>
 
       <form class="form" id="order-form" novalidate data-reveal style="--reveal-delay:100ms">
+        <p class="form__intro">Или оставьте заявку, и мы напишем первыми.</p>
         <div class="form__row">
           <div class="field" data-field>
             <label for="f-name">Имя</label>
@@ -257,42 +251,35 @@
             <span class="field__error" data-error>Напишите имя, чтобы мы знали, к кому обращаться.</span>
           </div>
           <div class="field" data-field>
-            <label for="f-phone">Телефон</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+7 ___ ___ __ __">
-            <span class="field__help">Пишем в мессенджер на этот же номер.</span>
-            <span class="field__error" data-error>Нужен номер, по которому вы на связи.</span>
-          </div>
-        </div>
-
-        <div class="form__row">
-          <div class="field" data-field>
-            <label for="f-date">Дата события</label>
-            <input id="f-date" name="date" type="date" required>
-            <span class="field__error" data-error>Выберите дату, чтобы мы проверили место в графике.</span>
-          </div>
-          <div class="field" data-field>
-            <label for="f-occasion">Повод</label>
-            <select id="f-occasion" name="occasion">
-              <option value="">Не выбран</option>
-              <option>День рождения</option>
-              <option>Свадьба</option>
-              <option>Годовщина</option>
-              <option>Корпоративный заказ</option>
-              <option>Без повода</option>
-            </select>
+            <label for="f-contact">Telegram или почта</label>
+            <input id="f-contact" name="contact" type="text" required placeholder="@username или адрес почты">
+            <span class="field__help">Куда прислать ответ.</span>
+            <span class="field__error" data-error>Нужен способ связи: ник в Telegram или почта.</span>
           </div>
         </div>
 
         <div class="field" data-field>
-          <label for="f-note">Комментарий</label>
-          <textarea id="f-note" name="note" placeholder="Число гостей, аллергии, пожелания по вкусу"></textarea>
-          <span class="field__help">Чем больше деталей, тем точнее смета.</span>
+          <label for="f-kind">Что интересует</label>
+          <select id="f-kind" name="kind">
+            <option value="">Не выбрано</option>
+            <option>Свечи</option>
+            <option>Керамические фигурки</option>
+            <option>Декор</option>
+            <option>Индивидуальный заказ</option>
+            <option>Подарок, нужен совет</option>
+          </select>
+        </div>
+
+        <div class="field" data-field>
+          <label for="f-note">Пожелания</label>
+          <textarea id="f-note" name="note" placeholder="Повод, цвета, к какой дате"></textarea>
+          <span class="field__help">Чем больше деталей, тем точнее предложим.</span>
         </div>
 
         <div class="form__status" id="form-status" role="status" aria-live="polite"></div>
 
         <div>
-          <button class="btn btn--primary" type="submit">Заказать торт
+          <button class="btn btn--primary" type="submit">Отправить заявку
             <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"></use></svg>
           </button>
         </div>
@@ -305,28 +292,27 @@
   <div class="shell">
     <div class="footer__grid">
       <div>
-        <div class="footer__brand">Lila Gerts</div>
-        <p class="footer__tag">Кондитерское ателье. Торты на заказ малыми партиями, Москва.</p>
+        <div class="footer__brand"><span class="script">Lila</span> <span class="footer__caps">GERTS</span></div>
+        <p class="footer__tag">Керамические фигурки и свечи ручной работы. Небольшими партиями, с подарочной упаковкой.</p>
         <div class="footer__social">
-          <a href="#" aria-label="Telegram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-telegram-logo"></use></svg></a>
-          <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram-logo"></use></svg></a>
-          <a href="#" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp-logo"></use></svg></a>
+          <a href="https://t.me/Nina.G1999" target="_blank" rel="noopener" aria-label="Telegram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-telegram-logo"></use></svg></a>
+          <a href="mailto:nina.gercik@mail.ru" aria-label="Почта"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-envelope-simple"></use></svg></a>
         </div>
       </div>
       <div>
-        <h2 class="footer__h">Коллекции</h2>
+        <h2 class="footer__h">Каталог</h2>
         <ul>
-          <li><a class="link-quiet" href="#collections">Black Cherry</a></li>
-          <li><a class="link-quiet" href="#collections">Cream Vanilla</a></li>
-          <li><a class="link-quiet" href="#collections">Mother of Pearl</a></li>
+          <li><a class="link-quiet" href="#catalog">Свечи</a></li>
+          <li><a class="link-quiet" href="#catalog">Фигурки</a></li>
+          <li><a class="link-quiet" href="#catalog">Декор</a></li>
         </ul>
       </div>
       <div>
         <h2 class="footer__h">Контакты</h2>
         <ul>
-          <li><a class="link-quiet" href="tel:+79264183705">+7 926 418 37 05</a></li>
-          <li><a class="link-quiet" href="mailto:hello@lilagerts.ru">hello@lilagerts.ru</a></li>
-          <li>Малый Гнездниковский, 9с7</li>
+          <li><a class="link-quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">t.me/Nina.G1999</a></li>
+          <li><a class="link-quiet" href="mailto:nina.gercik@mail.ru">nina.gercik@mail.ru</a></li>
+          <li>ПВЗ Ozon по всей России</li>
         </ul>
       </div>
     </div>

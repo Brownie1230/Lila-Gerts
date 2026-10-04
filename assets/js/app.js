@@ -32,6 +32,18 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paintToggle);
   }
 
+  /* Headline split into masked lines, so it can rise line by line.
+     Purely additive: without this the h1 renders as written. */
+  var h1 = document.querySelector(".hero__copy h1");
+  if (h1 && !reduce) {
+    var parts = h1.innerHTML.split(/<br\s*\/?>/i);
+    if (parts.length > 1) {
+      h1.innerHTML = parts.map(function (part, i) {
+        return '<span class="line"><span style="--i:' + i + '">' + part.trim() + "</span></span>";
+      }).join("");
+    }
+  }
+
   /* Mobile menu. A disclosure, not an overlay: the page stays reachable behind it. */
   var burger = document.getElementById("burger");
   var menu = document.getElementById("nav-menu");

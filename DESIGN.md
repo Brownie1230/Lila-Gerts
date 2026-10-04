@@ -4,9 +4,38 @@ Source of truth for the site. Overrides any skill default.
 
 ## Design read
 
-Premium-consumer landing page for a cake atelier, speaking to private clients who choose by
-taste and craft, with a heritage-confectionery language, built on native CSS, Cormorant Garamond,
-Onest, and the client's own Pantone palette.
+Premium-consumer landing page for a handmade ceramics and candle studio, speaking to private
+buyers who choose by look and feel, with a soft tactile boutique language, built on native CSS,
+Cormorant Garamond, Onest, and the client's own Pantone palette.
+
+### Correction, 4 Oct
+
+The first build read the brief as a cake atelier. It is not. Lila Gerts makes **ceramic figurines
+and candles**: dessert-shaped candles, cat figurines, decorative pieces, finished with bows and
+lace. The red-velvet photograph in reference board 1 was the client's **colour reference**, not a
+product, and the client said so in the brief chat. Palette and type survive the correction
+unchanged. The cross-section metaphor does not: product copy, section plan and imagery are being
+rebuilt around the real objects.
+
+### The client's own brief, verbatim
+
+Contact and claims come from the information card the client sent, so they go on the page as
+given, not invented:
+
+- Telegram `t.me/Nina.G1999`, email `nina.gercik@mail.ru`
+- Shipping to the buyer's chosen Ozon pickup point
+- "Наши свечи безопасны и не выделяют опасных веществ при горении"
+- "Эстетика в каждой детали"
+- "Качественная подарочная упаковка" (the card reads "Качественные", corrected here)
+- "Индивидуальный стиль и подход"
+
+There is no phone and no public address: Telegram is the ordering channel. The wordmark is script
+"Lila" over serif caps "GERTS" with a line-art bow. The client is open on the base colour: cream
+and cherry as supplied, or white if white reads better.
+
+**No testimonials exist.** The two in the first build were written by me as template filler. On a
+real shop that sells to real buyers, invented reviews are not placeholder text, they are false
+claims, so the section is removed until the client supplies real ones.
 
 Dials: `DESIGN_VARIANCE 7` · `MOTION_INTENSITY 6` · `VISUAL_DENSITY 3` (premium-consumer preset).
 
@@ -75,8 +104,11 @@ No scroll event listeners. Everything collapses to static under `prefers-reduced
 ## Imagery
 
 `assets/img/*.jpg` are **generated brand textures**, not photographs: abstract layered
-cross-sections built from the palette, echoing the red-velvet strata in reference board 1. They
-are the brand's visual signature and are production-usable as texture.
+cross-sections built from the palette. They were drawn from the red-velvet photograph in
+reference board 1 back when that was misread as the product. Since the brand makes ceramics and
+candles, the cross-section is the wrong signature and these are **retired** as soon as real
+product photography lands. A ceramics and candle brand sells on the object: photography is the
+hero here, not texture.
 
 They are **not** a substitute for product photography. Slots marked `data-photo-slot` in
 `index.html` take real shots at the sizes listed in README.md. Stock photo hosts were unreachable
@@ -85,7 +117,10 @@ from the build environment, so no stock imagery is used or faked.
 ## Copy rules
 
 - Russian throughout; the brand name and collection names stay Latin.
-- No em-dash or en-dash anywhere visible, in any language.
+- The `design-taste-frontend` skill bans the em-dash outright. That rule exists to kill a stylistic
+  tell in English marketing copy. In Russian the тире is orthography, so the ban is **kept for
+  decoration** (headlines, labels, pills, buttons, captions) and **overridden in body copy**, where
+  the dash is set correctly with non-breaking space before it. Project rules beat skill defaults.
 - One label per intent: ordering is always "Заказать торт", never a synonym.
 - No invented precision. Any number on the page is either structural (price floor, lead time)
   or absent.
