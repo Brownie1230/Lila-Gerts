@@ -172,7 +172,7 @@ a { color: inherit; }
   border-radius: var(--radius);
   box-shadow: var(--shadow-2);
 }
-.hero__figure img { width: 100%; height: 100%; object-fit: cover; }
+.hero__figure img { width: 100%; height: 100%; object-fit: cover; object-position: center 58%; }
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; min-height: 0; padding-top: var(--s-7); }
@@ -200,6 +200,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) { .card__media img, .card:hover .card__media img { transition: none; transform: none; } }
 
 .card--lead .card__media { aspect-ratio: 4 / 5; }
+.card--lead .card__media img { object-position: center 60%; }
 .card--small .card__media { aspect-ratio: 16 / 10; }
 
 .card__body { padding-top: var(--s-4); display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4); }
@@ -601,4 +602,28 @@ a { color: inherit; }
     }
     @keyframes bandZoom { from { transform: scale(1.12) translateY(-1.5%); } to { transform: scale(1.02) translateY(1.5%); } }
   }
+}
+
+/* ---------- pet portraits ---------- */
+
+.portrait {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.portrait__copy p { color: var(--ink-soft); margin-top: var(--s-5); }
+.portrait__meta { font-size: var(--step-small); color: var(--ink-faint); }
+.portrait__pairs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.pair { position: relative; margin: 0; overflow: hidden; border-radius: var(--radius); }
+.pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.pair:first-child { margin-top: clamp(0rem, 4vw, 3rem); }
+
+@media (max-width: 860px) {
+  .portrait { grid-template-columns: 1fr; }
+  .pair:first-child { margin-top: 0; }
 }

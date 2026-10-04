@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#2E0503" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Lila Gerts · Керамические фигурки и свечи ручной работы">
 <meta property="og:description" content="Фигурки и свечи небольшими партиями. Безопасный состав, подарочная упаковка, индивидуальный заказ.">
-<meta property="og:image" content="assets/img/backdrop-rose.jpg">
+<meta property="og:image" content="assets/img/product-hero.jpg">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 
@@ -40,6 +40,7 @@
     <nav aria-label="Основная навигация" class="nav__menu" id="nav-menu" hidden>
       <ul class="nav__links">
         <li><a class="link-quiet" href="#catalog">Каталог</a></li>
+        <li><a class="link-quiet" href="#portrait">Портрет питомца</a></li>
         <li><a class="link-quiet" href="#care">О свечах</a></li>
         <li><a class="link-quiet" href="#custom">Свой заказ</a></li>
         <li><a class="link-quiet" href="#delivery">Доставка</a></li>
@@ -74,11 +75,9 @@
         <a class="btn btn--ghost" href="#catalog">Смотреть каталог</a>
       </div>
     </div>
-    <!-- PHOTO SLOT: витринный кадр, 2000x2500, вертикаль. См. README -->
-    <figure class="hero__figure" data-photo-slot="hero" style="margin:0">
-      <img src="assets/img/backdrop-rose.jpg" width="2000" height="2500" fetchpriority="high"
-           alt="Розовая драпировка, фон витрины Lila Gerts">
-      <figcaption class="slot-note">Место под витринный кадр</figcaption>
+    <figure class="hero__figure" style="margin:0">
+      <img src="assets/img/product-hero.jpg" width="904" height="1280" fetchpriority="high"
+           alt="Керамическая свеча-шкатулка с жёлтым бантом и свеча в форме пиона на розовой подставке">
     </figure>
   </section>
 
@@ -103,16 +102,15 @@
 
     <div class="collections">
       <a class="card card--lead" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
-        <div class="card__media" data-photo-slot="candles">
-          <img src="assets/img/backdrop-rose-2.jpg" width="1200" height="1500" loading="lazy"
-               alt="Свечи ручной работы на розовой драпировке">
-          <span class="slot-note">Фото свечей, 1200x1500</span>
+        <div class="card__media">
+          <img src="assets/img/product-candles.jpg" width="856" height="1070" loading="lazy"
+               alt="Свеча в форме пиона и керамическая свеча-шкатулка на вязаном фоне">
         </div>
         <div class="card__body">
           <span class="card__name">Свечи</span>
-          <span class="card__ru">десерты, цветы, сердца</span>
+          <span class="card__ru">пионы, розы, шкатулки</span>
         </div>
-        <p class="card__note">Формы лепим сами. Горят ровно и не оставляют запаха гари, состав безопасный.</p>
+        <p class="card__note">Пионы, розы и шкатулки. Горят ровно и не оставляют запаха гари, состав безопасный.</p>
       </a>
 
       <div class="card--stack">
@@ -124,9 +122,9 @@
           </div>
           <div class="card__body">
             <span class="card__name">Фигурки</span>
-            <span class="card__ru">котики и не только</span>
+            <span class="card__ru">портрет питомца</span>
           </div>
-          <p class="card__note">Керамика, роспись вручную. Каждая мордочка получается своя.</p>
+          <p class="card__note">Лепим и расписываем по вашим фотографиям, с окрасом и характером.</p>
         </a>
 
         <a class="card card--small" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal style="--reveal-delay:180ms">
@@ -137,10 +135,38 @@
           </div>
           <div class="card__body">
             <span class="card__name">Декор</span>
-            <span class="card__ru">подсвечники, мелочи</span>
+            <span class="card__ru">подставки, мелочи</span>
           </div>
-          <p class="card__note">Небольшие вещи, которые собирают интерьер и хорошо уходят в подарок.</p>
+          <p class="card__note">Подставки и мелочи, которые собирают композицию и уходят в подарок.</p>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pet portraits: paired photographs, the animal and the figurine made from it -->
+  <section class="shell section" id="portrait">
+    <div class="portrait">
+      <div class="portrait__copy" data-reveal>
+        <h2>Фигурка по фото<br>вашего питомца</h2>
+        <p>Пришлите несколько снимков. Вылепим и распишем вручную: окрас, позу и выражение морды повторяем по фотографиям, бант подбираем под цвет.</p>
+        <p class="portrait__meta">Срок и цену называем после того, как посмотрим фотографии.</p>
+        <p style="margin-top:var(--s-6)">
+          <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
+            <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg>
+          </a>
+        </p>
+      </div>
+      <div class="portrait__pairs">
+        <figure class="pair" data-reveal data-photo-slot="portrait-1" style="--reveal-delay:80ms">
+          <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" loading="lazy"
+               alt="Место под пару снимков: кот и фигурка, сделанная по его фотографиям">
+          <figcaption class="slot-note">Пара «кот и фигурка», 960x1280</figcaption>
+        </figure>
+        <figure class="pair" data-reveal data-photo-slot="portrait-2" style="--reveal-delay:180ms">
+          <img src="assets/img/backdrop-cream.jpg" width="2000" height="1250" loading="lazy"
+               alt="Место под вторую пару снимков: кот и фигурка по его фотографиям">
+          <figcaption class="slot-note">Пара «кот и фигурка», 960x1280</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -263,7 +289,7 @@
           <select id="f-kind" name="kind">
             <option value="">Не выбрано</option>
             <option>Свечи</option>
-            <option>Керамические фигурки</option>
+            <option>Фигурка по фото питомца</option>
             <option>Декор</option>
             <option>Индивидуальный заказ</option>
             <option>Подарок, нужен совет</option>
