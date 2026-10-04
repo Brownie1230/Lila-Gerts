@@ -23,7 +23,7 @@ Contact and claims come from the information card the client sent, so they go on
 given, not invented:
 
 - Telegram `t.me/Nina.G1999`, email `nina.gercik@mail.ru`
-- Shipping to the buyer's chosen Ozon pickup point
+- Shipping to the buyer's chosen Ozon pickup point, free over 3 000 ₽
 - "Наши свечи безопасны и не выделяют опасных веществ при горении"
 - "Эстетика в каждой детали"
 - "Качественная подарочная упаковка" (the card reads "Качественные", corrected here)
