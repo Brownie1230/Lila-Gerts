@@ -41,6 +41,7 @@ h2{font-size:clamp(2.4rem, 1.5rem + 2.9vw, 4.2rem)}
 h3{font-size:clamp(1.6rem, 1.15rem + 1.3vw, 2.5rem);line-height:1.18}
 p{margin:0;max-width:65ch;text-wrap:pretty}
 img{display:block;max-width:100%;height:auto}
+[hidden]{display:none !important}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 [id]{scroll-margin-top:86px}
