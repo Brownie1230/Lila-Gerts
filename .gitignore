@@ -1,3 +1,6 @@
 node_modules/
 .DS_Store
 *.log
+
+# build artefact, 3.5 MB of inlined base64
+lila-gerts-one-file.html
