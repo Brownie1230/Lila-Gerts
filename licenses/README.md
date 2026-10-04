@@ -20,6 +20,7 @@ one source repository, copied verbatim at the commit pinned in [../SKILLS.md](..
 | Owl-Listener/designer-skills | MIT |
 | pbakaus/impeccable | Apache-2.0 |
 | rohitg00/awesome-claude-design | MIT |
+| vercel-labs/skills | MIT |
 | wondelai/skills | MIT |
 
 Three sources ship **no licence file** at the pinned commit, so no licence is granted and their

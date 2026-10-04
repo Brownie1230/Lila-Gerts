@@ -1,6 +1,6 @@
 # Design & frontend skill library
 
-167 Claude Code skills vendored from 15 upstream repositories into [`.claude/skills/`](.claude/skills/), so every design or frontend task in this repo has the same reference material available.
+168 Claude Code skills vendored from 16 upstream repositories into [`.claude/skills/`](.claude/skills/), so every design or frontend task in this repo has the same reference material available.
 
 ## Sources
 
@@ -21,6 +21,7 @@
 | [bencium/bencium-marketplace](https://github.com/bencium/bencium-marketplace) | `8b152ec0` | 16 |
 | [wondelai/skills](https://github.com/wondelai/skills) | `c1729964` | 2 |
 | [rohitg00/awesome-claude-design](https://github.com/rohitg00/awesome-claude-design) | `7f60ee56` | 1 |
+| [vercel-labs/skills](https://github.com/vercel-labs/skills) | `18f96ea0` | 1 |
 
 Nothing is a submodule: each skill is a plain copy of its upstream directory (`.git/` and `node_modules/` omitted), so it works offline and shows up in diffs.
 
@@ -275,6 +276,15 @@ Everything is upstream byte-for-byte except these three, which are needed for Cl
 | Skill | What it is for |
 |---|---|
 | [`awesome-claude-design`](.claude/skills/awesome-claude-design/SKILL.md) | Reference library of production DESIGN.md files grouped by aesthetic family (editorial, terminal, warm, data-dense, cinematic, playful, glass, brutalist, indie), brand-remix recipes, and prompt packs for art-directing a UI. Use when… |
+
+### vercel-labs/skills — 1 skill
+
+| Skill | What it is for |
+|---|---|
+| [`find-skills`](.claude/skills/find-skills/SKILL.md) | Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the us |
+
+Its registry search (`npx skills find`) needs skills.sh, which this build environment's egress policy
+blocks; the CLI then reports no results. It works normally on a machine with open network.
 
 ## Updating a vendored skill
 

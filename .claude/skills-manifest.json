@@ -455,6 +455,13 @@
     "desc": "Design confirmations, status updates, and notifications that tell users an action registered. Use when the system must acknowledge success or change. For waiting states use `loading-states`; for failures use `error-handling-ux`."
   },
   {
+    "name": "find-skills",
+    "repo": "vercel-labs/skills",
+    "sha": "18f96ea0",
+    "path": "skills/find-skills",
+    "desc": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill."
+  },
+  {
     "name": "fitts-law",
     "repo": "Owl-Listener/designer-skills",
     "sha": "9a6930cf",

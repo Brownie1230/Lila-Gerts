@@ -2,7 +2,7 @@
 
 ## Design & frontend skills
 
-This repo vendors 167 design/frontend skills into `.claude/skills/`. The full index, with each
+This repo vendors 168 design/frontend skills into `.claude/skills/`. The full index, with each
 skill's purpose and its upstream commit, is in [SKILLS.md](SKILLS.md).
 
 Many of them overlap. Loading several at once produces contradictory direction, so pick **one
@@ -26,6 +26,7 @@ primary skill** for the job, plus at most one or two narrow helpers. Routing:
 | Reference image → procedural Three.js model | `img2threejs` |
 | Choosing an aesthetic direction, or emulating a named brand | `awesome-claude-design` |
 | Validating a product idea before building | `design-sprint` |
+| Looking for a skill we do not have yet | `find-skills` (needs network to skills.sh) |
 
 A fixed aesthetic can be layered on a primary skill when the user asks for that look:
 `minimalist-ui`, `industrial-brutalist-ui`, `high-end-visual-design`.
