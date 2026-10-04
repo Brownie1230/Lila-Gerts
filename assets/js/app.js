@@ -120,6 +120,26 @@
     });
   });
 
+  /* Colour pairs write into the same field someone can type into, so the list is a
+     shortcut rather than a limit. */
+  document.querySelectorAll(".duos").forEach(function (group) {
+    group.querySelectorAll("button.duo").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var was = btn.getAttribute("aria-pressed") === "true";
+        group.querySelectorAll("button.duo").forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
+        btn.setAttribute("aria-pressed", String(!was));
+        if (colorField) colorField.value = was ? "" : btn.dataset.pair;
+      });
+    });
+  });
+  if (colorField) {
+    colorField.addEventListener("input", function () {
+      document.querySelectorAll("button.duo").forEach(function (o) {
+        o.setAttribute("aria-pressed", String(o.dataset.pair === colorField.value));
+      });
+    });
+  }
+
   /* The order form reshapes itself around the item: a candle needs a scent and a
      colour pair, a pet figurine needs photographs instead. */
   function syncItemFields() {

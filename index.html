@@ -366,8 +366,21 @@
 
           <div class="field" data-field data-only="candle">
             <label for="f-colors">Сочетание цветов</label>
-            <input id="f-colors" name="colors" type="text" placeholder="Например: жёлтый с белым">
-            <span class="help">Если нужного сочетания нет в каталоге, напишите своё, мы соберём под вас.</span>
+            <!-- СОЧЕТАНИЯ. Правятся прямо здесь: название в data-pair и в тексте кнопки,
+                 два цвета в --a и --b. Строку можно удалить или добавить новую. -->
+            <div class="duos" role="group" aria-label="Выбрать сочетание цветов">
+                <button class="duo" type="button" aria-pressed="false" data-pair="Бордо и крем"><i style="--a:#66001F;--b:#FEFCEF"></i>Бордо и крем</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Вино и мёд"><i style="--a:#44040F;--b:#FBDE9C"></i>Вино и мёд</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Кофе и миндаль"><i style="--a:#2E0D14;--b:#EFE1D5"></i>Кофе и миндаль</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Шоколад и песок"><i style="--a:#3E000C;--b:#FFECD1"></i>Шоколад и песок</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Розовое дерево и роза"><i style="--a:#70020F;--b:#FFDEE2"></i>Розовое дерево и роза</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Матча и ваниль"><i style="--a:#7A8450;--b:#F8EFDA"></i>Матча и ваниль</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Лимон и цветение"><i style="--a:#FAFFC7;--b:#FFD1D5"></i>Лимон и цветение</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Жвачка и мох"><i style="--a:#EFA7C9;--b:#3F481C"></i>Жвачка и мох</button>
+                <button class="duo" type="button" aria-pressed="false" data-pair="Лаванда и сливки"><i style="--a:#CBA1D4;--b:#FEEB9C"></i>Лаванда и сливки</button>
+            </div>
+            <input id="f-colors" name="colors" type="text" placeholder="Или впишите своё: например, бордовый с белым">
+            <span class="help">Нужного сочетания нет в списке? Напишите своё, соберём под вас.</span>
           </div>
 
           <div class="field" data-field data-only="pet" hidden>
