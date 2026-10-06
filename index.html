@@ -43,6 +43,8 @@
     <circle cx="24" cy="12" r="1.7"/>
   </symbol>
   <symbol id="up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M20.1 14.6A8.4 8.4 0 0 1 9.4 3.9a8.4 8.4 0 1 0 10.7 10.7Z"/></symbol>
+  <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.4 19.6 6 18M18 6l1.6-1.6"/></symbol>
 </svg>
 
 <header class="nav" id="nav">
@@ -59,7 +61,7 @@
     </nav>
     <div class="nav-right">
       <button class="tgl" type="button" id="theme" aria-pressed="false">
-        <span aria-hidden="true" data-glyph>☾</span>
+        <svg class="ico" aria-hidden="true" data-glyph><use href="#moon"></use></svg>
         <span class="sr">Переключить тёмную тему</span>
       </button>
       <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
@@ -103,30 +105,31 @@
       </div>
     </section>
 
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-row">
-      <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
-      <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
-      <span>Доставка от 3 000 ₽ бесплатно</span><i></i>
-      <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
-      <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
-      <span>Доставка от 3 000 ₽ бесплатно</span><i></i>
-    </div>
-    </div>
+    <section class="promises" aria-label="Что мы обещаем">
+      <div class="wrap">
+        <ul>
+          <li>Безопасный состав</li>
+          <li>Эстетика в каждой детали</li>
+          <li>Подарочная упаковка</li>
+          <li>Индивидуальный подход</li>
+          <li>Доставка от <span class="nw">3 000 ₽</span> бесплатно</li>
+        </ul>
+      </div>
+    </section>
 
     <section class="sec wrap" id="works">
-      <p class="label" data-reveal>
+      <div class="chapter">
         <svg class="bow" aria-hidden="true"><use href="#bow"></use></svg>
-        Коллекция
-      </p>
+        <h2>Коллекция</h2>
+      </div>
 
-      <div class="collection" data-reveal style="--d:60ms">
+      <div class="collection">
         <a class="col" href="#candles">
           <span class="col-img">
             <img src="assets/img/product-hero-detail.jpg" width="460" height="380" loading="lazy"
                  alt="Свеча-пион крупным планом с биркой ручной работы">
           </span>
-          <b>Свечи</b>
+          <b>Свечи<svg class="arw" aria-hidden="true"><use href="#arw"></use></svg></b>
           <span>пионы, розы, шкатулки</span>
         </a>
         <a class="col" href="#portrait">
@@ -134,7 +137,7 @@
             <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" loading="lazy"
                  alt="Мягкий перламутровый фон: место под кадр с фигуркой питомца">
           </span>
-          <b>Портрет питомца</b>
+          <b>Портрет питомца<svg class="arw" aria-hidden="true"><use href="#arw"></use></svg></b>
           <span>гипс, роспись по фото</span>
         </a>
         <a class="col" href="#decor">
@@ -142,32 +145,32 @@
             <img src="assets/img/product-candles-detail.jpg" width="430" height="430" loading="lazy"
                  alt="Гипсовая шкатулка с рифлёной крышкой крупным планом">
           </span>
-          <b>Декор</b>
+          <b>Декор<svg class="arw" aria-hidden="true"><use href="#arw"></use></svg></b>
           <span>подставки, мелочи</span>
         </a>
       </div>
 
-      <div class="collection-foot" data-reveal style="--d:120ms">
+      <div class="collection-foot">
         <a class="more" href="#contact">Оформить заказ
           <i aria-hidden="true"><svg class="arw"><use href="#arw"></use></svg></i>
         </a>
       </div>
 
-      <div class="sec-head" style="margin-top:clamp(72px,10vw,140px)" data-reveal>
+      <div class="sec-head" style="margin-top:clamp(72px,10vw,140px)">
         <h2>Что мы делаем</h2>
         <p>Три направления. Что-то уходит в единственном экземпляре, что-то повторяем под заказ.</p>
       </div>
 
       <!-- Свечи -->
       <article class="case" id="candles">
-        <div class="case-top" data-reveal>
+        <div class="case-top">
           <div class="case-title">
             <h3>Свечи</h3>
             <p class="case-sub">Пионы, розы и шкатулки с крышкой. Отливаем сами, цвет подбираем под повод.</p>
           </div>
           <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать</a>
         </div>
-        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
+        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">
           <div class="plate">
             <img src="assets/img/product-hero.jpg" width="904" height="1280" loading="lazy" style="--focus:76%"
                  alt="Керамическая свеча-шкатулка с жёлтым бантом и свеча в форме пиона на розовой подставке">
@@ -178,7 +181,7 @@
           </div>
         </a>
         <div class="case-body">
-          <div data-reveal>
+          <div>
             <ul class="did">
               <li>Пион, роза и шкатулка с крышкой, несколько размеров</li>
               <li>Цвет подбираем под интерьер или под повод</li>
@@ -192,7 +195,7 @@
               <button class="sw" type="button" aria-pressed="false" data-color="медовый"><i style="background:#E4C89B"></i>медовый</button>
             </div>
           </div>
-          <div data-reveal style="--d:90ms">
+          <div>
             <dl class="facts">
               <div><dt>Форма</dt><dd>пион, роза, шкатулка</dd></div>
               <div><dt>Горение</dt><dd>без запаха гари</dd></div>
@@ -205,14 +208,14 @@
 
       <!-- Портрет питомца -->
       <article class="case" id="portrait">
-        <div class="case-top" data-reveal>
+        <div class="case-top">
           <div class="case-title">
             <h3>Фигурка по фото питомца</h3>
             <p class="case-sub">Пришлите снимки питомца со всех сторон. Распишем фигурку под него вручную.</p>
           </div>
           <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Обсудить</a>
         </div>
-        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
+        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">
           <div class="plate" data-photo-slot="portrait-pair">
             <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" loading="lazy"
                  alt="Место под пару снимков: кот и фигурка, сделанная по его фотографиям">
@@ -223,7 +226,7 @@
           </div>
         </a>
         <div class="case-body">
-          <div data-reveal>
+          <div>
             <ul class="did">
               <li>Расписываем вручную по вашим фотографиям, каждая работа своя</li>
               <li>Повторяем окрас и рисунок шерсти, подбираем форму ушей под породу</li>
@@ -231,7 +234,7 @@
               <li>На этапе росписи присылаем снимок на согласование</li>
             </ul>
           </div>
-          <div data-reveal style="--d:90ms">
+          <div>
             <dl class="facts">
               <div><dt>Материал</dt><dd>гипс</dd></div>
               <div><dt>Роспись</dt><dd>вручную</dd></div>
@@ -244,14 +247,14 @@
 
       <!-- Декор -->
       <article class="case" id="decor">
-        <div class="case-top" data-reveal>
+        <div class="case-top">
           <div class="case-title">
             <h3>Декор</h3>
             <p class="case-sub">Подставки и мелочи, которые собирают композицию на столе или полке.</p>
           </div>
           <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать</a>
         </div>
-        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
+        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">
           <div class="plate">
             <img src="assets/img/product-candles.jpg" width="856" height="1070" loading="lazy" style="--focus:82%"
                  alt="Мятная шкатулка и свеча-пион на овальной подставке">
@@ -262,14 +265,14 @@
           </div>
         </a>
         <div class="case-body">
-          <div data-reveal>
+          <div>
             <ul class="did">
               <li>Овальные подставки под свечи и мелочи</li>
               <li>Матовая поверхность, спокойные оттенки</li>
               <li>Собираются в набор со свечой того же цвета</li>
             </ul>
           </div>
-          <div data-reveal style="--d:90ms">
+          <div>
             <dl class="facts">
               <div><dt>Материал</dt><dd>гипс</dd></div>
               <div><dt>Поверхность</dt><dd>матовая</dd></div>
@@ -289,7 +292,7 @@
 
     <!-- О свечах: светлая вставка -->
     <section class="sec wrap" id="care">
-      <div class="paper" data-reveal>
+      <div class="paper">
         <div class="paper-grid">
           <div>
             <h2>Свечу можно жечь дома<br>и рядом с детьми</h2>
@@ -307,21 +310,21 @@
 
     <!-- Как заказать -->
     <section class="sec wrap" id="how">
-      <div class="sec-head" data-reveal>
+      <div class="sec-head">
         <h2>Как заказать</h2>
         <p>Всё решается в переписке: так быстрее показать варианты и согласовать детали.</p>
       </div>
       <div class="steps">
-        <div class="step" data-reveal><i class="step-n" aria-hidden="true">01</i><b>Напишите</b><p>В Telegram или на почту. Расскажите про повод, цвета и к какой дате нужно.</p></div>
-        <div class="step" data-reveal style="--d:80ms"><i class="step-n" aria-hidden="true">02</i><b>Обсудим</b><p>Предложим форму и палитру, покажем похожие работы. Цену согласуем до начала.</p></div>
-        <div class="step" data-reveal style="--d:160ms"><i class="step-n" aria-hidden="true">03</i><b>Сделаем</b><p>Лепим, отливаем и расписываем. На этапе росписи присылаем фото.</p></div>
-        <div class="step" data-reveal style="--d:240ms"><i class="step-n" aria-hidden="true">04</i><b>Упакуем</b><p>Собираем в подарочную упаковку и готовим к отправке.</p></div>
+        <div class="step"><b>Напишите</b><p>В Telegram или на почту. Расскажите про повод, цвета и к какой дате нужно.</p></div>
+        <div class="step"><b>Обсудим</b><p>Предложим форму и палитру, покажем похожие работы. Цену согласуем до начала.</p></div>
+        <div class="step"><b>Сделаем</b><p>Лепим, отливаем и расписываем. На этапе росписи присылаем фото.</p></div>
+        <div class="step"><b>Упакуем</b><p>Собираем в подарочную упаковку и готовим к отправке.</p></div>
       </div>
     </section>
 
     <!-- Доставка -->
     <section class="sec wrap" id="delivery">
-      <div class="paper" data-reveal>
+      <div class="paper">
         <div class="paper-grid">
           <div>
             <p class="ship">Бесплатная доставка<br>от <span class="nw">3 000 ₽</span>
@@ -340,7 +343,7 @@
     <!-- Контакты -->
     <section class="sec wrap" id="contact">
       <div class="contact-grid">
-        <div data-reveal>
+        <div>
           <h2>Оформить заказ</h2>
           <p style="margin-top:16px;color:var(--ink-soft)">Заполните форму справа: выберите вещь и аромат, оставьте телефон и пункт выдачи Ozon. Переписываться не нужно. Если удобнее голосом или остались вопросы, контакты ниже.</p>
           <ul class="contact-list">
@@ -358,7 +361,7 @@
              Чтобы заявки приходили на почту, нужен адрес обработчика формы: впишите его
              в data-endpoint ниже. Пока он пустой, форма собирает заказ и копирует его
              в буфер обмена. Список ароматов правится прямо здесь, в <option>. -->
-        <form class="form" id="order-form" novalidate data-endpoint="" data-reveal style="--d:100ms">
+        <form class="form" id="order-form" novalidate data-endpoint="">
 
           <div class="field" data-field>
             <label for="f-item">Что заказываете</label>
@@ -460,25 +463,25 @@
 
           <div class="status" id="form-status" role="status" aria-live="polite"></div>
           <div>
-            <button class="btn btn--primary" type="submit">Оформить заказ</button>
+            <button class="btn btn--primary" type="submit">Отправить заказ</button>
           </div>
         </form>
       </div>
     </section>
 
     <section class="sec wrap" id="privacy">
-      <div class="sec-head" data-reveal>
+      <div class="sec-head">
         <h2>Обработка данных</h2>
         <p>Коротко и без юридического тумана: что происходит с тем, что вы отправляете через форму.</p>
       </div>
       <div class="paper-grid">
-        <ul class="did" data-reveal>
+        <ul class="did">
           <li>Форма собирает имя, способ связи и текст пожеланий. Больше ничего.</li>
           <li>Данные нужны ровно для одного: ответить вам и обсудить заказ.</li>
           <li>Переписка идёт в Telegram и на почту <span class="nw">nina.gercik@mail.ru</span>, там же хранятся заявки.</li>
           <li>Третьим лицам не передаём и в рассылки не добавляем.</li>
         </ul>
-        <ul class="did" data-reveal style="--d:90ms">
+        <ul class="did">
           <li>Отозвать согласие и попросить удалить переписку можно в любой момент, написав на ту же почту.</li>
           <li>Если писать через Telegram напрямую, форма не участвует вовсе.</li>
           <li>Текст описывает фактическую работу формы. Перед запуском его стоит показать юристу и при необходимости дополнить.</li>

@@ -16,7 +16,10 @@
   function paintToggle() {
     var dark = currentlyDark();
     if (toggle) toggle.setAttribute("aria-pressed", String(dark));
-    if (glyph) glyph.textContent = dark ? "☀" : "☾";
+    if (glyph) {
+      var use = glyph.querySelector("use");
+      if (use) use.setAttribute("href", dark ? "#sun" : "#moon");
+    }
   }
   if (toggle) {
     toggle.addEventListener("click", function () {
@@ -78,22 +81,6 @@
   }
 
   /* Scroll reveal: storytelling, one shot per element. */
-  var targets = document.querySelectorAll("[data-reveal]");
-  if (reduce || !("IntersectionObserver" in window)) {
-    targets.forEach(function (el) { el.classList.add("is-in"); });
-  } else {
-    var io = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-in");
-        obs.unobserve(entry.target);
-      });
-    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.15 });
-    targets.forEach(function (el) { io.observe(el); });
-  }
-
-  /* Colour chips. Picking one carries the choice into the order form, so the
-     control does something real instead of only looking like a control. */
   var noteField = document.getElementById("f-note");
   var itemField = document.getElementById("f-item");
   var colorField = document.getElementById("f-colors");

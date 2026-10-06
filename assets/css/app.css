@@ -38,10 +38,10 @@ body{
 ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
 html{scrollbar-color:var(--rule-strong) var(--bg);scrollbar-width:thin}
 
-h1,h2,h3{font-family:var(--fd);font-weight:400;line-height:1.06;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h1,h2,h3{font-family:var(--fd);font-weight:400;line-height:1.12;letter-spacing:-.015em;margin:0;text-wrap:balance}
 h1{font-size:clamp(2.8rem, 1.4rem + 4.8vw, 5.6rem)}
 h2{font-size:clamp(2rem, 1.35rem + 2.2vw, 3.4rem)}
-h3{font-size:clamp(1.5rem, 1.15rem + 1.1vw, 2.2rem);line-height:1.18}
+h3{font-size:clamp(1.5rem, 1.15rem + 1.1vw, 2.2rem);line-height:1.25}
 p{margin:0;max-width:66ch;text-wrap:pretty}
 img{display:block;max-width:100%;height:auto}
 [hidden]{display:none !important}
@@ -59,9 +59,8 @@ a{color:inherit}
 
 /* The one label treatment on the page: centred, tracked, tiny. It marks a
    change of chapter, not every heading. */
-.label{max-width:none;font-family:var(--ft);font-size:.8rem;font-weight:500;
-  letter-spacing:var(--track-label);text-transform:uppercase;
-  color:var(--ink-faint);text-align:center;margin:0 0 clamp(36px,5vw,66px)}
+.chapter{text-align:center;margin:0 0 clamp(38px,5vw,70px)}
+.chapter h2{font-size:clamp(1.9rem,1.3rem + 2vw, 3rem)}
 
 /* Grain stays fixed and inert; never on a scrolling box. */
 .grain{position:fixed;inset:0;z-index:60;pointer-events:none;
@@ -147,6 +146,8 @@ a{color:inherit}
   cursor:pointer;padding:0;font-size:.85rem;
   transition:border-color .2s var(--e),color .2s var(--e)}
 .tgl:hover,.burger:hover{border-color:var(--accent);color:var(--accent)}
+.ico{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round}
 .burger{display:none}
 .burger span[aria-hidden]{display:block;width:22px;height:1px;background:currentColor;position:relative}
 .burger span[aria-hidden]::before,.burger span[aria-hidden]::after{content:"";position:absolute;
@@ -188,7 +189,7 @@ a{color:inherit}
   padding-block:116px clamp(26px,5vh,52px)}
 .hero-say{display:grid;justify-items:center;gap:clamp(20px,3vh,34px);text-align:center;
   max-width:46rem;padding-inline:clamp(10px,3vw,28px)}
-.hero-mark{text-align:center;color:var(--c-inferno);
+.hero-mark{text-align:center;color:var(--c-inferno);line-height:1;
   font-size:clamp(3.2rem, 1rem + 9.2vw, 9rem);margin:0}
 .hero-foot{display:flex;justify-content:center;width:100%}
 .hero-lead{font-family:var(--ft);font-size:clamp(1.1rem,.95rem + .6vw,1.5rem);
@@ -216,16 +217,19 @@ a{color:inherit}
   color:color-mix(in srgb,var(--on-band) 62%,transparent)}
 
 /* ── the promises, running: thin, quiet, hairline ─────────────── */
-.ticker{position:relative;z-index:10;overflow:hidden;background:var(--bg);
-  border-bottom:1px solid var(--rule);padding-block:16px;--dur:52s}
-.ticker-row{display:flex;align-items:center;gap:clamp(22px,3vw,48px);width:max-content;
-  font-family:var(--fd);font-size:clamp(1.05rem,.95rem + .5vw,1.5rem);letter-spacing:0;
-  color:var(--ink-soft);
-  white-space:nowrap;animation:run var(--dur) linear infinite}
-.ticker-row i{display:block;width:3px;height:3px;background:var(--accent);opacity:.6;flex:none}
-.ticker:hover .ticker-row{animation-play-state:paused}
-@keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.ticker-row{animation:none}}
+.promises{position:relative;z-index:10;background:var(--bg);
+  border-bottom:1px solid var(--rule);padding-block:clamp(18px,2.4vw,30px)}
+.promises ul{display:flex;flex-wrap:wrap;justify-content:center;
+  gap:10px clamp(20px,3vw,44px);list-style:none;margin:0;padding:0}
+.promises li{font-family:var(--fd);font-size:clamp(1rem,.92rem + .4vw,1.3rem);
+  color:var(--ink-soft)}
+.promises li::after{content:"";display:inline-block;vertical-align:middle;
+  width:3px;height:3px;background:var(--accent);opacity:.6;
+  margin-left:clamp(20px,3vw,44px)}
+.promises li:last-child::after{display:none}
+@media (max-width:640px){
+  .promises ul{flex-direction:column;align-items:center;gap:8px}
+  .promises li::after{display:none}}
 
 /* ── the stage rides over the first screen ────────────────────── */
 .stage{position:relative;z-index:10;background:var(--bg)}
@@ -276,10 +280,10 @@ a.shot:hover .plate img{transform:scale(1.03)}
 @media (max-width:860px){.case-body{grid-template-columns:1fr;gap:32px}}
 
 .did{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none}
-.did li{position:relative;padding:14px 0 14px 30px;color:var(--ink-soft);
+.did li{position:relative;padding:16px 0 16px 30px;color:var(--ink-soft);
   line-height:1.5;font-size:1.0625rem;border-top:1px solid var(--line-2)}
 .did li:last-child{border-bottom:1px solid var(--line-2)}
-.did li::before{content:"";position:absolute;left:0;top:calc(14px + .76em);
+.did li::before{content:"";position:absolute;left:0;top:calc(16px + .76em);
   width:14px;height:1px;background:var(--accent);opacity:.8}
 
 /* Facts read as a table, because that is what they are. */
@@ -301,7 +305,8 @@ a.shot:hover .plate img{transform:scale(1.03)}
 
 /* ── the statement: one photograph, one sentence ──────────────── */
 .statement{position:relative;z-index:10;min-height:clamp(480px,78svh,760px);
-  display:grid;place-items:center;overflow:clip;isolation:isolate}
+  display:grid;place-items:center;overflow:clip;isolation:isolate;
+  background:var(--band)}
 .statement img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:center 30%;z-index:-2}
 .statement::after{content:"";position:absolute;inset:0;z-index:-1;
@@ -337,7 +342,7 @@ a.shot:hover .plate img{transform:scale(1.03)}
 /* ── contact ──────────────────────────────────────────────────── */
 .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,72px);align-items:start}
 .contact-list{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:0;font-size:1.0625rem}
-.contact-list li{padding-block:13px;border-top:1px solid var(--line-2)}
+.contact-list li{padding-block:15px;border-top:1px solid var(--line-2)}
 .contact-list li:last-child{border-bottom:1px solid var(--line-2)}
 @media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
 
@@ -356,8 +361,8 @@ a.shot:hover .plate img{transform:scale(1.03)}
   background-size:5px 5px,5px 5px;background-repeat:no-repeat}
 .field textarea{resize:vertical;min-height:5.5rem}
 .field input::placeholder,.field textarea::placeholder{color:var(--ink-faint);opacity:1}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-color:var(--accent);
-  box-shadow:0 1px 0 0 var(--accent)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;
+  border-bottom-color:var(--accent);border-bottom-width:2px;padding-bottom:calc(.6em - 1px)}
 .help{font-size:.84rem;color:var(--ink-faint)}
 .err{font-size:.82rem;color:var(--accent);display:none}
 .field[data-invalid="true"] input,.field[data-invalid="true"] select{border-bottom-color:var(--accent)}
@@ -395,10 +400,6 @@ a.shot:hover .plate img{transform:scale(1.03)}
       to{opacity:.2;transform:scale(.985)}
     }
   }
-  .js [data-reveal]{opacity:0;transform:translateY(26px)}
-  .js [data-reveal].is-in{opacity:1;transform:none;
-    transition:opacity .9s var(--e),transform .9s var(--e);transition-delay:var(--d,0ms)}
-
   /* Entrance: the wordmark arrives, then the capitals at the foot. */
   .hero-mark{animation:lift 1.1s var(--e) both;animation-delay:100ms}
   .hero-foot{animation:lift 1.1s var(--e) both;animation-delay:420ms}
@@ -447,15 +448,12 @@ button.sw[aria-pressed="true"] i{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .5
   opacity:.65}
 .bow--foot{margin:20px 0 0;opacity:.5}
 @media (prefers-reduced-motion:no-preference){
-  .label .bow{transform-origin:50% 50%;animation:bow-tie 1s var(--e) both}
+  .chapter .bow{transform-origin:50% 50%;animation:bow-tie 1s var(--e) both}
   @keyframes bow-tie{from{opacity:0;transform:scale(.82)}to{opacity:.65;transform:none}}
 }
 
 /* Шаги заказа — настоящая последовательность, поэтому пронумерованы. */
 .step{position:relative}
-.step-n{display:block;font-family:var(--ft);font-style:normal;font-size:.78rem;
-  font-weight:600;letter-spacing:var(--track-label);color:var(--accent);
-  opacity:.75;margin-bottom:10px}
 
 /* Текущий раздел виден в меню: ссылка должна сообщать своё состояние. */
 .nav-links a{position:relative}
@@ -469,12 +467,12 @@ button.sw[aria-pressed="true"] i{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .5
 
 /* Плитка отвечает на курсор: подпись подаётся вперёд, приходит стрелка. */
 .col b{position:relative;transition:transform .45s var(--e)}
-.col b::after{content:"→";position:absolute;margin-left:.5em;opacity:0;
+.col .arw{position:absolute;width:14px;height:14px;margin-left:.5em;top:.28em;opacity:0;
   transform:translateX(-5px);transition:opacity .45s var(--e),transform .45s var(--e)}
 .col:hover b,.col:focus-visible b{transform:translateX(3px)}
-.col:hover b::after,.col:focus-visible b::after{opacity:.65;transform:none}
+.col:hover .arw,.col:focus-visible .arw{opacity:.7;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .col b,.col b::after,.col:hover b{transition:none;transform:none}}
+  .col b,.col .arw,.col:hover b{transition:none;transform:none}}
 
 /* Фотографии проявляются, а не щёлкают. */
 img{opacity:1}

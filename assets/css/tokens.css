@@ -58,10 +58,7 @@
   --radius: 0px;
 
   /* Elevation: there is none. Depth is carried by hairlines and by the
-     photography itself, not by tinted drop shadows. Kept as near-zero
-     values so any legacy reference degrades quietly. */
-  --shadow-1: 0 1px 0 rgb(78 0 0 / 0.05);
-  --shadow-2: 0 1px 0 rgb(78 0 0 / 0.07);
+     photography itself, so no shadow tokens exist to reach for. */
 
   /* The dark band: her cherry at full depth, used for the manifesto and
      the statement scrim. */
@@ -100,8 +97,6 @@ html:not([data-theme="light"]) :root { }
     --accent-deep: #F0C3C8;
     --accent-lift: #F2D2D6;
     --on-accent:   #3A0604;
-    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
-    --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
     color-scheme: dark;
   }
 }
@@ -119,7 +114,5 @@ html:not([data-theme="light"]) :root { }
   --accent-deep: #F0C3C8;
   --accent-lift: #F2D2D6;
   --on-accent:   #3A0604;
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
-  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
   color-scheme: dark;
 }
