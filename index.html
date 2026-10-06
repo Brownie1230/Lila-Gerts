@@ -34,7 +34,16 @@
 <a class="sr" href="#works">Перейти к содержимому</a>
 <div class="grain" aria-hidden="true"></div>
 
-<svg class="sr" aria-hidden="true"><symbol id="arw" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol></svg>
+<svg class="sr" aria-hidden="true">
+  <symbol id="arw" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="bow" viewBox="0 0 48 26">
+    <path d="M23.4 11.4C19.2 6 14 3.4 10.5 5.2 7.2 6.9 7.2 12.3 10.1 14.6c2.9 2.3 8.8-.3 13.3-3.2Z"/>
+    <path d="M24.6 11.4C28.8 6 34 3.4 37.5 5.2c3.3 1.7 3.3 7.1.4 9.4-2.9 2.3-8.8-.3-13.3-3.2Z"/>
+    <path d="M22.2 13.2 18.6 22.4M25.8 13.2 29.4 22.4"/>
+    <circle cx="24" cy="12" r="1.7"/>
+  </symbol>
+  <symbol id="up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+</svg>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -106,7 +115,10 @@
     </div>
 
     <section class="sec wrap" id="works">
-      <p class="label" data-reveal>Коллекция</p>
+      <p class="label" data-reveal>
+        <svg class="bow" aria-hidden="true"><use href="#bow"></use></svg>
+        Коллекция
+      </p>
 
       <div class="collection" data-reveal style="--d:60ms">
         <a class="col" href="#candles">
@@ -300,10 +312,10 @@
         <p>Всё решается в переписке: так быстрее показать варианты и согласовать детали.</p>
       </div>
       <div class="steps">
-        <div class="step" data-reveal><b>Напишите</b><p>В Telegram или на почту. Расскажите про повод, цвета и к какой дате нужно.</p></div>
-        <div class="step" data-reveal style="--d:80ms"><b>Обсудим</b><p>Предложим форму и палитру, покажем похожие работы. Цену согласуем до начала.</p></div>
-        <div class="step" data-reveal style="--d:160ms"><b>Сделаем</b><p>Лепим, отливаем и расписываем. На этапе росписи присылаем фото.</p></div>
-        <div class="step" data-reveal style="--d:240ms"><b>Упакуем</b><p>Собираем в подарочную упаковку и готовим к отправке.</p></div>
+        <div class="step" data-reveal><i class="step-n" aria-hidden="true">01</i><b>Напишите</b><p>В Telegram или на почту. Расскажите про повод, цвета и к какой дате нужно.</p></div>
+        <div class="step" data-reveal style="--d:80ms"><i class="step-n" aria-hidden="true">02</i><b>Обсудим</b><p>Предложим форму и палитру, покажем похожие работы. Цену согласуем до начала.</p></div>
+        <div class="step" data-reveal style="--d:160ms"><i class="step-n" aria-hidden="true">03</i><b>Сделаем</b><p>Лепим, отливаем и расписываем. На этапе росписи присылаем фото.</p></div>
+        <div class="step" data-reveal style="--d:240ms"><i class="step-n" aria-hidden="true">04</i><b>Упакуем</b><p>Собираем в подарочную упаковку и готовим к отправке.</p></div>
       </div>
     </section>
 
@@ -481,6 +493,7 @@
     <div class="foot-grid">
       <div>
         <div class="lockup">Lila Gerts</div>
+        <svg class="bow bow--foot" aria-hidden="true"><use href="#bow"></use></svg>
         <p class="foot-tag">Свечи и фигурки ручной работы из гипса. Небольшими партиями, с подарочной упаковкой.</p>
       </div>
       <div>
@@ -507,6 +520,11 @@
     </div>
   </div>
 </footer>
+
+<button class="up" type="button" id="to-top" hidden>
+  <svg class="arw" aria-hidden="true"><use href="#up"></use></svg>
+  <span class="sr">Наверх</span>
+</button>
 
 <script src="assets/js/app.js" defer></script>
 </body>

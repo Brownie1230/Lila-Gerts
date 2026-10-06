@@ -248,3 +248,98 @@
     });
   });
 })();
+
+/* ── детали ───────────────────────────────────────────────────── */
+
+/* Текущий раздел в меню. Наблюдатель отмечал сразу два раздела, когда один
+   кончался на границе полосы, и подсветка отставала. Считаем прямо: активен
+   последний раздел, начало которого уже прошло под шапкой. */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a[href^='#']"));
+  if (!links.length) return;
+  var items = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute("href").slice(1));
+    if (el) items.push({ link: a, el: el });
+  });
+  if (!items.length) return;
+
+  var tick = false;
+  function update() {
+    tick = false;
+    var line = window.scrollY + 110;
+    var active = null;
+    items.forEach(function (it) {
+      if (it.el.getBoundingClientRect().top + window.scrollY <= line) active = it;
+    });
+    if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 4) {
+      active = items[items.length - 1];
+    }
+    items.forEach(function (it) {
+      if (it === active) it.link.setAttribute("aria-current", "true");
+      else it.link.removeAttribute("aria-current");
+    });
+  }
+  window.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  update();
+})();
+
+/* Фотографии проявляются. Уже загруженные помечаем сразу, чтобы не мигали. */
+(function () {
+  document.querySelectorAll("img").forEach(function (img) {
+    if (img.classList.contains("hero-bg")) return;
+    if (img.complete && img.naturalWidth) { img.classList.add("is-loaded"); return; }
+    img.addEventListener("load", function () { img.classList.add("is-loaded"); });
+    img.addEventListener("error", function () { img.classList.add("is-loaded"); });
+  });
+})();
+
+/* Заполненное поле отмечается сразу, а не при отправке. */
+(function () {
+  var form = document.getElementById("order-form");
+  if (!form) return;
+  function mark(el) {
+    var wrap = el.closest("[data-field]");
+    if (!wrap) return;
+    var filled = el.type === "checkbox" ? el.checked : String(el.value).trim() !== "";
+    wrap.dataset.filled = String(filled);
+  }
+  form.querySelectorAll("input, select, textarea").forEach(function (el) {
+    mark(el);
+    el.addEventListener("input", function () { mark(el); });
+    el.addEventListener("change", function () { mark(el); });
+  });
+  form.addEventListener("reset", function () {
+    setTimeout(function () {
+      form.querySelectorAll("input, select, textarea").forEach(mark);
+    }, 0);
+  });
+})();
+
+/* Возврат наверх, когда первый экран позади. */
+(function () {
+  var btn = document.getElementById("to-top");
+  if (!btn) return;
+  btn.hidden = false;
+  btn.dataset.in = "false";
+  btn.addEventListener("click", function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+  var tick = false;
+  function update() {
+    tick = false;
+    btn.dataset.in = window.scrollY > window.innerHeight * 0.9 ? "true" : "false";
+  }
+  window.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+})();
