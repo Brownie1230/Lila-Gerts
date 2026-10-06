@@ -38,7 +38,9 @@
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top">Lila Gerts</a>
+    <a class="brand lockup" href="#top" aria-label="Lila Gerts, на главную">
+      <span class="s">Lila</span><span class="g">Gerts</span>
+    </a>
     <nav aria-label="Основная навигация" class="menu" id="menu" hidden>
       <ul class="nav-links">
         <li><a class="quiet" href="#works">Работы</a></li>
@@ -46,14 +48,14 @@
         <li><a class="quiet" href="#how">Как заказать</a></li>
         <li><a class="quiet" href="#delivery">Доставка</a></li>
       </ul>
-      <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a class="btn btn--primary" href="#contact">Оформить заказ</a>
     </nav>
     <div class="nav-right">
       <button class="tgl" type="button" id="theme" aria-pressed="false">
         <span aria-hidden="true" data-glyph>☾</span>
         <span class="sr">Переключить тёмную тему</span>
       </button>
-      <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a class="btn btn--primary" href="#contact">Оформить заказ</a>
       <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu">
         <span aria-hidden="true"></span><span class="sr">Открыть меню</span>
       </button>
@@ -64,44 +66,34 @@
 <main id="top">
 
   <section class="hero">
+    <img class="hero-bg" src="assets/img/product-hero.jpg" width="904" height="1280"
+         fetchpriority="high" decoding="async"
+         alt="Гипсовая свеча-шкатулка с жёлтым бантом и свеча-пион на овальной подставке, на розовом вязаном полотне">
     <div class="wrap hero-in">
-      <div class="hero-grid">
-        <div class="hero-say">
-          <h1 class="hero-word">Lila Gerts</h1>
-          <p class="hero-lead">Свечи и фигурки ручной работы. Отливаем в гипсе и расписываем вручную, двух одинаковых вещей не бывает.</p>
-          <div class="hero-actions">
-            <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
-              <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-            </a>
-            <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
-          </div>
-        </div>
-        <figure class="hero-shot">
-          <img src="assets/img/product-hero.jpg" width="904" height="1280" fetchpriority="high"
-               alt="Керамическая свеча-шкатулка с жёлтым бантом и свеча в форме пиона на розовой подставке">
-        </figure>
-      </div>
-
-      <div class="hero-index">
-        <div class="hero-index-t">Что мы делаем</div>
-        <a class="hi" href="#candles">
-          <img src="assets/img/product-hero-detail.jpg" width="460" height="380" alt="">
-          <b>Свечи</b><span>пионы, розы, шкатулки</span>
-        </a>
-        <a class="hi" href="#portrait">
-          <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" alt="">
-          <b>Портрет питомца</b><span>гипс, роспись по фото</span>
-        </a>
-        <a class="hi" href="#decor">
-          <img src="assets/img/product-candles-detail.jpg" width="430" height="430" alt="">
-          <b>Декор</b><span>подставки, мелочи</span>
+      <a class="lockup hero-mark" href="#works" aria-label="Lila Gerts, к работам">
+        <span class="s">Lila</span><span class="g">Gerts</span>
+      </a>
+      <div class="hero-foot">
+        <p class="hero-say">Ручная работа<br>из гипса</p>
+        <a class="hero-scroll" href="#works">Коллекция
+          <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
         </a>
       </div>
     </div>
   </section>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-row">
+
+  <div class="stage">
+
+    <section class="band">
+      <div class="wrap band-in">
+        <p>Эстетика в каждой детали: форма, цвет, аромат и упаковка собираются как одно целое.</p>
+        <span class="sig">Мастерская Lila Gerts</span>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-row">
       <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
       <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
       <span>Доставка от 3 000 ₽ бесплатно</span><i></i>
@@ -109,13 +101,46 @@
       <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
       <span>Доставка от 3 000 ₽ бесплатно</span><i></i>
     </div>
-  </div>
-
-  <div class="stage">
+    </div>
 
     <section class="sec wrap" id="works">
-      <div class="sec-head" data-reveal>
-        <h2>Работы</h2>
+      <p class="label" data-reveal>Коллекция</p>
+
+      <div class="collection" data-reveal style="--d:60ms">
+        <a class="col" href="#candles">
+          <span class="col-img">
+            <img src="assets/img/product-hero-detail.jpg" width="460" height="380" loading="lazy"
+                 alt="Свеча-пион крупным планом с биркой ручной работы">
+          </span>
+          <b>Свечи</b>
+          <span>Пионы, розы, шкатулки с крышкой</span>
+        </a>
+        <a class="col" href="#portrait">
+          <span class="col-img" data-photo-slot="portrait-tile">
+            <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" loading="lazy"
+                 alt="Мягкий перламутровый фон: место под кадр с фигуркой питомца">
+          </span>
+          <b>Фигурка по фото питомца</b>
+          <span>Гипс, роспись вручную по вашим снимкам</span>
+        </a>
+        <a class="col" href="#decor">
+          <span class="col-img">
+            <img src="assets/img/product-candles-detail.jpg" width="430" height="430" loading="lazy"
+                 alt="Гипсовая шкатулка с рифлёной крышкой крупным планом">
+          </span>
+          <b>Декор</b>
+          <span>Подставки и мелочи в тон свече</span>
+        </a>
+      </div>
+
+      <div class="collection-foot" data-reveal style="--d:120ms">
+        <a class="more" href="#contact">Выбрать и заказать
+          <i aria-hidden="true"><svg class="arw"><use href="#arw"></use></svg></i>
+        </a>
+      </div>
+
+      <div class="sec-head" style="margin-top:clamp(72px,10vw,140px)" data-reveal>
+        <h2>Что мы делаем</h2>
         <p>Три направления. Что-то уходит в единственном экземпляре, что-то повторяем под заказ.</p>
       </div>
 
@@ -126,9 +151,7 @@
             <h3>Свечи</h3>
             <p class="case-sub">Пионы, розы и шкатулки с крышкой. Отливаем сами, цвет подбираем под повод.</p>
           </div>
-          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать
-            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-          </a>
+          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать</a>
         </div>
         <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
           <div class="plate">
@@ -173,9 +196,7 @@
             <h3>Фигурка по фото питомца</h3>
             <p class="case-sub">Пришлите снимки питомца со всех сторон. Распишем фигурку под него вручную.</p>
           </div>
-          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Обсудить
-            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-          </a>
+          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Обсудить</a>
         </div>
         <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
           <div class="plate" data-photo-slot="portrait-pair">
@@ -214,9 +235,7 @@
             <h3>Декор</h3>
             <p class="case-sub">Подставки и мелочи, которые собирают композицию на столе или полке.</p>
           </div>
-          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать
-            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-          </a>
+          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать</a>
         </div>
         <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
           <div class="plate">
@@ -246,6 +265,12 @@
           </div>
         </div>
       </article>
+    </section>
+
+    <section class="statement">
+      <img src="assets/img/product-candles.jpg" width="856" height="1070" loading="lazy"
+           alt="Гипсовая шкатулка и свеча-пион на подставке, на жёлтом вязаном полотне под веткой фикуса">
+      <p>Дом собирается из мелочей, которые выбрали сами</p>
     </section>
 
     <!-- О свечах: светлая вставка -->
@@ -311,9 +336,7 @@
             <li>Доставка бесплатно при заказе от <span class="nw">3 000 ₽</span></li>
           </ul>
           <p style="margin-top:26px">
-            <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
-              <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-            </a>
+            <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
           </p>
         </div>
 
@@ -423,9 +446,7 @@
 
           <div class="status" id="form-status" role="status" aria-live="polite"></div>
           <div>
-            <button class="btn btn--primary" type="submit">Оформить заказ
-              <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-            </button>
+            <button class="btn btn--primary" type="submit">Оформить заказ</button>
           </div>
         </form>
       </div>
@@ -457,7 +478,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="brand" style="font-size:2rem">Lila Gerts</div>
+        <div class="lockup"><span class="s">Lila</span><span class="g">Gerts</span></div>
         <p class="foot-tag">Свечи и фигурки ручной работы из гипса. Небольшими партиями, с подарочной упаковкой.</p>
       </div>
       <div>

@@ -38,6 +38,11 @@
   --step-small:   0.875rem;
   --step-label:   0.75rem;
 
+  /* Tracking for the two places that are set in caps: navigation and the
+     section labels. Taken from the reference, not applied anywhere else. */
+  --track-label: 0.26em;
+  --track-nav:   0.14em;
+
   /* Space */
   --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
   --s-5: 1.5rem;  --s-6: 2rem;    --s-7: 3rem;    --s-8: 4rem;
@@ -47,12 +52,20 @@
   --measure: 65ch;
   --page: 1400px;
 
-  /* Shape: one radius for everything */
-  --radius: 2px;
+  /* Shape: the gallery is square. Nothing on this page is rounded except
+     the one circular arrow button and the colour chips. */
+  --radius: 0px;
 
-  /* Elevation, tinted to the brand hue */
-  --shadow-1: 0 1px 2px rgb(78 0 0 / 0.06), 0 8px 24px rgb(78 0 0 / 0.07);
-  --shadow-2: 0 2px 4px rgb(78 0 0 / 0.08), 0 24px 56px rgb(78 0 0 / 0.12);
+  /* Elevation: there is none. Depth is carried by hairlines and by the
+     photography itself, not by tinted drop shadows. Kept as near-zero
+     values so any legacy reference degrades quietly. */
+  --shadow-1: 0 1px 0 rgb(78 0 0 / 0.05);
+  --shadow-2: 0 1px 0 rgb(78 0 0 / 0.07);
+
+  /* The dark band: her cherry at full depth, used for the manifesto and
+     the statement scrim. */
+  --band:    #2B0402;
+  --on-band: #F2E2D1;
 
   /* Motion */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
