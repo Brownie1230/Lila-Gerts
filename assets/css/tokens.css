@@ -38,10 +38,11 @@
   --step-small:   0.875rem;
   --step-label:   0.75rem;
 
-  /* Tracking for the two places that are set in caps: navigation and the
-     section labels. Taken from the reference, not applied anywhere else. */
-  --track-label: 0.26em;
-  --track-nav:   0.14em;
+  /* Tracking. Only the small eyebrow labels are tracked, at the width the
+     site already used. Navigation, buttons, form labels and body text are
+     set normally: spaced-out capitals in running controls read as noise. */
+  --track-label: 0.12em;
+  --track-nav:   0;
 
   /* Space */
   --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
