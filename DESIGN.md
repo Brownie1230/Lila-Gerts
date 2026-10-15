@@ -225,5 +225,10 @@ The crops taken from her mockup PNG are gone; cards are built from the originals
 The colour notes invented for those crops are gone with them: every name and every colour word
 on the page is now hers.
 
-**Still missing:** the provenance of the mascot illustration, and whether the nine originals
-should stay in the repository root, where they add about 30 MB to every clone.
+The mascot is the studio's own, not a found image: asked where it came from, the developer
+said it is theirs. Nothing to clear.
+
+**Still missing:** whether an order is paid by an invoice sent in Telegram after the fact, which
+is what the page says now, or by a real payment on the site, which needs self-employment
+registration and a provider; and whether the nine originals should stay in the repository root,
+where they add about 30 MB to every clone.
