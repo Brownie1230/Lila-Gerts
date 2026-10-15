@@ -203,10 +203,27 @@ rejection: she is extending what exists. What her mockup settles, and what it ov
   render "500" with lowercase-looking zeros, which is charming on a heading and wrong on a
   price.
 
-**Not from the client, and marked as such:** the colour word under each candle card ("на фото:
-мята и роза") describes what is visible in her photograph. All eight of her cards read
-«Свеча Pion, 500 руб.», so the names are hers and the colour notes are ours, pending her list.
+### Same day: the real catalogue arrived
 
-**Still missing:** originals of the catalogue photographs (these are cropped out of her PNG at
-about 335×439), the set «Juli» she priced at 2 999 ₽ in her own cart but never pictured, and
-the provenance of the mascot illustration.
+Nine full-resolution photographs were uploaded straight to `main`, named with the product and
+the price. They overturn the reading taken from her mockup, where every card said
+«Свеча Pion, 500 руб.»: only two of the nine are a Pion. The catalogue is now hers, verbatim:
+
+| Товар | Цена | Варианты |
+|---|---|---|
+| Свеча «Pion» | 500 ₽ | бордо · цвет на выбор |
+| Набор «Juli» | 2 999 ₽ | розовый и зелёный · розовый · белый и розовый · голубой · розовый и жёлтый · зелёный и жёлтый |
+| Набор «Nina» | 1 999 ₽ | бордовый |
+| Свеча «Moon» | 1 999 ₽ | белая · серая |
+| Подсвечник «Китя» | 2 999 ₽ | по фото питомца |
+
+This also confirms her cart screen: «Juli» 2 999 ₽ plus «Moon» 1 999 ₽ is the 4 998 ₽ she drew.
+One filename carries an instruction — "под этим товаром можно выбрать цвет" — so that card
+points at the constructor.
+
+The crops taken from her mockup PNG are gone; cards are built from the originals at 720×960.
+The colour notes invented for those crops are gone with them: every name and every colour word
+on the page is now hers.
+
+**Still missing:** the provenance of the mascot illustration, and whether the nine originals
+should stay in the repository root, where they add about 30 MB to every clone.
