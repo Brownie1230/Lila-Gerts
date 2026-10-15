@@ -1,15 +1,14 @@
 <!doctype html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lila Gerts · Свечи и фигурки ручной работы</title>
-<meta name="description" content="Lila Gerts: свечи и фигурки ручной работы из гипса. Фигурка с росписью по фото вашего питомца, безопасный состав, подарочная упаковка. Доставка в ПВЗ Ozon, от 3 000 ₽ бесплатно.">
-<meta name="theme-color" content="#F4E9DC" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#2E0503" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Lila Gerts · Свечи и фигурки ручной работы">
-<meta property="og:description" content="Фигурка по фото вашего питомца, свечи-пионы, подарочная упаковка. Доставка от 3 000 ₽ бесплатно.">
-<meta property="og:image" content="assets/img/product-hero.jpg">
+<title>Lila Gerts · Свечи и гипсовые подсвечники ручной работы</title>
+<meta name="description" content="Lila Gerts: авторские свечи и гипсовые подсвечники ручной работы. Подсвечник по фото питомца, конструктор свечей, безопасный состав, подарочная упаковка. Доставка в ПВЗ Ozon, от 5 000 ₽ бесплатно.">
+<meta name="theme-color" content="#310907">
+<meta property="og:title" content="Lila Gerts · Свечи и гипсовые подсвечники ручной работы">
+<meta property="og:description" content="Уют, созданный руками: авторские свечи и гипсовые подсвечники. Подсвечник по фото вашего питомца. Доставка от 5 000 ₽ бесплатно.">
+<meta property="og:image" content="assets/img/logo.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 
@@ -24,24 +23,25 @@
   document.documentElement.classList.add("js");
   try {
     var t = localStorage.getItem("lg-theme");
-    if (t) document.documentElement.dataset.theme = t;
-    else document.documentElement.removeAttribute("data-theme");
-  } catch (e) { document.documentElement.removeAttribute("data-theme"); }
+    if (t === "light") document.documentElement.dataset.theme = "light";
+  } catch (e) { /* private mode */ }
 </script>
 </head>
 <body>
 
-<a class="sr" href="#works">Перейти к содержимому</a>
+<a class="sr" href="#candles">Перейти к содержимому</a>
 <div class="grain" aria-hidden="true"></div>
 
 <svg class="sr" aria-hidden="true"><symbol id="arw" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol></svg>
+
+<div class="sheet">
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top">Lila Gerts</a>
     <nav aria-label="Основная навигация" class="menu" id="menu" hidden>
       <ul class="nav-links">
-        <li><a class="quiet" href="#works">Работы</a></li>
+        <li><a class="quiet" href="#candles">Работы</a></li>
         <li><a class="quiet" href="#care">О свечах</a></li>
         <li><a class="quiet" href="#how">Как заказать</a></li>
         <li><a class="quiet" href="#delivery">Доставка</a></li>
@@ -49,9 +49,10 @@
       <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
     </nav>
     <div class="nav-right">
-      <button class="tgl" type="button" id="theme" aria-pressed="false">
-        <span aria-hidden="true" data-glyph>☾</span>
-        <span class="sr">Переключить тёмную тему</span>
+      <a class="quiet cart-link" href="#cart">Корзина<span class="cart-count" id="cart-count" hidden>0</span></a>
+      <button class="tgl" type="button" id="theme" aria-pressed="true">
+        <span aria-hidden="true" data-glyph>☀</span>
+        <span class="sr">Переключить светлую тему</span>
       </button>
       <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
       <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu">
@@ -67,188 +68,239 @@
     <div class="wrap hero-in">
       <div class="hero-grid">
         <div class="hero-say">
-          <h1 class="hero-word">Lila Gerts</h1>
-          <p class="hero-lead">Свечи и фигурки ручной работы. Отливаем в гипсе и расписываем вручную, двух одинаковых вещей не бывает.</p>
+          <h1 class="hero-word"><img src="assets/img/logo.webp" width="900" height="602" fetchpriority="high" alt="Lila Gerts"></h1>
+          <p class="hero-lead">Уют, созданный руками: авторские свечи и гипсовые подсвечники от Lila&nbsp;Gerts.</p>
           <div class="hero-actions">
-            <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
+            <a class="btn btn--primary" href="#candles">Посмотреть работы
               <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
             </a>
-            <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
+            <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
           </div>
         </div>
-        <figure class="hero-shot">
-          <img src="assets/img/product-hero.jpg" width="904" height="1280" fetchpriority="high"
-               alt="Керамическая свеча-шкатулка с жёлтым бантом и свеча в форме пиона на розовой подставке">
+        <figure class="hero-mascot" aria-hidden="true">
+          <img src="assets/img/mascot.webp" width="800" height="1200" alt="">
         </figure>
-      </div>
-
-      <div class="hero-index">
-        <div class="hero-index-t">Что мы делаем</div>
-        <a class="hi" href="#candles">
-          <img src="assets/img/product-hero-detail.jpg" width="460" height="380" alt="">
-          <b>Свечи</b><span>пионы, розы, шкатулки</span>
-        </a>
-        <a class="hi" href="#portrait">
-          <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" alt="">
-          <b>Портрет питомца</b><span>гипс, роспись по фото</span>
-        </a>
-        <a class="hi" href="#decor">
-          <img src="assets/img/product-candles-detail.jpg" width="430" height="430" alt="">
-          <b>Декор</b><span>подставки, мелочи</span>
-        </a>
       </div>
     </div>
   </section>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-row">
-      <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
-      <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
-      <span>Доставка от 3 000 ₽ бесплатно</span><i></i>
-      <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
-      <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
-      <span>Доставка от 3 000 ₽ бесплатно</span><i></i>
+  <div class="band">
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-row">
+        <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
+        <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
+        <span>Доставка от 5 000 ₽ бесплатно</span><i></i>
+        <span>Безопасный состав</span><i></i><span>Эстетика в каждой детали</span><i></i>
+        <span>Подарочная упаковка</span><i></i><span>Индивидуальный подход</span><i></i>
+        <span>Доставка от 5 000 ₽ бесплатно</span><i></i>
+      </div>
     </div>
+    <nav class="cats" aria-label="Разделы каталога">
+      <a class="cat" href="#candles">Свечи</a>
+      <a class="cat" href="#holders">Подсвечники</a>
+      <a class="cat" href="#builder">Конструктор свечей</a>
+    </nav>
   </div>
 
   <div class="stage">
 
-    <section class="sec wrap" id="works">
+    <!-- ═══ СВЕЧИ ═══════════════════════════════════════════════════
+         Ассортимент правится прямо здесь. Карточка = один <figure class="card">
+         с data-sku, data-name, data-price, data-sub и картинкой. Цена в рублях,
+         целым числом. Чтобы снять позицию, удалите блок figure целиком. -->
+    <section class="sec wrap" id="candles">
       <div class="sec-head" data-reveal>
-        <h2>Работы</h2>
-        <p>Три направления. Что-то уходит в единственном экземпляре, что-то повторяем под заказ.</p>
+        <h2>Свечи и наборы</h2>
+        <p>Отливаем из гипса и воска небольшими партиями. Аромат и сочетание цветов собираются ниже, в конструкторе, или в комментарии к заказу.</p>
       </div>
 
-      <!-- Свечи -->
-      <article class="case" id="candles">
-        <div class="case-top" data-reveal>
-          <div class="case-title">
-            <h3>Свечи</h3>
-            <p class="case-sub">Пионы, розы и шкатулки с крышкой. Отливаем сами, цвет подбираем под повод.</p>
-          </div>
-          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать
-            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-          </a>
-        </div>
-        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
-          <div class="plate">
-            <img src="assets/img/product-hero.jpg" width="904" height="1280" loading="lazy" style="--focus:76%"
-                 alt="Керамическая свеча-шкатулка с жёлтым бантом и свеча в форме пиона на розовой подставке">
-          </div>
-          <div class="inset">
-            <img src="assets/img/product-hero-detail.jpg" width="460" height="380" loading="lazy"
-                 alt="Свеча-пион крупным планом с биркой ручной работы">
-          </div>
-        </a>
-        <div class="case-body">
-          <div data-reveal>
-            <ul class="did">
-              <li>Пион, роза и шкатулка с крышкой, несколько размеров</li>
-              <li>Цвет подбираем под интерьер или под повод</li>
-              <li>Горят ровно и не оставляют запаха гари</li>
-              <li>Каждая свеча уезжает с биркой и в подарочной упаковке</li>
-            </ul>
-            <div class="palette" role="group" aria-label="Выбрать цвет свечи" data-palette="Свечи">
-              <button class="sw" type="button" aria-pressed="false" data-color="вишня"><i style="background:#8E1612"></i>вишня</button>
-              <button class="sw" type="button" aria-pressed="false" data-color="роза"><i style="background:#E3A0A8"></i>роза</button>
-              <button class="sw" type="button" aria-pressed="false" data-color="ваниль"><i style="background:#EEDCC8"></i>ваниль</button>
-              <button class="sw" type="button" aria-pressed="false" data-color="медовый"><i style="background:#E4C89B"></i>медовый</button>
-            </div>
-          </div>
-          <div data-reveal style="--d:90ms">
-            <dl class="facts">
-              <div><dt>Форма</dt><dd>пион, роза, шкатулка</dd></div>
-              <div><dt>Горение</dt><dd>без запаха гари</dd></div>
-              <div><dt>Упаковка</dt><dd>подарочная, с биркой</dd></div>
-              <div><dt>Партия</dt><dd>небольшая</dd></div>
-            </dl>
-          </div>
-        </div>
-      </article>
-
-      <!-- Портрет питомца -->
-      <article class="case" id="portrait">
-        <div class="case-top" data-reveal>
-          <div class="case-title">
-            <h3>Фигурка по фото питомца</h3>
-            <p class="case-sub">Пришлите снимки питомца со всех сторон. Распишем фигурку под него вручную.</p>
-          </div>
-          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Обсудить
-            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-          </a>
-        </div>
-        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
-          <div class="plate" data-photo-slot="portrait-pair">
-            <img src="assets/img/backdrop-pearl.jpg" width="1600" height="1000" loading="lazy"
-                 alt="Место под пару снимков: кот и фигурка, сделанная по его фотографиям">
-          </div>
-          <div class="inset" data-photo-slot="portrait-hand">
-            <img src="assets/img/backdrop-cream-2.jpg" width="2000" height="1250" loading="lazy"
-                 alt="Место под кадр: готовая фигурка на ладони">
-          </div>
-        </a>
-        <div class="case-body">
-          <div data-reveal>
-            <ul class="did">
-              <li>Расписываем вручную по вашим фотографиям, каждая работа своя</li>
-              <li>Повторяем окрас и рисунок шерсти, подбираем форму ушей под породу</li>
-              <li>В наборе пять сменных чайных свечей: фигурка от огня не страдает</li>
-              <li>На этапе росписи присылаем снимок на согласование</li>
-            </ul>
-          </div>
-          <div data-reveal style="--d:90ms">
-            <dl class="facts">
-              <div><dt>Материал</dt><dd>гипс</dd></div>
-              <div><dt>Роспись</dt><dd>вручную</dd></div>
-              <div><dt>Размер</dt><dd>помещается в ладонь</dd></div>
-              <div><dt>Цена и срок</dt><dd>после ваших фото</dd></div>
-            </dl>
-          </div>
-        </div>
-      </article>
-
-      <!-- Декор -->
-      <article class="case" id="decor">
-        <div class="case-top" data-reveal>
-          <div class="case-title">
-            <h3>Декор</h3>
-            <p class="case-sub">Подставки и мелочи, которые собирают композицию на столе или полке.</p>
-          </div>
-          <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Заказать
-            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-          </a>
-        </div>
-        <a class="shot" href="https://t.me/Nina.G1999" target="_blank" rel="noopener" data-reveal>
-          <div class="plate">
-            <img src="assets/img/product-candles.jpg" width="856" height="1070" loading="lazy" style="--focus:82%"
-                 alt="Мятная шкатулка и свеча-пион на овальной подставке">
-          </div>
-          <div class="inset">
-            <img src="assets/img/product-candles-detail.jpg" width="430" height="430" loading="lazy"
-                 alt="Керамическая шкатулка с рифлёной крышкой крупным планом">
-          </div>
-        </a>
-        <div class="case-body">
-          <div data-reveal>
-            <ul class="did">
-              <li>Овальные подставки под свечи и мелочи</li>
-              <li>Матовая поверхность, спокойные оттенки</li>
-              <li>Собираются в набор со свечой того же цвета</li>
-            </ul>
-          </div>
-          <div data-reveal style="--d:90ms">
-            <dl class="facts">
-              <div><dt>Материал</dt><dd>гипс</dd></div>
-              <div><dt>Поверхность</dt><dd>матовая</dd></div>
-              <div><dt>Набор</dt><dd>свеча и подставка</dd></div>
-              <div><dt>Партия</dt><dd>небольшая</dd></div>
-            </dl>
-          </div>
-        </div>
-      </article>
+      <div class="shop">
+        <figure class="card" data-sku="pion-bordo" data-name="Свеча «Pion»" data-sub="бордо" data-price="500" data-img="assets/img/catalog/pion-bordo.webp" data-reveal>
+          <div class="card-shot"><img src="assets/img/catalog/pion-bordo.webp" width="720" height="960" loading="lazy" alt="Бордовые свечи-пионы и перевёрнутый бокал с алой лентой"></div>
+          <div class="card-say"><span class="price">500&nbsp;₽</span><span class="card-name">Свеча «Pion»</span><span class="card-sub">бордо</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="pion-choice" data-name="Свеча «Pion»" data-sub="цвет на выбор" data-price="500" data-img="assets/img/catalog/pion-choice.webp" data-reveal style="--d:60ms">
+          <div class="card-shot"><img src="assets/img/catalog/pion-choice.webp" width="720" height="960" loading="lazy" alt="Три свечи-пиона — розовая, белая и пудровая — на розовом меху"></div>
+          <div class="card-say"><span class="price">500&nbsp;₽</span><span class="card-name">Свеча «Pion»</span><span class="card-sub">цвет на выбор</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+          <p class="help" style="margin-top:2px">Цвет подбирается в <a class="quiet" href="#builder">конструкторе</a>.</p>
+        </figure>
+        <figure class="card" data-sku="juli-rose-green" data-name="Набор «Juli»" data-sub="розовый и зелёный" data-price="2999" data-img="assets/img/catalog/juli-rose-green.webp" data-reveal style="--d:120ms">
+          <div class="card-shot"><img src="assets/img/catalog/juli-rose-green.webp" width="720" height="960" loading="lazy" alt="Белая шкатулка-свеча и розовый пион на подставке, сверху зелёная ветка"></div>
+          <div class="card-say"><span class="price">2 999&nbsp;₽</span><span class="card-name">Набор «Juli»</span><span class="card-sub">розовый и зелёный</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="juli-rose" data-name="Набор «Juli»" data-sub="розовый" data-price="2999" data-img="assets/img/catalog/juli-rose.webp" data-reveal style="--d:180ms">
+          <div class="card-shot"><img src="assets/img/catalog/juli-rose.webp" width="720" height="960" loading="lazy" alt="Розовый пион и белая рифлёная шкатулка-свеча на розовом меху"></div>
+          <div class="card-say"><span class="price">2 999&nbsp;₽</span><span class="card-name">Набор «Juli»</span><span class="card-sub">розовый</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="juli-white-rose" data-name="Набор «Juli»" data-sub="белый и розовый" data-price="2999" data-img="assets/img/catalog/juli-white-rose.webp" data-reveal>
+          <div class="card-shot"><img src="assets/img/catalog/juli-white-rose.webp" width="720" height="960" loading="lazy" alt="Белая шкатулка-свеча с бантом и белый пион на овальной подставке"></div>
+          <div class="card-say"><span class="price">2 999&nbsp;₽</span><span class="card-name">Набор «Juli»</span><span class="card-sub">белый и розовый</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="juli-blue" data-name="Набор «Juli»" data-sub="голубой" data-price="2999" data-img="assets/img/catalog/juli-blue.webp" data-reveal style="--d:60ms">
+          <div class="card-shot"><img src="assets/img/catalog/juli-blue.webp" width="720" height="960" loading="lazy" alt="Голубая рифлёная шкатулка-свеча и кремовый пион на подставке"></div>
+          <div class="card-say"><span class="price">2 999&nbsp;₽</span><span class="card-name">Набор «Juli»</span><span class="card-sub">голубой</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="juli-rose-yellow" data-name="Набор «Juli»" data-sub="розовый и жёлтый" data-price="2999" data-img="assets/img/catalog/juli-rose-yellow.webp" data-reveal style="--d:120ms">
+          <div class="card-shot"><img src="assets/img/catalog/juli-rose-yellow.webp" width="720" height="960" loading="lazy" alt="Шкатулка-свеча с жёлтым бантом и жёлтый пион на розовом фоне"></div>
+          <div class="card-say"><span class="price">2 999&nbsp;₽</span><span class="card-name">Набор «Juli»</span><span class="card-sub">розовый и жёлтый</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="juli-green-yellow" data-name="Набор «Juli»" data-sub="зелёный и жёлтый" data-price="2999" data-img="assets/img/catalog/juli-green-yellow.webp" data-reveal style="--d:180ms">
+          <div class="card-shot"><img src="assets/img/catalog/juli-green-yellow.webp" width="720" height="960" loading="lazy" alt="Шкатулка-свеча с жёлтым бантом и жёлтый пион на жёлтом вязаном фоне"></div>
+          <div class="card-say"><span class="price">2 999&nbsp;₽</span><span class="card-name">Набор «Juli»</span><span class="card-sub">зелёный и жёлтый</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="nina-bordo" data-name="Набор «Nina»" data-sub="бордовый" data-price="1999" data-img="assets/img/catalog/nina-bordo.webp" data-reveal>
+          <div class="card-shot"><img src="assets/img/catalog/nina-bordo.webp" width="720" height="960" loading="lazy" alt="Два бордовых пиона на овальной подставке"></div>
+          <div class="card-say"><span class="price">1 999&nbsp;₽</span><span class="card-name">Набор «Nina»</span><span class="card-sub">бордовый</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="moon-white" data-name="Свеча «Moon»" data-sub="белая" data-price="1999" data-img="assets/img/moon-white.webp" data-reveal>
+          <div class="card-shot"><img src="assets/img/moon-white.webp" width="736" height="1104" loading="lazy" alt="Белая свеча-луна с кратерами на деревянной полке"></div>
+          <div class="card-say"><span class="price">1&nbsp;999&nbsp;₽</span><span class="card-name">Свеча «Moon»</span><span class="card-sub">белая</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+        <figure class="card" data-sku="moon-grey" data-name="Свеча «Moon»" data-sub="серая" data-price="1999" data-img="assets/img/moon-grey.webp" data-reveal style="--d:60ms">
+          <div class="card-shot"><img src="assets/img/moon-grey.webp" width="736" height="920" loading="lazy" alt="Серая свеча-луна с кратерами, рядом горит фитиль"></div>
+          <div class="card-say"><span class="price">1&nbsp;999&nbsp;₽</span><span class="card-name">Свеча «Moon»</span><span class="card-sub">серая</span></div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+        </figure>
+      </div>
     </section>
 
-    <!-- О свечах: светлая вставка -->
+    <!-- ═══ ПОДСВЕЧНИК ПО ФОТО ПИТОМЦА ══════════════════════════════ -->
+    <section class="sec wrap" id="holders">
+      <div class="sec-head" data-reveal>
+        <h2>Подсвечник по фото питомца</h2>
+        <p>Примеры готовых работ. Расписываем вручную по вашим снимкам, поэтому двух одинаковых не бывает.</p>
+      </div>
+
+      <div class="shop shop--pairs">
+        <figure class="card" data-reveal>
+          <div class="card-shot"><img src="assets/img/pair-1.webp" width="345" height="428" loading="lazy" alt="Полосатый кот и сделанный по его фотографиям гипсовый подсвечник на ладони"></div>
+        </figure>
+        <figure class="card" data-reveal style="--d:80ms">
+          <div class="card-shot"><img src="assets/img/pair-2.webp" width="350" height="440" loading="lazy" alt="Чёрно-белый кот и сделанный по его фотографиям гипсовый подсвечник на ладони"></div>
+        </figure>
+        <figure class="card" data-reveal style="--d:160ms">
+          <div class="card-shot"><img src="assets/img/pair-3.webp" width="346" height="426" loading="lazy" alt="Пушистый кот колор-пойнт и сделанный по его фотографиям гипсовый подсвечник на ладони"></div>
+        </figure>
+      </div>
+
+      <div class="paper-grid" style="margin-top:clamp(30px,4vw,56px)">
+        <div data-reveal>
+          <ul class="did">
+            <li>Для изготовления нужно оплатить заказ и прислать фото питомца со всех сторон, по возможности</li>
+            <li>На изготовление уходит от 10 до 14 рабочих дней со дня отправки фотографий</li>
+            <li>Материал: гипс, УФ-смола, акриловые краски</li>
+            <li>В подарок к заказу прилагается: спички, сменные чайные свечи, подарочная упаковка, открытка с посланием</li>
+          </ul>
+        </div>
+        <figure class="card" data-sku="kitya" data-name="Подсвечник «Китя»" data-sub="по фото вашего питомца" data-price="2999" data-img="assets/img/pair-2.webp" data-reveal style="--d:90ms;max-width:360px">
+          <div class="card-say">
+            <span class="price">2 999 ₽</span>
+            <span class="card-name">Подсвечник «Китя»</span>
+            <span class="card-sub">по фото вашего питомца</span>
+          </div>
+          <button class="btn btn--primary" type="button" data-add>в корзину</button>
+          <p class="added" data-added aria-live="polite"></p>
+          <p class="help" style="margin-top:6px">Куда прислать снимки, напишем в ответ на заказ: в Telegram или на почту.</p>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══ КОНСТРУКТОР СВЕЧЕЙ ══════════════════════════════════════
+         Ароматы и сочетания цветов правятся прямо здесь, в <option>
+         и в кнопках .duo. Цена берётся из data-price у <option>. -->
+    <section class="sec wrap" id="builder">
+      <div class="sec-head" data-reveal>
+        <h2>Конструктор свечей</h2>
+        <p>Соберите свечу под себя: форма, аромат и сочетание цветов. Получится отдельная позиция в корзине.</p>
+      </div>
+
+      <form class="form" id="builder-form" novalidate data-reveal>
+        <div class="field" data-field>
+          <label for="b-shape">Форма</label>
+          <select id="b-shape" name="shape" required>
+            <option value="">Выберите форму</option>
+            <option data-price="500" value="Свеча «Pion»">Свеча «Pion» — 500&nbsp;₽</option>
+            <option data-price="2999" value="Набор «Juli»">Набор «Juli» — 2&nbsp;999&nbsp;₽</option>
+            <option data-price="1999" value="Набор «Nina»">Набор «Nina» — 1&nbsp;999&nbsp;₽</option>
+            <option data-price="1999" value="Свеча «Moon»">Свеча «Moon» — 1&nbsp;999&nbsp;₽</option>
+          </select>
+          <span class="err" data-error>Выберите форму свечи.</span>
+        </div>
+
+        <div class="field" data-field>
+          <label for="b-scent">Аромат</label>
+          <select id="b-scent" name="scent">
+            <option value="">Выберите аромат</option>
+            <option>Черничный йогурт</option>
+            <option>Сладкий мёд</option>
+            <option>Макадамия и миндальное масло</option>
+            <option>Розовый перец, ветивер</option>
+            <option>Мёд и воск</option>
+            <option>Молоко и мёд</option>
+            <option>Конопля, ветивер, чёрный перец</option>
+            <option>Чёрный перец</option>
+            <option>Удовое дерево</option>
+            <option>Зелёный чай, лимон, мята</option>
+            <option>Булочка с корицей</option>
+            <option>Еловые шишки и хвоя</option>
+            <option>Кофе со сливками</option>
+            <option>Мимоза</option>
+            <option>Амбра, ветивер</option>
+            <option>Орхидея и морская соль</option>
+            <option>Деревенские яблочки</option>
+          </select>
+          <span class="help">Спички в стеклянной колбе входят в набор.</span>
+        </div>
+
+        <div class="field" data-field>
+          <label for="b-colors">Сочетание цветов</label>
+          <!-- СОЧЕТАНИЯ. Название в data-pair и в тексте кнопки, два цвета в --a и --b. -->
+          <div class="duos" role="group" aria-label="Выбрать сочетание цветов">
+            <button class="duo" type="button" aria-pressed="false" data-pair="Бордо и крем"><i style="--a:#66001F;--b:#FEFCEF"></i>Бордо и крем</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Вино и мёд"><i style="--a:#44040F;--b:#FBDE9C"></i>Вино и мёд</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Кофе и миндаль"><i style="--a:#2E0D14;--b:#EFE1D5"></i>Кофе и миндаль</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Шоколад и песок"><i style="--a:#3E000C;--b:#FFECD1"></i>Шоколад и песок</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Розовое дерево и роза"><i style="--a:#70020F;--b:#FFDEE2"></i>Розовое дерево и роза</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Матча и ваниль"><i style="--a:#7A8450;--b:#F8EFDA"></i>Матча и ваниль</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Лимон и цветение"><i style="--a:#FAFFC7;--b:#FFD1D5"></i>Лимон и цветение</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Жвачка и мох"><i style="--a:#EFA7C9;--b:#3F481C"></i>Жвачка и мох</button>
+            <button class="duo" type="button" aria-pressed="false" data-pair="Лаванда и сливки"><i style="--a:#CBA1D4;--b:#FEEB9C"></i>Лаванда и сливки</button>
+          </div>
+          <input id="b-colors" name="colors" type="text" placeholder="Или впишите своё: например, бордовый с белым">
+          <span class="help">Нужного сочетания нет в списке? Напишите своё, соберём под вас.</span>
+        </div>
+
+        <div>
+          <button class="btn btn--primary" type="submit">Добавить в корзину
+            <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
+          </button>
+        </div>
+        <p class="added" data-added aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- ═══ О СВЕЧАХ ════════════════════════════════════════════════ -->
     <section class="sec wrap" id="care">
       <div class="paper" data-reveal>
         <div class="paper-grid">
@@ -259,134 +311,70 @@
           <ul class="did">
             <li>Безопасный состав, без опасных веществ при горении</li>
             <li>Эстетика в каждой детали: форма, цвет и упаковка собираются как одно целое</li>
-            <li>Качественная подарочная упаковка, вещь приезжает готовой к вручению</li>
-            <li>Индивидуальный стиль и подход: цвет, размер и подпись подбираем под повод</li>
+            <li>Подарочная упаковка, вещь приезжает готовой к вручению</li>
+            <li>Индивидуальный подход: цвет, размер и подпись подбираем под повод</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Как заказать -->
+    <!-- ═══ КАК ЗАКАЗАТЬ ════════════════════════════════════════════ -->
     <section class="sec wrap" id="how">
       <div class="sec-head" data-reveal>
         <h2>Как заказать</h2>
-        <p>Всё решается в переписке: так быстрее показать варианты и согласовать детали.</p>
+        <p>Через корзину, без переписки. Если удобнее голосом или остались вопросы — Telegram и почта ниже.</p>
       </div>
       <div class="steps">
-        <div class="step" data-reveal><b>Напишите</b><p>В Telegram или на почту. Расскажите про повод, цвета и к какой дате нужно.</p></div>
-        <div class="step" data-reveal style="--d:80ms"><b>Обсудим</b><p>Предложим форму и палитру, покажем похожие работы. Цену согласуем до начала.</p></div>
-        <div class="step" data-reveal style="--d:160ms"><b>Сделаем</b><p>Лепим, отливаем и расписываем. На этапе росписи присылаем фото.</p></div>
-        <div class="step" data-reveal style="--d:240ms"><b>Упакуем</b><p>Собираем в подарочную упаковку и готовим к отправке.</p></div>
+        <div class="step" data-reveal><b>Соберите заказ</b><p>Добавьте вещи в корзину. Свечу под себя соберите в конструкторе.</p></div>
+        <div class="step" data-reveal style="--d:80ms"><b>Оформите</b><p>Имя, телефон и пункт выдачи Ozon. Счёт на оплату пришлём в ответ.</p></div>
+        <div class="step" data-reveal style="--d:160ms"><b>Сделаем</b><p>Отливаем и расписываем. Подсвечник по фото питомца — от 10 до 14 рабочих дней.</p></div>
+        <div class="step" data-reveal style="--d:240ms"><b>Упакуем</b><p>Подарочная упаковка, спички, сменные чайные свечи и открытка с посланием.</p></div>
       </div>
     </section>
 
-    <!-- Доставка -->
+    <!-- ═══ ДОСТАВКА ════════════════════════════════════════════════ -->
     <section class="sec wrap" id="delivery">
       <div class="paper" data-reveal>
         <div class="paper-grid">
           <div>
-            <p class="ship">Бесплатная доставка<br>от <span class="nw">3 000 ₽</span>
+            <p class="ship">Бесплатная доставка<br>от <span class="nw">5 000 ₽</span>
               <small>Отправка в удобный для вас ПВЗ Ozon</small>
             </p>
           </div>
           <ul class="did">
             <li>Хрупкое пакуем так, чтобы доехало целым</li>
             <li>Каждый заказ уезжает в подарочной упаковке</li>
-            <li>Открытка с подписью по вашей просьбе</li>
+            <li>Открытка с посланием вкладывается в заказ</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Контакты -->
-    <section class="sec wrap" id="contact">
+    <!-- ═══ КОРЗИНА И ОФОРМЛЕНИЕ ════════════════════════════════════
+         Чтобы заказы приходили на почту, впишите адрес обработчика формы
+         в data-endpoint ниже. Пока он пустой, заказ собирается и копируется
+         в буфер обмена, а отправка идёт вручную. -->
+    <section class="sec wrap" id="cart">
       <div class="contact-grid">
         <div data-reveal>
-          <h2>Оформить заказ</h2>
-          <p style="margin-top:16px;color:var(--ink-soft)">Заполните форму справа: выберите вещь и аромат, оставьте телефон и пункт выдачи Ozon. Переписываться не нужно. Если удобнее голосом или остались вопросы, контакты ниже.</p>
-          <ul class="contact-list">
+          <h2>Ваш заказ</h2>
+          <div class="cart" style="margin-top:clamp(20px,3vw,34px)">
+            <p class="cart-empty" id="cart-empty">Корзина пока пуста. Добавьте что-нибудь из каталога выше.</p>
+            <ul class="lines" id="cart-lines"></ul>
+            <div class="total" id="cart-total" hidden>
+              <b>Сумма</b>
+              <span class="price" id="cart-sum">0 ₽</span>
+              <p class="ship-hint" id="ship-hint"></p>
+            </div>
+          </div>
+          <ul class="contact-list" style="margin-top:clamp(26px,4vw,44px)">
             <li><a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">t.me/Nina.G1999</a></li>
             <li><a class="quiet" href="mailto:nina.gercik@mail.ru">nina.gercik@mail.ru</a></li>
             <li>Отправка в удобный для вас ПВЗ Ozon</li>
-            <li>Доставка бесплатно при заказе от <span class="nw">3 000 ₽</span></li>
           </ul>
-          <p style="margin-top:26px">
-            <a class="btn btn--primary" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram
-              <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-            </a>
-          </p>
         </div>
 
-        <!-- ЗАКАЗ.
-             Чтобы заявки приходили на почту, нужен адрес обработчика формы: впишите его
-             в data-endpoint ниже. Пока он пустой, форма собирает заказ и копирует его
-             в буфер обмена. Список ароматов правится прямо здесь, в <option>. -->
         <form class="form" id="order-form" novalidate data-endpoint="" data-reveal style="--d:100ms">
-
-          <div class="field" data-field>
-            <label for="f-item">Что заказываете</label>
-            <select id="f-item" name="item" required>
-              <option value="">Выберите</option>
-              <!-- Наборы. Добавляйте и убирайте строки по мере изменения ассортимента. -->
-              <option>Набор «Juli»</option>
-              <option>Свеча-пион</option>
-              <option>Свеча-роза</option>
-              <option>Свеча «Луна»</option>
-              <option>Фигурка по фото питомца</option>
-              <option>Подставка</option>
-            </select>
-            <span class="err" data-error>Выберите, что заказываете.</span>
-          </div>
-
-          <div class="field" data-field data-only="candle">
-            <label for="f-scent">Аромат</label>
-            <select id="f-scent" name="scent">
-              <option value="">Выберите аромат</option>
-              <!-- Ароматы. Чтобы снять позицию, удалите строку; чтобы добавить, впишите новую. -->
-              <option>Черничный йогурт</option>
-              <option>Сладкий мёд</option>
-              <option>Макадамия и миндальное масло</option>
-              <option>Розовый перец, ветивер</option>
-              <option>Мёд и воск</option>
-              <option>Молоко и мёд</option>
-              <option>Конопля, ветивер, чёрный перец</option>
-              <option>Чёрный перец</option>
-              <option>Удовое дерево</option>
-              <option>Зелёный чай, лимон, мята</option>
-              <option>Булочка с корицей</option>
-              <option>Еловые шишки и хвоя</option>
-              <option>Кофе со сливками</option>
-              <option>Мимоза</option>
-              <option>Амбра, ветивер</option>
-              <option>Орхидея и морская соль</option>
-              <option>Деревенские яблочки</option>
-            </select>
-            <span class="help">Пять сменных чайных свечей и спички в стеклянной колбе входят в набор.</span>
-          </div>
-
-          <div class="field" data-field data-only="candle">
-            <label for="f-colors">Сочетание цветов</label>
-            <!-- СОЧЕТАНИЯ. Правятся прямо здесь: название в data-pair и в тексте кнопки,
-                 два цвета в --a и --b. Строку можно удалить или добавить новую. -->
-            <div class="duos" role="group" aria-label="Выбрать сочетание цветов">
-                <button class="duo" type="button" aria-pressed="false" data-pair="Бордо и крем"><i style="--a:#66001F;--b:#FEFCEF"></i>Бордо и крем</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Вино и мёд"><i style="--a:#44040F;--b:#FBDE9C"></i>Вино и мёд</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Кофе и миндаль"><i style="--a:#2E0D14;--b:#EFE1D5"></i>Кофе и миндаль</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Шоколад и песок"><i style="--a:#3E000C;--b:#FFECD1"></i>Шоколад и песок</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Розовое дерево и роза"><i style="--a:#70020F;--b:#FFDEE2"></i>Розовое дерево и роза</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Матча и ваниль"><i style="--a:#7A8450;--b:#F8EFDA"></i>Матча и ваниль</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Лимон и цветение"><i style="--a:#FAFFC7;--b:#FFD1D5"></i>Лимон и цветение</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Жвачка и мох"><i style="--a:#EFA7C9;--b:#3F481C"></i>Жвачка и мох</button>
-                <button class="duo" type="button" aria-pressed="false" data-pair="Лаванда и сливки"><i style="--a:#CBA1D4;--b:#FEEB9C"></i>Лаванда и сливки</button>
-            </div>
-            <input id="f-colors" name="colors" type="text" placeholder="Или впишите своё: например, бордовый с белым">
-            <span class="help">Нужного сочетания нет в списке? Напишите своё, соберём под вас.</span>
-          </div>
-
-          <div class="field" data-field data-only="pet" hidden>
-            <span class="help">Фигурку расписываем по фотографиям. Нужны снимки питомца со всех четырёх сторон: морда, спина, хвост, лапы. Куда их прислать, напишем в ответ на заявку. Ароматы здесь не нужны: в наборе пять сменных чайных свечей.</span>
-          </div>
-
           <div class="row">
             <div class="field" data-field>
               <label for="f-name">Имя</label>
@@ -404,7 +392,7 @@
           <div class="field" data-field>
             <label for="f-pvz">Пункт выдачи Ozon</label>
             <input id="f-pvz" name="pvz" type="text" required placeholder="Город, улица, дом">
-            <span class="help">Адрес удобного вам ПВЗ. От 3 000 ₽ доставка бесплатно.</span>
+            <span class="help">Адрес удобного вам ПВЗ. От <span class="nw">5 000 ₽</span> доставка бесплатно.</span>
             <span class="err" data-error>Напишите адрес пункта выдачи.</span>
           </div>
 
@@ -438,12 +426,13 @@
       </div>
       <div class="paper-grid">
         <ul class="did" data-reveal>
-          <li>Форма собирает имя, способ связи и текст пожеланий. Больше ничего.</li>
-          <li>Данные нужны ровно для одного: ответить вам и обсудить заказ.</li>
-          <li>Переписка идёт в Telegram и на почту <span class="nw">nina.gercik@mail.ru</span>, там же хранятся заявки.</li>
-          <li>Третьим лицам не передаём и в рассылки не добавляем.</li>
+          <li>Форма собирает имя, телефон, пункт выдачи и состав заказа. Больше ничего.</li>
+          <li>Данные нужны ровно для одного: собрать заказ и довезти его до вас.</li>
+          <li>Переписка идёт в Telegram и на почту nina.gercik@mail.ru, там же хранятся заявки.</li>
+          <li>Корзина хранится только в вашем браузере и никуда не уходит, пока вы не оформите заказ.</li>
         </ul>
         <ul class="did" data-reveal style="--d:90ms">
+          <li>Третьим лицам не передаём и в рассылки не добавляем.</li>
           <li>Отозвать согласие и попросить удалить переписку можно в любой момент, написав на ту же почту.</li>
           <li>Если писать через Telegram напрямую, форма не участвует вовсе.</li>
           <li>Текст описывает фактическую работу формы. Перед запуском его стоит показать юристу и при необходимости дополнить.</li>
@@ -457,15 +446,15 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="brand" style="font-size:2rem">Lila Gerts</div>
-        <p class="foot-tag">Свечи и фигурки ручной работы из гипса. Небольшими партиями, с подарочной упаковкой.</p>
+        <img src="assets/img/logo.webp" width="900" height="602" loading="lazy" alt="Lila Gerts" style="width:min(260px,70%);height:auto">
+        <p class="foot-tag">Авторские свечи и гипсовые подсвечники ручной работы. Небольшими партиями, с подарочной упаковкой.</p>
       </div>
       <div>
         <h2>Работы</h2>
         <ul>
           <li><a class="quiet" href="#candles">Свечи</a></li>
-          <li><a class="quiet" href="#portrait">Фигурка по фото питомца</a></li>
-          <li><a class="quiet" href="#decor">Декор</a></li>
+          <li><a class="quiet" href="#holders">Подсвечник по фото питомца</a></li>
+          <li><a class="quiet" href="#builder">Конструктор свечей</a></li>
         </ul>
       </div>
       <div>
@@ -474,7 +463,7 @@
           <li><a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">t.me/Nina.G1999</a></li>
           <li><a class="quiet" href="mailto:nina.gercik@mail.ru">nina.gercik@mail.ru</a></li>
           <li>ПВЗ Ozon по всей России</li>
-          <li>От <span class="nw">3 000 ₽</span> доставка бесплатно</li>
+          <li>От <span class="nw">5 000 ₽</span> доставка бесплатно</li>
         </ul>
       </div>
     </div>
@@ -484,6 +473,8 @@
     </div>
   </div>
 </footer>
+
+</div><!-- /.sheet -->
 
 <script src="assets/js/app.js" defer></script>
 </body>

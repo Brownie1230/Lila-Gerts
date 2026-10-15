@@ -10,20 +10,27 @@
   --c-rose:    #E3A0A8;
   --c-sponge:  #E4C89B;
 
-  /* Semantic surface + ink, light theme */
-  --bg:          #F4E9DC;
-  --bg-sunk:     #EDDFCE;
-  --bg-raised:   #FBF4EA;
-  --ink:         #43120E;
-  --ink-soft:    #6E3A32;
-  --ink-faint:   #7B4B42;
-  --rule:        #D8C2AE;
-  --rule-strong: #BFA68F;
+  /* The striped paper the site is printed on. Sampled from the client's own
+     mockup: #FBD2D4 over #FCEEEC, stripe about 51px at her 1906px canvas. */
+  --stripe-a: #FBD2D4;
+  --stripe-b: #FCEEEC;
+  --stripe-w: 38px;
 
-  --accent:      var(--c-cherry);
-  --accent-deep: var(--c-inferno);
-  --accent-lift: var(--c-velvet);
-  --on-accent:   #F7EADB;
+  /* Semantic surface + ink. DARK IS THE DEFAULT: every one of the client's five
+     mockup screens is cherry, and the light cream theme is the alternative. */
+  --bg:          #310907;
+  --bg-sunk:     #250605;
+  --bg-raised:   #45100C;
+  --ink:         #F7E9DC;
+  --ink-soft:    #DCBCA8;
+  --ink-faint:   #B8927F;
+  --rule:        #5E211A;
+  --rule-strong: #7D3328;
+
+  --accent:      var(--c-rose);
+  --accent-deep: #F0C3C8;
+  --accent-lift: #F2D2D6;
+  --on-accent:   #310907;
 
   /* Type */
   --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -51,8 +58,8 @@
   --radius: 2px;
 
   /* Elevation, tinted to the brand hue */
-  --shadow-1: 0 1px 2px rgb(78 0 0 / 0.06), 0 8px 24px rgb(78 0 0 / 0.07);
-  --shadow-2: 0 2px 4px rgb(78 0 0 / 0.08), 0 24px 56px rgb(78 0 0 / 0.12);
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
+  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
 
   /* Motion */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -65,47 +72,24 @@
   --z-nav: 40;
   --z-raised: 10;
 
-  color-scheme: light;
-}
-
-/* Dark mode: the brand inverts to its own cherry, it does not go neutral. */
-:root[data-theme="dark"],
-html:not([data-theme="light"]) :root { }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:        #2E0503;
-    --bg-sunk:   #230302;
-    --bg-raised: #45100C;
-    --ink:       #F2DFCC;
-    --ink-soft:  #D9B9A4;
-    --ink-faint: #B38E7C;
-    --rule:      #5E211A;
-    --rule-strong: #7D3328;
-    --accent:      var(--c-rose);
-    --accent-deep: #F0C3C8;
-    --accent-lift: #F2D2D6;
-    --on-accent:   #3A0604;
-    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
-    --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"] {
-  --bg:        #2E0503;
-  --bg-sunk:   #230302;
-  --bg-raised: #45100C;
-  --ink:       #F2DFCC;
-  --ink-soft:  #D9B9A4;
-  --ink-faint: #B38E7C;
-  --rule:      #5E211A;
-  --rule-strong: #7D3328;
-  --accent:      var(--c-rose);
-  --accent-deep: #F0C3C8;
-  --accent-lift: #F2D2D6;
-  --on-accent:   #3A0604;
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.32);
-  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.36), 0 24px 56px rgb(0 0 0 / 0.46);
   color-scheme: dark;
+}
+
+/* The cream alternative. Reached only through the toggle: the brand reads dark. */
+:root[data-theme="light"] {
+  --bg:          #F4E9DC;
+  --bg-sunk:     #EDDFCE;
+  --bg-raised:   #FBF4EA;
+  --ink:         #43120E;
+  --ink-soft:    #6E3A32;
+  --ink-faint:   #7B4B42;
+  --rule:        #D8C2AE;
+  --rule-strong: #BFA68F;
+  --accent:      var(--c-cherry);
+  --accent-deep: var(--c-inferno);
+  --accent-lift: var(--c-velvet);
+  --on-accent:   #F7EADB;
+  --shadow-1: 0 1px 2px rgb(78 0 0 / 0.06), 0 8px 24px rgb(78 0 0 / 0.07);
+  --shadow-2: 0 2px 4px rgb(78 0 0 / 0.08), 0 24px 56px rgb(78 0 0 / 0.12);
+  color-scheme: light;
 }

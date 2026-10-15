@@ -3,16 +3,14 @@
   "use strict";
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var NBSP = " ";
 
-  /* Theme toggle. Persists per visitor; falls back to the system setting. */
+  /* Theme toggle. Cherry is the brand and the default; cream is the alternative. */
   var root = document.documentElement;
   var toggle = document.getElementById("theme");
   var glyph = toggle && toggle.querySelector("[data-glyph]");
 
-  function currentlyDark() {
-    if (root.dataset.theme) return root.dataset.theme === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  }
+  function currentlyDark() { return root.dataset.theme !== "light"; }
   function paintToggle() {
     var dark = currentlyDark();
     if (toggle) toggle.setAttribute("aria-pressed", String(dark));
@@ -21,12 +19,12 @@
   if (toggle) {
     toggle.addEventListener("click", function () {
       var next = currentlyDark() ? "light" : "dark";
-      root.dataset.theme = next;
+      if (next === "dark") root.removeAttribute("data-theme");
+      else root.dataset.theme = "light";
       try { localStorage.setItem("lg-theme", next); } catch (e) { /* private mode */ }
       paintToggle();
     });
     paintToggle();
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paintToggle);
   }
 
   /* Mobile menu. A disclosure, not an overlay: the page stays reachable behind it. */
@@ -92,36 +90,171 @@
     targets.forEach(function (el) { io.observe(el); });
   }
 
-  /* Colour chips. Picking one carries the choice into the order form, so the
-     control does something real instead of only looking like a control. */
-  var noteField = document.getElementById("f-note");
-  var itemField = document.getElementById("f-item");
-  var colorField = document.getElementById("f-colors");
+  /* ─────────────────────────────────────────────────────────────────
+     Cart. Lives in this browser only, in localStorage, and travels no
+     further until the order is submitted. Free shipping from 5 000 ₽.
+     ───────────────────────────────────────────────────────────────── */
 
-  function writeChoice(product, color) {
-    if (colorField) colorField.value = color;
+  var KEY = "lg-cart";
+  var FREE_FROM = 5000;
+
+  var linesEl = document.getElementById("cart-lines");
+  var emptyEl = document.getElementById("cart-empty");
+  var totalEl = document.getElementById("cart-total");
+  var sumEl = document.getElementById("cart-sum");
+  var hintEl = document.getElementById("ship-hint");
+  var countEl = document.getElementById("cart-count");
+
+  function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP) + NBSP + "₽"; }
+
+  function read() {
+    try {
+      var raw = JSON.parse(localStorage.getItem(KEY) || "[]");
+      if (!Array.isArray(raw)) return [];
+      return raw.filter(function (l) {
+        return l && typeof l.id === "string" && typeof l.name === "string" &&
+               isFinite(l.price) && isFinite(l.qty) && l.qty > 0;
+      });
+    } catch (e) { return []; }
+  }
+  function write(cart) {
+    try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) { /* private mode */ }
   }
 
-  document.querySelectorAll("[data-palette]").forEach(function (group) {
-    var product = group.dataset.palette;
-    group.querySelectorAll("button.sw").forEach(function (chip) {
-      chip.addEventListener("click", function () {
-        var was = chip.getAttribute("aria-pressed") === "true";
-        group.querySelectorAll("button.sw").forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
-        chip.setAttribute("aria-pressed", String(!was));
-        if (was) return;
-        writeChoice(product, chip.dataset.color);
-        var form = document.getElementById("order-form");
-        if (form) {
-          form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-          window.setTimeout(function () { if (noteField) noteField.focus({ preventScroll: true }); }, reduce ? 0 : 500);
-        }
+  function add(line) {
+    var cart = read();
+    var found = cart.filter(function (l) { return l.id === line.id; })[0];
+    if (found) found.qty += 1;
+    else cart.push({ id: line.id, name: line.name, sub: line.sub || "", price: line.price, img: line.img || "", qty: 1 });
+    write(cart);
+    render();
+  }
+  function setQty(id, delta) {
+    var cart = read().map(function (l) {
+      if (l.id === id) l.qty += delta;
+      return l;
+    }).filter(function (l) { return l.qty > 0; });
+    write(cart);
+    render();
+  }
+  function kill(id) {
+    write(read().filter(function (l) { return l.id !== id; }));
+    render();
+  }
+
+  function render() {
+    var cart = read();
+    var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
+    var count = cart.reduce(function (a, l) { return a + l.qty; }, 0);
+
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count === 0;
+    }
+    if (!linesEl) return;
+
+    linesEl.textContent = "";
+    cart.forEach(function (l) {
+      var li = document.createElement("li");
+      li.className = "line";
+
+      if (l.img) {
+        var img = document.createElement("img");
+        img.src = l.img; img.alt = ""; img.loading = "lazy";
+        li.appendChild(img);
+      } else {
+        var box = document.createElement("div");
+        box.className = "line-no-img";
+        li.appendChild(box);
+      }
+
+      var name = document.createElement("div");
+      name.className = "line-name";
+      name.textContent = l.name;
+      if (l.sub) {
+        var sub = document.createElement("span");
+        sub.className = "line-sub";
+        sub.textContent = l.sub;
+        name.appendChild(sub);
+      }
+      li.appendChild(name);
+
+      var qty = document.createElement("div");
+      qty.className = "qty";
+      var minus = document.createElement("button");
+      minus.type = "button"; minus.textContent = "−";
+      minus.setAttribute("aria-label", "Убрать одну штуку: " + l.name);
+      minus.addEventListener("click", function () { setQty(l.id, -1); });
+      var out = document.createElement("output");
+      out.textContent = String(l.qty);
+      var plus = document.createElement("button");
+      plus.type = "button"; plus.textContent = "+";
+      plus.setAttribute("aria-label", "Добавить ещё одну штуку: " + l.name);
+      plus.addEventListener("click", function () { setQty(l.id, 1); });
+      qty.append(minus, out, plus);
+      li.appendChild(qty);
+
+      var sumCell = document.createElement("div");
+      sumCell.className = "line-sum";
+      sumCell.textContent = money(l.price * l.qty);
+      li.appendChild(sumCell);
+
+      var rm = document.createElement("button");
+      rm.type = "button"; rm.className = "line-kill";
+      rm.textContent = "убрать";
+      rm.setAttribute("aria-label", "Убрать из корзины: " + l.name);
+      rm.addEventListener("click", function () { kill(l.id); });
+      li.appendChild(rm);
+
+      linesEl.appendChild(li);
+    });
+
+    if (emptyEl) emptyEl.hidden = count > 0;
+    if (totalEl) totalEl.hidden = count === 0;
+    if (sumEl) sumEl.textContent = money(total);
+    if (hintEl) {
+      if (total >= FREE_FROM) {
+        hintEl.dataset.free = "true";
+        hintEl.textContent = "Доставка бесплатно.";
+      } else {
+        hintEl.dataset.free = "false";
+        hintEl.textContent = "До бесплатной доставки " + money(FREE_FROM - total) + ".";
+      }
+    }
+  }
+
+  /* Acknowledge next to the button that caused it, never as a page-wide banner. */
+  function flash(scope, text) {
+    var note = scope && scope.querySelector("[data-added]");
+    if (!note) return;
+    note.textContent = text;
+    note.dataset.on = "true";
+    window.clearTimeout(note._t);
+    note._t = window.setTimeout(function () { note.dataset.on = "false"; }, 2600);
+  }
+
+  document.querySelectorAll("[data-add]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var card = btn.closest("[data-sku]");
+      if (!card) return;
+      add({
+        id: card.dataset.sku,
+        name: card.dataset.name,
+        sub: card.dataset.sub,
+        price: parseInt(card.dataset.price, 10) || 0,
+        img: card.dataset.img
       });
+      flash(card, "Добавлено в корзину");
     });
   });
 
-  /* Colour pairs write into the same field someone can type into, so the list is a
-     shortcut rather than a limit. */
+  render();
+
+  /* ── Конструктор свечей ──────────────────────────────────────────
+     The pairs write into the same field someone can type into, so the
+     list is a shortcut rather than a limit. */
+  var colorField = document.getElementById("b-colors");
+
   document.querySelectorAll(".duos").forEach(function (group) {
     group.querySelectorAll("button.duo").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -140,29 +273,6 @@
     });
   }
 
-  /* The order form reshapes itself around the item: a candle needs a scent and a
-     colour pair, a pet figurine needs photographs instead. */
-  function syncItemFields() {
-    if (!itemField) return;
-    var pet = /питомц/i.test(itemField.value);
-    document.querySelectorAll("[data-only]").forEach(function (el) {
-      var wants = el.dataset.only === "pet" ? pet : !pet && itemField.value !== "";
-      el.hidden = !wants;
-      el.querySelectorAll("input, select, textarea").forEach(function (f) { f.disabled = !wants; });
-    });
-  }
-  if (itemField) {
-    itemField.addEventListener("change", syncItemFields);
-    syncItemFields();
-  }
-
-  /* Order form: inline validation, then a local success state.
-     Template only. Point `endpoint` at the real handler before launch. */
-  var form = document.getElementById("order-form");
-  if (!form) return;
-  var status = document.getElementById("form-status");
-  var endpoint = form.dataset.endpoint || "";
-
   function fieldOf(input) { return input.closest("[data-field]"); }
 
   function validate(input) {
@@ -180,6 +290,42 @@
     return ok;
   }
 
+  var builder = document.getElementById("builder-form");
+  if (builder) {
+    builder.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var shape = document.getElementById("b-shape");
+      if (!validate(shape)) { shape.focus(); return; }
+
+      var opt = shape.options[shape.selectedIndex];
+      var price = parseInt(opt.dataset.price, 10) || 0;
+      var scent = (document.getElementById("b-scent") || {}).value || "";
+      var colors = colorField ? colorField.value.trim() : "";
+
+      var parts = [];
+      if (scent) parts.push("аромат: " + scent);
+      if (colors) parts.push("цвета: " + colors);
+      var sub = parts.join(" · ") || "аромат и цвет подберём в переписке";
+
+      add({
+        id: "custom:" + shape.value + "|" + scent + "|" + colors,
+        name: shape.value,
+        sub: sub,
+        price: price,
+        img: ""
+      });
+      flash(builder, "Добавлено в корзину: " + shape.value);
+    });
+  }
+
+  /* ── Оформление ──────────────────────────────────────────────────
+     Inline validation, then the order. Point `endpoint` at the real
+     handler before launch; until then the order goes to the clipboard. */
+  var form = document.getElementById("order-form");
+  if (!form) return;
+  var status = document.getElementById("form-status");
+  var endpoint = form.dataset.endpoint || "";
+
   form.querySelectorAll("input, select, textarea").forEach(function (input) {
     input.addEventListener("blur", function () { validate(input); });
     input.addEventListener("input", function () {
@@ -190,33 +336,51 @@
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    var inputs = Array.prototype.slice.call(form.querySelectorAll("input, select, textarea"));
-    var bad = inputs.filter(function (i) { return !validate(i); });
-    if (bad.length) {
-      bad[0].focus();
+
+    var cart = read();
+    if (!cart.length) {
+      status.dataset.state = "sent";
+      status.textContent = "Корзина пуста. Добавьте что-нибудь из каталога, и мы оформим заказ.";
+      var shop = document.getElementById("candles");
+      if (shop) shop.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
       return;
     }
+
+    var inputs = Array.prototype.slice.call(form.querySelectorAll("input, select, textarea"));
+    var bad = inputs.filter(function (i) { return !validate(i); });
+    if (bad.length) { bad[0].focus(); return; }
+
+    var data = new FormData(form);
+    var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
+    var order = {
+      items: cart.map(function (l) {
+        return { name: l.name, sub: l.sub, price: l.price, qty: l.qty };
+      }),
+      total: total,
+      name: data.get("name"),
+      phone: data.get("phone"),
+      pvz: data.get("pvz"),
+      note: data.get("note")
+    };
 
     status.dataset.state = "sending";
     status.textContent = "Отправляем заказ";
 
     if (!endpoint) {
-      // No backend yet, so the request is handed to Telegram rather than
-      // swallowed: the text goes to the clipboard and the chat opens.
-      var data = new FormData(form);
-      var rows = [
-        ["Заказ", data.get("item")],
-        ["Аромат", data.get("scent")],
-        ["Цвета", data.get("colors")],
-        ["Имя", data.get("name")],
-        ["Телефон", data.get("phone")],
-        ["ПВЗ Ozon", data.get("pvz")],
-        ["Комментарий", data.get("note")]
-      ];
-      var text = "Заказ с сайта Lila Gerts\n" + rows
-        .filter(function (r) { return r[1]; })
-        .map(function (r) { return r[0] + ": " + r[1]; })
-        .join("\n");
+      // No backend yet, so the order is handed over rather than swallowed.
+      var text = ["Заказ с сайта Lila Gerts", ""]
+        .concat(cart.map(function (l) {
+          return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") +
+                 " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
+        }))
+        .concat([
+          "",
+          "Сумма: " + total + " руб.",
+          "Имя: " + (order.name || ""),
+          "Телефон: " + (order.phone || ""),
+          "ПВЗ Ozon: " + (order.pvz || "")
+        ]);
+      if (order.note) text.push("Комментарий: " + order.note);
 
       var done = function (copied) {
         status.dataset.state = "sent";
@@ -224,8 +388,9 @@
           ? "Заказ собран и скопирован. Отправка на почту ещё не подключена: пришлите текст в Telegram или на почту, и мы оформим."
           : "Отправка на почту ещё не подключена. Напишите нам в Telegram или на почту, и мы оформим заказ.";
       };
+      var joined = text.join("\n");
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+        navigator.clipboard.writeText(joined).then(function () { done(true); }, function () { done(false); });
       } else {
         done(false);
       }
@@ -235,13 +400,14 @@
     fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      body: JSON.stringify(order)
     }).then(function (res) {
       if (!res.ok) throw new Error(String(res.status));
       status.dataset.state = "sent";
-      status.textContent = "Заказ принят. Напишем вам, чтобы подтвердить и согласовать оплату.";
+      status.textContent = "Заказ принят. Напишем вам, чтобы подтвердить и прислать счёт на оплату.";
       form.reset();
-      if (itemField) syncItemFields();
+      write([]);
+      render();
     }).catch(function () {
       status.dataset.state = "sent";
       status.textContent = "Не удалось отправить. Напишите нам в Telegram или на почту, заказ оформим вручную.";
