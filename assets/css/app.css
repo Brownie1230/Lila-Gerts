@@ -20,7 +20,11 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 body{
-  margin:0;background:var(--bg);color:var(--ink);
+  margin:0;color:var(--ink);
+  background:var(--stripe-b);
+  background-image:repeating-linear-gradient(90deg,
+    var(--stripe-a) 0 var(--stripe-w),
+    var(--stripe-b) var(--stripe-w) calc(var(--stripe-w) * 2));
   font-family:var(--ft);font-size:1.125rem;line-height:1.62;
   font-synthesis-weight:none;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;
@@ -89,7 +93,7 @@ a{color:inherit}
 @media (prefers-reduced-motion:reduce){.quiet{transition:none}}
 
 /* ── navigation ───────────────────────────────────────────────── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:40;height:72px;display:flex;align-items:center;
+.nav{position:sticky;top:0;z-index:40;height:72px;display:flex;align-items:center;
   background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px) saturate(150%);
   border-bottom:1px solid transparent;transition:border-color .4s var(--e)}
 .nav[data-stuck="true"]{border-bottom-color:var(--rule)}
@@ -142,7 +146,13 @@ a{color:inherit}
 @media (max-width:900px){.hero-shot{display:none}}
 .hero-lead{font-size:clamp(1.2rem, 1rem + .7vw, 1.65rem);line-height:1.5;color:var(--ink-soft);max-width:32ch}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-@media (max-width:900px){.hero{padding-block:96px clamp(28px,5vh,52px)}.hero-grid{grid-template-columns:1fr}}
+@media (max-width:900px){
+  /* Bottom-aligned, the first screen leaves a hole above the wordmark on a
+     phone and pushes the second button under the fold. Centre it instead. */
+  .hero{padding-block:92px clamp(28px,5vh,52px);justify-content:center}
+  .hero-in{flex:none;justify-content:center}
+  .hero-grid{grid-template-columns:1fr}
+}
 .hero-actions{margin-top:30px}
 @media (min-width:901px){.hero{min-height:88svh;padding-block:100px clamp(32px,5vh,56px)}}
 
@@ -170,7 +180,7 @@ a.hi:hover b{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){.hi{transition:none}}
 
 /* ── the promises, running ────────────────────────────────────── */
-.ticker{position:relative;z-index:10;overflow:hidden;background:var(--bg-sunk);
+.ticker{position:relative;z-index:10;overflow:hidden;background:transparent;
   border-block:1px solid var(--rule);padding-block:18px;--dur:44s}
 .ticker-row{display:flex;align-items:center;gap:clamp(20px,3vw,44px);width:max-content;
   font-family:var(--fd);font-size:clamp(1.15rem,.95rem + .9vw,1.9rem);color:var(--ink-soft);
@@ -386,3 +396,142 @@ button.sw[aria-pressed="true"] i{box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)
 .duo[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .duo[aria-pressed="true"] i{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .55)}
 @media (prefers-reduced-motion:reduce){.duo{transition:none}.duo:active{transform:none}}
+
+/* ══════════════════════════════════════════════════════════════════
+   The client's own mockup, October: the site is printed on striped
+   paper and the cherry sheet is laid on top of it. Screens, prices and
+   the cart below all follow the five PNGs she drew.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* The sheet. Everything the eye reads as "the site" lives inside it; the
+   stripes show past its edges, widest on a desktop, a band top and bottom
+   on a phone. No overflow here: the bar and the first screen stick. */
+.sheet{
+  max-width:var(--page);
+  margin-inline:auto;
+  margin-block:clamp(14px,3.2vw,56px);
+  background:var(--bg);
+  box-shadow:0 30px 90px -40px rgba(0,0,0,.55), 0 2px 0 rgba(0,0,0,.1);
+}
+@media (max-width:640px){.sheet{margin-inline:0}}
+
+/* The promise strip and the three doors ride the striped paper. */
+.band{position:relative;z-index:10;color:#310907;
+  padding-block:clamp(14px,2vw,22px) clamp(22px,4vw,46px);
+  background:var(--stripe-b);
+  background-image:repeating-linear-gradient(90deg,
+    var(--stripe-a) 0 var(--stripe-w),
+    var(--stripe-b) var(--stripe-w) calc(var(--stripe-w) * 2));}
+.band .ticker{padding-block:clamp(10px,1.4vw,16px)}
+.band .ticker-row{color:#310907;font-size:clamp(1rem,.9rem + .45vw,1.3rem)}
+.band .ticker-row span{font-style:italic;letter-spacing:.01em}
+.band .ticker-row i{background:#310907;opacity:.4}
+.ticker{border-radius:0;box-shadow:none}
+.ticker::before{display:none}
+
+/* Свечи · Подсвечники · Конструктор свечей */
+.cats{display:flex;flex-wrap:wrap;gap:clamp(10px,2vw,28px);justify-content:center;
+  padding-inline:var(--pad);margin-top:clamp(10px,1.6vw,18px)}
+.cat{display:inline-block;text-decoration:none;color:#310907;
+  border:2px solid #310907;border-radius:var(--radius);
+  padding:.42em .9em;font-size:clamp(1.3rem,.9rem + 1.5vw,2.4rem);
+  line-height:1.1;background:transparent;
+  transition:background var(--dur-1) var(--e),color var(--dur-1) var(--e),transform var(--dur-1) var(--e)}
+.cat:hover,.cat:focus-visible{background:#310907;color:var(--stripe-b);transform:translateY(-2px)}
+
+/* The stage now carries the lifted edge the strip used to own. */
+.stage{border-radius:var(--r) var(--r) 0 0;
+  box-shadow:0 -30px 90px -20px rgba(0,0,0,.4)}
+
+/* ── first screen ─────────────────────────────────────────────── */
+.hero-word{margin-bottom:clamp(18px,2.2vw,30px);white-space:normal}
+.hero-word img{width:clamp(230px,30vw,430px);height:auto;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.45))}
+.hero-mascot{margin:0;align-self:end;justify-self:end;pointer-events:none}
+.hero-mascot img{width:100%;max-width:clamp(230px,26vw,380px);height:auto;
+  filter:drop-shadow(-14px 18px 40px rgba(0,0,0,.5))}
+@media (max-width:900px){.hero-mascot{display:none}}
+.hero-grid{align-items:end}
+
+#builder-form{max-width:46rem}
+
+/* ── catalogue ────────────────────────────────────────────────── */
+.shop{display:grid;gap:clamp(18px,2.4vw,34px);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.card{display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:10px 14px;align-items:center;align-content:start;margin:0}
+.shop--pairs{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.card-shot{grid-column:1 / -1}
+.card .help{grid-column:1 / -1;margin:0}
+.card-shot{display:block;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--rule-strong);background:var(--bg-sunk)}
+.card-shot img{width:100%;aspect-ratio:3/4;object-fit:cover;
+  transition:transform var(--dur-3) var(--e)}
+.card:hover .card-shot img{transform:scale(1.035)}
+.card-say{display:grid;gap:1px;min-width:0}
+.card-name{font-size:1.02rem;font-weight:500}
+.card-sub{font-size:var(--step-small);color:var(--ink-faint)}
+.price{font-family:var(--ft);font-size:1.15rem;font-weight:600;line-height:1.2;
+  white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
+.card .btn{grid-column:2;justify-self:end}
+.added{grid-column:1 / -1}
+/* A phone gets two columns: one card per row makes each photo a poster. */
+@media (max-width:560px){
+  .shop{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px}
+  .shop--pairs{grid-template-columns:1fr}
+  .card{grid-template-columns:minmax(0,1fr)}
+  .card .btn{grid-column:1;justify-self:start}
+}
+
+/* ── cart ─────────────────────────────────────────────────────── */
+.cart{display:grid;gap:clamp(20px,3vw,36px)}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.line{display:grid;grid-template-columns:64px minmax(0,1fr) auto auto auto;
+  align-items:center;gap:clamp(10px,2vw,20px);
+  padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.line img{width:64px;height:80px;object-fit:cover;border-radius:var(--radius);
+  border:1px solid var(--rule-strong)}
+.line-no-img{width:64px;height:80px;border-radius:var(--radius);
+  border:1px dashed var(--rule-strong);background:var(--bg-sunk)}
+.line-name{font-size:1.02rem;line-height:1.35}
+.line-sub{display:block;font-size:var(--step-small);color:var(--ink-faint);margin-top:3px}
+.qty{display:flex;align-items:center;gap:2px}
+.qty button{width:34px;height:34px;border-radius:var(--radius);cursor:pointer;
+  border:1px solid var(--rule-strong);background:transparent;color:var(--ink);
+  font:inherit;font-size:1.1rem;line-height:1;
+  transition:border-color var(--dur-1) var(--e),color var(--dur-1) var(--e)}
+.qty button:hover{border-color:var(--accent);color:var(--accent)}
+.qty output{min-width:2.2ch;text-align:center;font-variant-numeric:tabular-nums}
+.line-sum{font-family:var(--ft);font-size:1.05rem;font-weight:600;white-space:nowrap;
+  text-align:right;min-width:7ch;font-variant-numeric:lining-nums tabular-nums}
+.line-kill{justify-self:end;background:none;border:0;cursor:pointer;
+  color:var(--ink-faint);font:inherit;font-size:var(--step-small);text-decoration:underline;
+  text-underline-offset:3px;padding:0}
+.line-kill:hover{color:var(--accent)}
+.total{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:10px 20px;padding-top:4px}
+.total b{font-size:1.05rem;font-weight:500;letter-spacing:.01em}
+.total .price{font-size:clamp(1.5rem,1.2rem + 1.1vw,2.1rem);font-weight:600}
+.ship-hint{width:100%;font-size:var(--step-small);color:var(--ink-faint);margin:0}
+.ship-hint[data-free="true"]{color:var(--accent)}
+.cart-empty{color:var(--ink-soft)}
+@media (max-width:560px){
+  .line{grid-template-columns:56px minmax(0,1fr) auto;row-gap:10px}
+  .line img,.line-no-img{width:56px;height:70px}
+  .line-sum{grid-column:3;grid-row:1}
+  .qty{grid-column:2;grid-row:2}
+  .line-kill{grid-column:3;grid-row:2}
+}
+
+/* The count on the bar button, so the cart is never lost. */
+.cart-link{position:relative}
+.cart-count{display:inline-flex;align-items:center;justify-content:center;
+  min-width:1.5em;height:1.5em;padding-inline:.35em;margin-left:.5em;
+  border-radius:99px;background:var(--accent);color:var(--on-accent);
+  font-size:.78em;font-variant-numeric:tabular-nums;line-height:1}
+.cart-count[hidden]{display:none !important}
+
+/* Added-to-cart acknowledgement, next to the button that caused it. */
+.added{font-size:var(--step-small);color:var(--accent);margin:0;
+  opacity:0;transition:opacity var(--dur-1) var(--e)}
+.added[data-on="true"]{opacity:1}

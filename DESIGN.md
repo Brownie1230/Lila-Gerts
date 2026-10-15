@@ -171,3 +171,42 @@ form composes the order and copies it, and says so plainly rather than claiming 
 - One label per intent: ordering is always "Заказать торт", never a synonym.
 - No invented precision. Any number on the page is either structural (price floor, lead time)
   or absent.
+
+## Correction, 15 Oct — the client art-directed the site herself
+
+She sent an archive of five screens she drew (`1–4 стр.png`, `корзина.png`), the real logo
+file, a mascot illustration and photographs of the Moon candle. Two of those screens are
+screenshots of **this** build with her own styling laid over them, so the brief is not a
+rejection: she is extending what exists. What her mockup settles, and what it overrides:
+
+- **Striped paper, cherry sheet.** The page field is a pink stripe, `#FBD2D4` over `#FCEEEC`,
+  about 51px per stripe on her 1906px canvas, so 38px here. The site proper is a cherry sheet
+  laid on it, `#310907`, capped at `--page` with the stripes showing past its edges. The
+  promise strip and the three category doors ride the striped paper, not the sheet.
+- **Dark is now the default**, and the cream theme moved behind the toggle. All five of her
+  screens are cherry; the earlier "light is the page theme and it is locked" line is overruled
+  by the client's own drawing. `prefers-color-scheme` no longer flips the page: the brand reads
+  dark to everyone until they ask otherwise.
+- **The wordmark is the supplied logo**, not type: script "Lila" over a fat didone "GERTS" with
+  a bow, drawn as a sticker with a cream outline. It replaces the Grand Hotel setting in the
+  bar, the first screen and the footer. Grand Hotel stays only as the small bar wordmark.
+- **The mascot** is placed on the cherry sheet only. Cut from a black background, it keeps a
+  dark fringe along the hair that would show on the stripes.
+- **Shop, not enquiry.** Her screens have prices, "в корзину" on every card and a cart page
+  with line items and a sum, so the single order form is gone: catalogue → cart → checkout.
+  The cart lives in localStorage and travels no further until the order is sent.
+- **Free shipping from 5 000 ₽**, not 3 000. She corrected the figure on our own screenshot.
+- **Подсвечники, not фигурки.** "Уют, созданный руками: авторские свечи и гипсовые
+  подсвечники". The pet piece is a candle holder, «Китя».
+- Prices as given: Pion 500 ₽, Moon 1 999 ₽, Китя 2 999 ₽.
+- A price is set in the text face with lining tabular figures. Cormorant's old-style figures
+  render "500" with lowercase-looking zeros, which is charming on a heading and wrong on a
+  price.
+
+**Not from the client, and marked as such:** the colour word under each candle card ("на фото:
+мята и роза") describes what is visible in her photograph. All eight of her cards read
+«Свеча Pion, 500 руб.», so the names are hers and the colour notes are ours, pending her list.
+
+**Still missing:** originals of the catalogue photographs (these are cropped out of her PNG at
+about 335×439), the set «Juli» she priced at 2 999 ₽ in her own cart but never pictured, and
+the provenance of the mascot illustration.
