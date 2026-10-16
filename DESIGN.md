@@ -266,3 +266,16 @@ What changed and why:
 
 Buttons and chips are full pill; photographs and cards are 2px; panels and overlays use `--r`.
 That is the documented shape rule.
+
+### Same pass: closing the gaps with her mockup
+
+Compared screen by screen against her five PNGs, three things still differed and now match:
+
+- **The catalogue sits on the stripe**, continuing the band under the three doors, as on her
+  second screen: dark text, maroon `#35000B` buttons, a thin dark rule round each photograph.
+  The cherry sheet now starts at the pet section.
+- **The pet heading sits in her pink cloud**, drawn in CSS as two loose outlines, not an image.
+- **Footer contacts are labelled** ("Telegram:", "Эл. почта:"), as on her fourth screen.
+
+Left out on purpose: her "Коллекция ↓" under the hero buttons. "Посмотреть работы" already
+goes to the catalogue, and two links with one job on one screen is one too many.

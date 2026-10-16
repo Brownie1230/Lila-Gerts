@@ -298,3 +298,33 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
     @keyframes sheet-out{to{transform:translateY(100%)}}
   }
 }
+
+/* ── catalogue on the paper, as on her second screen ──────────── */
+/* The band does not stop at the doors: the catalogue continues on the same
+   stripe, dark text, maroon buttons, a thin dark rule round every photo. */
+.paper-shop{padding-top:clamp(40px,6vw,88px)}
+.paper-shop .sec-head{text-align:center;margin-inline:auto}
+.paper-shop .sec-head p{margin-inline:auto;color:color-mix(in srgb,var(--on-paper) 84%,transparent)}
+.paper-shop .filters{justify-content:center}
+.paper-shop .chip{border-color:var(--on-paper);color:var(--on-paper)}
+.paper-shop .chip:hover{background:color-mix(in srgb,var(--on-paper) 10%,transparent);color:var(--on-paper)}
+.paper-shop .chip[aria-pressed="true"]{background:var(--on-paper);border-color:var(--on-paper);color:var(--stripe-b)}
+.paper-shop .card-shot{box-shadow:0 0 0 1.5px var(--on-paper),0 18px 34px -22px rgb(49 9 7 / .55)}
+.paper-shop .card-name,.paper-shop .price{color:var(--on-paper)}
+.paper-shop .card-sub{color:color-mix(in srgb,var(--on-paper) 78%,transparent)}
+.paper-shop .btn--primary{background:#35000B;color:#FCEEEC}
+.paper-shop .btn--primary:hover{background:#5D0703}
+.paper-shop :focus-visible,.cats :focus-visible{outline-color:var(--on-paper)}
+
+/* ── her pink cloud round the pet heading ─────────────────────── */
+.sec-head--cloud{text-align:center;display:grid;justify-items:center}
+.sec-head--cloud p{margin-inline:auto}
+.cloud{position:relative;display:inline-block;padding:.55em 1.25em .6em;
+  font-size:clamp(1.9rem,1.3rem + 2vw,3.1rem);
+  border:3px solid var(--stripe-a);
+  border-radius:48% 52% 44% 56% / 62% 50% 54% 44%}
+.cloud::after{content:"";position:absolute;inset:-9px -7px -6px -11px;pointer-events:none;
+  border:2px solid color-mix(in srgb,var(--stripe-a) 70%,transparent);
+  border-radius:54% 46% 58% 42% / 48% 60% 40% 56%;transform:rotate(-1.4deg)}
+
+.foot-k{color:var(--ink-faint)}
