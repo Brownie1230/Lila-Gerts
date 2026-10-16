@@ -4,12 +4,12 @@
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var NBSP = " ";
+  var $ = function (id) { return document.getElementById(id); };
 
-  /* Theme toggle. Cherry is the brand and the default; cream is the alternative. */
+  /* ── theme: cherry is the brand and the default, cream is the alternative ── */
   var root = document.documentElement;
-  var toggle = document.getElementById("theme");
+  var toggle = $("theme");
   var glyph = toggle && toggle.querySelector("[data-glyph]");
-
   function currentlyDark() { return root.dataset.theme !== "light"; }
   function paintToggle() {
     var dark = currentlyDark();
@@ -27,45 +27,34 @@
     paintToggle();
   }
 
-  /* Mobile menu. A disclosure, not an overlay: the page stays reachable behind it. */
-  var burger = document.getElementById("burger");
-  var menu = document.getElementById("menu");
+  /* ── mobile menu: a disclosure, not an overlay ── */
+  var burger = $("burger");
+  var menu = $("menu");
   var desktop = window.matchMedia("(min-width: 901px)");
-
   function syncMenu() {
     if (!menu || !burger) return;
-    if (desktop.matches) {
-      menu.hidden = false;
-      burger.setAttribute("aria-expanded", "false");
-    } else {
-      menu.hidden = burger.getAttribute("aria-expanded") !== "true";
-    }
+    if (desktop.matches) { menu.hidden = false; burger.setAttribute("aria-expanded", "false"); }
+    else menu.hidden = burger.getAttribute("aria-expanded") !== "true";
   }
   if (burger && menu) {
     burger.addEventListener("click", function () {
-      var open = burger.getAttribute("aria-expanded") === "true";
-      burger.setAttribute("aria-expanded", String(!open));
+      burger.setAttribute("aria-expanded", String(burger.getAttribute("aria-expanded") !== "true"));
       syncMenu();
     });
     menu.addEventListener("click", function (e) {
-      if (e.target.closest("a") && !desktop.matches) {
-        burger.setAttribute("aria-expanded", "false");
-        syncMenu();
-      }
+      if (e.target.closest("a") && !desktop.matches) { burger.setAttribute("aria-expanded", "false"); syncMenu(); }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && burger.getAttribute("aria-expanded") === "true") {
-        burger.setAttribute("aria-expanded", "false");
-        syncMenu();
-        burger.focus();
+        burger.setAttribute("aria-expanded", "false"); syncMenu(); burger.focus();
       }
     });
     desktop.addEventListener("change", syncMenu);
     syncMenu();
   }
 
-  /* Nav hairline appears once the page has moved off the top. */
-  var nav = document.getElementById("nav");
+  /* ── bar hairline once the page has moved ── */
+  var nav = $("nav");
   var sentinel = document.createElement("div");
   sentinel.style.cssText = "position:absolute;top:0;height:1px;width:1px";
   document.body.prepend(sentinel);
@@ -75,35 +64,73 @@
     }).observe(sentinel);
   }
 
-  /* Scroll reveal: storytelling, one shot per element. */
-  var targets = document.querySelectorAll("[data-reveal]");
+  /* ── scroll reveal: one shot per element ── */
+  var io = null;
   if (reduce || !("IntersectionObserver" in window)) {
-    targets.forEach(function (el) { el.classList.add("is-in"); });
+    document.querySelectorAll("[data-reveal]").forEach(function (el) { el.classList.add("is-in"); });
   } else {
-    var io = new IntersectionObserver(function (entries, obs) {
+    io = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("is-in");
         obs.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.15 });
-    targets.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
   }
+
+  /* ── dialogs: native <dialog> for focus trap and Esc; we only add the exit ── */
+  function openDialog(d) {
+    if (!d || d.open) return;
+    d.classList.remove("closing");
+    d.showModal();
+  }
+  function closeDialog(d, then) {
+    if (!d || !d.open) { if (then) then(); return; }
+    if (reduce) { d.close(); if (then) then(); return; }
+    d.classList.add("closing");
+    var done = false;
+    var finish = function () {
+      if (done) return; done = true;
+      d.classList.remove("closing"); d.close(); if (then) then();
+    };
+    d.addEventListener("animationend", finish, { once: true });
+    window.setTimeout(finish, 400); // in case the animation never runs
+  }
+  document.querySelectorAll("dialog").forEach(function (d) {
+    // Esc: play the exit instead of vanishing.
+    d.addEventListener("cancel", function (e) { e.preventDefault(); closeDialog(d); });
+    // A click on the backdrop lands on the dialog element itself.
+    d.addEventListener("click", function (e) { if (e.target === d) closeDialog(d); });
+    d.querySelectorAll("[data-close]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        var href = b.getAttribute("href");
+        if (href && href.charAt(0) === "#") {
+          e.preventDefault();
+          closeDialog(d, function () {
+            var t = document.querySelector(href);
+            if (t) t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+            history.replaceState(null, "", href);
+          });
+        } else closeDialog(d);
+      });
+    });
+  });
 
   /* ─────────────────────────────────────────────────────────────────
      Cart. Lives in this browser only, in localStorage, and travels no
-     further until the order is submitted. Free shipping from 5 000 ₽.
+     further until the order is sent. Free shipping from 5 000 ₽.
      ───────────────────────────────────────────────────────────────── */
-
   var KEY = "lg-cart";
   var FREE_FROM = 5000;
-
-  var linesEl = document.getElementById("cart-lines");
-  var emptyEl = document.getElementById("cart-empty");
-  var totalEl = document.getElementById("cart-total");
-  var sumEl = document.getElementById("cart-sum");
-  var hintEl = document.getElementById("ship-hint");
-  var countEl = document.getElementById("cart-count");
+  var drawer = $("cart-drawer");
+  var linesEl = $("cart-lines");
+  var emptyEl = $("cart-empty");
+  var totalEl = $("cart-total");
+  var sumEl = $("cart-sum");
+  var hintEl = $("ship-hint");
+  var countEl = $("cart-count");
+  var form = $("order-form");
 
   function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP) + NBSP + "₽"; }
 
@@ -120,29 +147,31 @@
   function write(cart) {
     try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) { /* private mode */ }
   }
-
-  function add(line) {
+  function add(line, qty) {
+    qty = qty || 1;
     var cart = read();
     var found = cart.filter(function (l) { return l.id === line.id; })[0];
-    if (found) found.qty += 1;
-    else cart.push({ id: line.id, name: line.name, sub: line.sub || "", price: line.price, img: line.img || "", qty: 1 });
+    if (found) found.qty += qty;
+    else cart.push({ id: line.id, name: line.name, sub: line.sub || "", price: line.price,
+                     img: line.img || "", swatch: line.swatch || null, qty: qty });
     write(cart);
-    render();
+    render(true);
   }
   function setQty(id, delta) {
-    var cart = read().map(function (l) {
-      if (l.id === id) l.qty += delta;
-      return l;
-    }).filter(function (l) { return l.qty > 0; });
-    write(cart);
+    write(read().map(function (l) { if (l.id === id) l.qty += delta; return l; })
+                .filter(function (l) { return l.qty > 0; }));
     render();
   }
-  function kill(id) {
-    write(read().filter(function (l) { return l.id !== id; }));
-    render();
+  function kill(id) { write(read().filter(function (l) { return l.id !== id; })); render(); }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
   }
 
-  function render() {
+  function render(bump) {
     var cart = read();
     var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
     var count = cart.reduce(function (a, l) { return a + l.qty; }, 0);
@@ -150,58 +179,45 @@
     if (countEl) {
       countEl.textContent = String(count);
       countEl.hidden = count === 0;
+      if (bump && count && !reduce) {
+        countEl.classList.remove("bump"); void countEl.offsetWidth; countEl.classList.add("bump");
+      }
     }
+    var openBtn = $("cart-open");
+    if (openBtn) openBtn.setAttribute("aria-label", count ? "Корзина, товаров: " + count : "Корзина, пусто");
     if (!linesEl) return;
 
     linesEl.textContent = "";
     cart.forEach(function (l) {
-      var li = document.createElement("li");
-      li.className = "line";
-
+      var li = el("li", "line");
       if (l.img) {
-        var img = document.createElement("img");
-        img.src = l.img; img.alt = ""; img.loading = "lazy";
-        li.appendChild(img);
+        var img = el("img"); img.src = l.img; img.alt = ""; img.loading = "lazy"; li.appendChild(img);
       } else {
-        var box = document.createElement("div");
-        box.className = "line-no-img";
+        var box = el("div", "line-no-img");
+        // A constructor candle has no photo; show the colours that were picked.
+        if (l.swatch && l.swatch.length === 2 && /^#[0-9a-f]{6}$/i.test(l.swatch[0]) && /^#[0-9a-f]{6}$/i.test(l.swatch[1])) {
+          box.style.background = "linear-gradient(135deg," + l.swatch[0] + " 0 50%," + l.swatch[1] + " 50% 100%)";
+        }
         li.appendChild(box);
       }
-
-      var name = document.createElement("div");
-      name.className = "line-name";
-      name.textContent = l.name;
-      if (l.sub) {
-        var sub = document.createElement("span");
-        sub.className = "line-sub";
-        sub.textContent = l.sub;
-        name.appendChild(sub);
-      }
+      var name = el("div", "line-name", l.name);
+      if (l.sub) name.appendChild(el("span", "line-sub", l.sub));
       li.appendChild(name);
 
-      var qty = document.createElement("div");
-      qty.className = "qty";
-      var minus = document.createElement("button");
-      minus.type = "button"; minus.textContent = "−";
+      var qty = el("div", "qty");
+      var minus = el("button", null, "−"); minus.type = "button";
       minus.setAttribute("aria-label", "Убрать одну штуку: " + l.name);
       minus.addEventListener("click", function () { setQty(l.id, -1); });
-      var out = document.createElement("output");
-      out.textContent = String(l.qty);
-      var plus = document.createElement("button");
-      plus.type = "button"; plus.textContent = "+";
+      var out = el("output", null, String(l.qty));
+      var plus = el("button", null, "+"); plus.type = "button";
       plus.setAttribute("aria-label", "Добавить ещё одну штуку: " + l.name);
       plus.addEventListener("click", function () { setQty(l.id, 1); });
       qty.append(minus, out, plus);
       li.appendChild(qty);
 
-      var sumCell = document.createElement("div");
-      sumCell.className = "line-sum";
-      sumCell.textContent = money(l.price * l.qty);
-      li.appendChild(sumCell);
+      li.appendChild(el("div", "line-sum", money(l.price * l.qty)));
 
-      var rm = document.createElement("button");
-      rm.type = "button"; rm.className = "line-kill";
-      rm.textContent = "убрать";
+      var rm = el("button", "line-kill", "убрать"); rm.type = "button";
       rm.setAttribute("aria-label", "Убрать из корзины: " + l.name);
       rm.addEventListener("click", function () { kill(l.id); });
       li.appendChild(rm);
@@ -211,50 +227,123 @@
 
     if (emptyEl) emptyEl.hidden = count > 0;
     if (totalEl) totalEl.hidden = count === 0;
+    if (form) form.hidden = count === 0;
     if (sumEl) sumEl.textContent = money(total);
     if (hintEl) {
-      if (total >= FREE_FROM) {
-        hintEl.dataset.free = "true";
-        hintEl.textContent = "Доставка бесплатно.";
-      } else {
-        hintEl.dataset.free = "false";
-        hintEl.textContent = "До бесплатной доставки " + money(FREE_FROM - total) + ".";
-      }
+      var free = total >= FREE_FROM;
+      hintEl.dataset.free = String(free);
+      hintEl.textContent = free ? "Доставка бесплатно." : "До бесплатной доставки " + money(FREE_FROM - total) + ".";
     }
   }
 
-  /* Acknowledge next to the button that caused it, never as a page-wide banner. */
-  function flash(scope, text) {
-    var note = scope && scope.querySelector("[data-added]");
-    if (!note) return;
-    note.textContent = text;
-    note.dataset.on = "true";
-    window.clearTimeout(note._t);
-    note._t = window.setTimeout(function () { note.dataset.on = "false"; }, 2600);
-  }
+  function openCart() { render(); openDialog(drawer); }
+  var cartOpen = $("cart-open");
+  if (cartOpen) cartOpen.addEventListener("click", openCart);
 
-  document.querySelectorAll("[data-add]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var card = btn.closest("[data-sku]");
-      if (!card) return;
-      add({
-        id: card.dataset.sku,
-        name: card.dataset.name,
-        sub: card.dataset.sub,
-        price: parseInt(card.dataset.price, 10) || 0,
-        img: card.dataset.img
+  /* ── toast: acknowledge the add without taking the page away ── */
+  var toast = $("toast");
+  var toastText = $("toast-text");
+  var toastTimer = 0;
+  function say(text) {
+    if (!toast) return;
+    toastText.textContent = text;
+    toast.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { toast.hidden = true; }, 4500);
+  }
+  var toastOpen = $("toast-open");
+  if (toastOpen) toastOpen.addEventListener("click", function () {
+    toast.hidden = true; openCart();
+  });
+
+  /* ── catalogue filters ── */
+  var shop = $("shop");
+  document.querySelectorAll(".chip[data-filter]").forEach(function (chip, _, all) {
+    chip.addEventListener("click", function () {
+      var f = chip.dataset.filter;
+      all.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
+      if (!shop) return;
+      shop.querySelectorAll(".card").forEach(function (card) {
+        var show = f === "all" || card.dataset.cat === f;
+        var was = !card.hidden;
+        card.hidden = !show;
+        card.classList.add("is-in"); // a filtered card must never stay mid-reveal
+        if (show && !was) { card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop"); }
       });
-      flash(card, "Добавлено в корзину");
     });
   });
 
+  /* ── product sheet ── */
+  var qv = $("qv");
+  var qvForm = $("qv-form");
+  var qvScent = $("qv-scent");
+  var qvScentField = $("qv-scent-field");
+  var qvQty = $("qv-qty");
+  var current = null;
+  var qtyNow = 1;
+
+  // One list of scents on the page: the constructor's. The sheet borrows it.
+  var builderScent = $("b-scent");
+  if (builderScent && qvScent) {
+    Array.prototype.forEach.call(builderScent.options, function (o) {
+      if (o.value) qvScent.appendChild(new Option(o.textContent, o.value));
+    });
+  }
+
+  function openProduct(holder) {
+    if (!qv || !holder) return;
+    var shot = holder.querySelector("img");
+    current = {
+      sku: holder.dataset.sku,
+      name: holder.dataset.name,
+      sub: holder.dataset.sub || "",
+      price: parseInt(holder.dataset.price, 10) || 0,
+      img: holder.dataset.img || "",
+      scent: holder.dataset.scent !== "no"
+    };
+    qtyNow = 1;
+    qvQty.textContent = "1";
+    $("qv-name").textContent = current.name;
+    $("qv-sub").textContent = current.sub;
+    $("qv-price").textContent = money(current.price);
+    var img = $("qv-img");
+    img.src = current.img;
+    img.alt = shot ? shot.alt : current.name;
+    qvScentField.hidden = !current.scent;
+    qvScent.value = "";
+    $("qv-incl").textContent = current.scent
+      ? "В комплекте спички в стеклянной колбе и подарочная упаковка."
+      : "В подарок спички, сменные чайные свечи, подарочная упаковка и открытка с посланием. Фото питомца попросим после оплаты.";
+    openDialog(qv);
+  }
+
+  document.querySelectorAll("[data-open]").forEach(function (b) {
+    b.addEventListener("click", function () { openProduct(b.closest("[data-sku]")); });
+  });
+
+  if (qv) {
+    qv.querySelectorAll("[data-step]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        qtyNow = Math.max(1, Math.min(20, qtyNow + parseInt(b.dataset.step, 10)));
+        qvQty.textContent = String(qtyNow);
+      });
+    });
+    qvForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!current) return;
+      var scent = current.scent ? qvScent.value : "";
+      var sub = [current.sub, scent ? "аромат: " + scent : ""].filter(Boolean).join(" · ");
+      add({ id: current.sku + (scent ? "|" + scent : ""), name: current.name, sub: sub,
+            price: current.price, img: current.img }, qtyNow);
+      var label = current.name + (qtyNow > 1 ? " × " + qtyNow : "") + " в корзине";
+      closeDialog(qv, function () { say(label); });
+    });
+  }
+
   render();
 
-  /* ── Конструктор свечей ──────────────────────────────────────────
-     The pairs write into the same field someone can type into, so the
-     list is a shortcut rather than a limit. */
-  var colorField = document.getElementById("b-colors");
-
+  /* ── constructor ── */
+  var colorField = $("b-colors");
   document.querySelectorAll(".duos").forEach(function (group) {
     group.querySelectorAll("button.duo").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -274,7 +363,6 @@
   }
 
   function fieldOf(input) { return input.closest("[data-field]"); }
-
   function validate(input) {
     var wrap = fieldOf(input);
     if (!wrap) return true;
@@ -290,40 +378,36 @@
     return ok;
   }
 
-  var builder = document.getElementById("builder-form");
+  var builder = $("builder-form");
   if (builder) {
     builder.addEventListener("submit", function (event) {
       event.preventDefault();
-      var shape = document.getElementById("b-shape");
+      var shape = $("b-shape");
       if (!validate(shape)) { shape.focus(); return; }
-
-      var opt = shape.options[shape.selectedIndex];
-      var price = parseInt(opt.dataset.price, 10) || 0;
-      var scent = (document.getElementById("b-scent") || {}).value || "";
+      var price = parseInt(shape.options[shape.selectedIndex].dataset.price, 10) || 0;
+      var scent = builderScent ? builderScent.value : "";
       var colors = colorField ? colorField.value.trim() : "";
-
+      var pressed = builder.querySelector(".duo[aria-pressed=\"true\"] i");
+      var swatch = null;
+      if (pressed && colors === pressed.parentNode.dataset.pair) {
+        var a = pressed.style.getPropertyValue("--a").trim(), b = pressed.style.getPropertyValue("--b").trim();
+        if (a && b) swatch = [a, b];
+      }
       var parts = [];
       if (scent) parts.push("аромат: " + scent);
       if (colors) parts.push("цвета: " + colors);
-      var sub = parts.join(" · ") || "аромат и цвет подберём в переписке";
-
-      add({
-        id: "custom:" + shape.value + "|" + scent + "|" + colors,
-        name: shape.value,
-        sub: sub,
-        price: price,
-        img: ""
-      });
-      flash(builder, "Добавлено в корзину: " + shape.value);
+      add({ id: "custom:" + shape.value + "|" + scent + "|" + colors, name: shape.value,
+            sub: parts.join(" · ") || "аромат и цвет подберём в переписке",
+            price: price, img: "", swatch: swatch });
+      say(shape.value + " в корзине");
     });
+    var shapeSel = $("b-shape");
+    if (shapeSel) shapeSel.addEventListener("change", function () { validate(shapeSel); });
   }
 
-  /* ── Оформление ──────────────────────────────────────────────────
-     Inline validation, then the order. Point `endpoint` at the real
-     handler before launch; until then the order goes to the clipboard. */
-  var form = document.getElementById("order-form");
+  /* ── checkout ── */
   if (!form) return;
-  var status = document.getElementById("form-status");
+  var status = $("form-status");
   var endpoint = form.dataset.endpoint || "";
 
   form.querySelectorAll("input, select, textarea").forEach(function (input) {
@@ -336,70 +420,48 @@
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-
     var cart = read();
-    if (!cart.length) {
-      status.dataset.state = "sent";
-      status.textContent = "Корзина пуста. Добавьте что-нибудь из каталога, и мы оформим заказ.";
-      var shop = document.getElementById("candles");
-      if (shop) shop.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-      return;
-    }
+    if (!cart.length) return;
 
-    var inputs = Array.prototype.slice.call(form.querySelectorAll("input, select, textarea"));
-    var bad = inputs.filter(function (i) { return !validate(i); });
+    var bad = Array.prototype.slice.call(form.querySelectorAll("input, select, textarea"))
+      .filter(function (i) { return !validate(i); });
     if (bad.length) { bad[0].focus(); return; }
 
     var data = new FormData(form);
     var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
     var order = {
-      items: cart.map(function (l) {
-        return { name: l.name, sub: l.sub, price: l.price, qty: l.qty };
-      }),
-      total: total,
-      name: data.get("name"),
-      phone: data.get("phone"),
-      pvz: data.get("pvz"),
-      note: data.get("note")
+      items: cart.map(function (l) { return { name: l.name, sub: l.sub, price: l.price, qty: l.qty }; }),
+      total: total, name: data.get("name"), phone: data.get("phone"),
+      pvz: data.get("pvz"), note: data.get("note")
     };
 
     status.dataset.state = "sending";
     status.textContent = "Отправляем заказ";
 
     if (!endpoint) {
-      // No backend yet, so the order is handed over rather than swallowed.
+      // No handler yet: the order is handed over rather than swallowed.
       var text = ["Заказ с сайта Lila Gerts", ""]
         .concat(cart.map(function (l) {
-          return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") +
-                 " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
+          return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
         }))
-        .concat([
-          "",
-          "Сумма: " + total + " руб.",
-          "Имя: " + (order.name || ""),
-          "Телефон: " + (order.phone || ""),
-          "ПВЗ Ozon: " + (order.pvz || "")
-        ]);
+        .concat(["", "Сумма: " + total + " руб.", "Имя: " + (order.name || ""),
+                 "Телефон: " + (order.phone || ""), "ПВЗ Ozon: " + (order.pvz || "")]);
       if (order.note) text.push("Комментарий: " + order.note);
-
       var done = function (copied) {
         status.dataset.state = "sent";
         status.textContent = copied
           ? "Заказ собран и скопирован. Отправка на почту ещё не подключена: пришлите текст в Telegram или на почту, и мы оформим."
           : "Отправка на почту ещё не подключена. Напишите нам в Telegram или на почту, и мы оформим заказ.";
       };
-      var joined = text.join("\n");
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(joined).then(function () { done(true); }, function () { done(false); });
-      } else {
-        done(false);
-      }
+        navigator.clipboard.writeText(text.join("\n")).then(function () { done(true); }, function () { done(false); });
+      } else done(false);
       return;
     }
 
     fetch(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(order)
     }).then(function (res) {
       if (!res.ok) throw new Error(String(res.status));
@@ -408,6 +470,8 @@
       form.reset();
       write([]);
       render();
+      if (emptyEl) emptyEl.hidden = true; // keep the confirmation on screen, not the empty state
+      form.hidden = false;
     }).catch(function () {
       status.dataset.state = "sent";
       status.textContent = "Не удалось отправить. Напишите нам в Telegram или на почту, заказ оформим вручную.";

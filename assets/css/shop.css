@@ -1,0 +1,300 @@
+/* Lila Gerts — the shop layer.
+   Everything the client art-directed in October lives here: the striped paper
+   and the cherry sheet laid on it, her first-screen composition, the catalogue,
+   the pet frames, the delivery band, and the three overlays a shop needs
+   (product sheet, cart drawer, toast). app.css stays the house system. */
+
+/* ── paper and sheet ──────────────────────────────────────────── */
+:root{
+  --stripes:repeating-linear-gradient(90deg,
+    var(--stripe-a) 0 var(--stripe-w),
+    var(--stripe-b) var(--stripe-w) calc(var(--stripe-w) * 2));
+  --on-paper:#310907;
+  --sheet-gap:clamp(14px,3.2vw,56px);
+  --nav-h:72px;
+}
+@media (max-width:640px){:root{--stripe-w:24px}}
+
+/* The site is a cherry sheet laid on striped paper; the stripes show past its
+   edges. No overflow on the sheet: the bar and the first screen stick. */
+.sheet{
+  max-width:var(--page);margin-inline:auto;margin-block:var(--sheet-gap);
+  background:var(--bg);
+  box-shadow:0 30px 90px -40px rgb(0 0 0 / .55),0 2px 0 rgb(0 0 0 / .1);
+}
+@media (max-width:640px){.sheet{margin-inline:0}}
+
+/* Anything that rides the paper instead of the sheet. */
+.band,.ship-band{position:relative;z-index:10;color:var(--on-paper);
+  background:var(--stripe-b);background-image:var(--stripes)}
+
+/* ── bar ──────────────────────────────────────────────────────── */
+.cart-link{display:inline-flex;align-items:center;gap:.45em;padding:.45em .2em;
+  background:none;border:0;color:inherit;font:inherit;font-size:1rem;cursor:pointer}
+.cart-link:hover{color:var(--accent)}
+.cart-count{display:inline-flex;align-items:center;justify-content:center;
+  min-width:1.6em;height:1.6em;padding-inline:.4em;border-radius:99px;
+  background:var(--accent);color:var(--on-accent);
+  font-size:.78em;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.cart-count[hidden]{display:none !important}
+@media (max-width:900px){.nav-tg{display:none}}
+
+/* ── first screen, as she drew it ─────────────────────────────── */
+/* Logo and line centred, mascot standing at the right edge with her feet on
+   the stripe. The screen stops a little short of the fold so the stripe she
+   stands on shows at the bottom edge on first load. */
+.hero{
+  --peek:clamp(40px,7vh,72px);
+  min-height:calc(100svh - var(--nav-h) - var(--sheet-gap) - var(--peek));
+  padding:clamp(18px,3vh,40px) 0 0;justify-content:stretch;
+}
+.hero-in{flex:1;justify-content:stretch}
+.hero-grid{flex:1;display:grid;align-items:center;gap:0 clamp(16px,2vw,32px);
+  grid-template-columns:minmax(0,.8fr) minmax(0,560px) minmax(0,1.2fr)}
+.hero-say{grid-column:2;max-width:none;display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding-bottom:clamp(36px,7vh,88px)}
+.hero-word{margin:0 0 clamp(16px,2.4vh,28px);white-space:normal;line-height:0}
+.hero-word img{width:clamp(250px,30vw,440px);height:auto;
+  filter:drop-shadow(0 22px 36px rgb(0 0 0 / .45))}
+.hero-lead{max-width:30ch;margin-inline:auto;color:var(--ink);opacity:.92}
+.hero-lead .script{font-family:var(--font-script);color:var(--accent);font-size:1.18em;white-space:nowrap}
+.hero-actions{justify-content:center}
+.hero-mascot{grid-column:3;align-self:end;justify-self:end;margin:0;pointer-events:none;line-height:0}
+.hero-mascot img{width:100%;max-width:clamp(250px,26vw,400px);height:auto;
+  filter:drop-shadow(-16px 18px 40px rgb(0 0 0 / .5))}
+
+@media (max-width:900px){
+  .hero{padding-top:clamp(14px,2.4vh,28px);--peek:24px}
+  .hero-grid{grid-template-columns:1fr;align-content:space-between}
+  .hero-say{grid-column:1;padding-bottom:8px}
+  .hero-word img{width:min(62vw,300px)}
+  .hero-lead{font-size:1.15rem}
+  .hero-actions{flex-direction:column;align-items:stretch;width:min(100%,340px)}
+  .hero-actions .btn{justify-content:center}
+  .hero-mascot{grid-column:1;justify-self:center;width:min(46vw,240px)}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  /* The screen assembles in reading order: mark, line, actions, then the girl. */
+  .hero-say{animation:none}
+  .hero-word{animation:stamp 1s var(--e) both}
+  .hero-lead{animation:lift .9s var(--e) 140ms both}
+  .hero-actions{animation:lift .9s var(--e) 240ms both}
+  .hero-mascot{animation:rise 1.2s var(--e) 320ms both}
+  @keyframes stamp{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes rise{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+}
+
+/* ── promise strip and the three doors ────────────────────────── */
+.band{padding-block:clamp(14px,2vw,22px) clamp(24px,4vw,46px)}
+.band .ticker{background:transparent;padding-block:clamp(10px,1.4vw,16px);border-radius:0;box-shadow:none}
+.band .ticker::before{display:none}
+.band .ticker-row{color:var(--on-paper);font-size:clamp(1rem,.9rem + .45vw,1.3rem)}
+.band .ticker-row span{font-style:italic;letter-spacing:.01em}
+.band .ticker-row i{background:var(--on-paper);opacity:.4}
+.cats{display:flex;flex-wrap:wrap;gap:clamp(10px,2vw,28px);justify-content:center;
+  padding-inline:var(--pad);margin-top:clamp(10px,1.6vw,18px)}
+.cat{display:inline-block;text-decoration:none;color:var(--on-paper);
+  border:2px solid var(--on-paper);border-radius:var(--radius);
+  padding:.42em .9em;font-size:clamp(1.25rem,.9rem + 1.5vw,2.4rem);line-height:1.1;
+  transition:background var(--dur-1) var(--e),color var(--dur-1) var(--e),transform var(--dur-1) var(--e)}
+.cat:hover,.cat:focus-visible{background:var(--on-paper);color:var(--stripe-b);transform:translateY(-2px)}
+@media (max-width:560px){.cats{gap:8px}.cat{font-size:1.1rem;padding:.5em .75em}}
+
+/* The stage carries the lifted edge where it meets the paper. */
+.stage{border-radius:var(--r) var(--r) 0 0;box-shadow:0 -30px 90px -20px rgb(0 0 0 / .4)}
+
+/* ── catalogue ────────────────────────────────────────────────── */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(22px,3vw,36px)}
+.chip{display:inline-flex;align-items:center;gap:.55em;padding:.6em 1.15em;border-radius:99px;
+  border:1px solid var(--rule-strong);background:transparent;color:var(--ink);
+  font:inherit;font-size:1rem;font-weight:500;cursor:pointer;
+  transition:background var(--dur-1) var(--e),color var(--dur-1) var(--e),border-color var(--dur-1) var(--e)}
+.chip span{font-size:.8em;opacity:.7;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+.shop{display:grid;gap:clamp(26px,3vw,40px) clamp(16px,2vw,28px);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.card{margin:0;display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:12px 14px;align-items:center;align-content:start}
+.card-shot{grid-column:1 / -1;display:block;padding:0;border:0;cursor:pointer;
+  border-radius:var(--radius);overflow:hidden;background:var(--bg-sunk);
+  box-shadow:0 0 0 1px var(--rule-strong)}
+.card-shot img{width:100%;aspect-ratio:3/4;object-fit:cover;
+  transition:transform .9s var(--e),filter .9s var(--e)}
+.card:hover .card-shot img{transform:scale(1.045);filter:saturate(1.08)}
+.card-say{display:grid;gap:2px;min-width:0}
+.card-name{font-size:1.02rem;font-weight:500}
+.card-sub{font-size:var(--step-small);color:var(--ink-faint)}
+.card .btn{grid-column:2;justify-self:end;padding:.72em 1.15em;font-size:.95rem}
+.price{font-family:var(--ft);font-size:1.15rem;font-weight:600;line-height:1.2;
+  white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
+.price--big{font-size:clamp(1.5rem,1.2rem + 1vw,2rem)}
+@media (max-width:560px){
+  .shop{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+  .card{grid-template-columns:minmax(0,1fr)}
+  .card .btn{grid-column:1;justify-self:stretch;justify-content:center}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card.pop{animation:pop .55s var(--e) both}
+  @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+}
+
+/* ── pet holders: her pink frames ─────────────────────────────── */
+.frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,48px);
+  padding:8px clamp(0px,1vw,12px)}
+.frame{margin:0}
+.frame-in{background:var(--stripe-a);padding:clamp(9px,1vw,13px);border-radius:var(--radius);
+  transform:rotate(var(--tilt,0deg));
+  box-shadow:inset 0 0 0 2px var(--stripe-b),0 26px 46px -24px rgb(0 0 0 / .65);
+  transition:transform .7s var(--e)}
+.frame-in img{width:100%;height:auto;border-radius:var(--radius)}
+.frame:hover .frame-in{transform:rotate(0deg) scale(1.025)}
+@media (max-width:760px){
+  /* Three tall frames stacked would be a corridor; flick through them instead. */
+  .frames{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:76%;
+    overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 4px 20px;margin-inline:calc(var(--pad) * -1);
+    padding-inline:var(--pad);scrollbar-width:none}
+  .frames::-webkit-scrollbar{display:none}
+  .frame{scroll-snap-align:center}
+}
+
+.pet{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(26px,4vw,64px);
+  align-items:start;margin-top:clamp(34px,5vw,64px)}
+.pet-buy{display:grid;gap:10px;justify-items:start;padding:clamp(22px,2.6vw,34px);
+  border-radius:var(--r);background:var(--bg-raised);box-shadow:0 0 0 1px var(--rule)}
+.pet-buy .btn{margin-top:8px}
+@media (max-width:760px){.pet{grid-template-columns:1fr}}
+
+/* ── constructor: headline holds while the form scrolls ───────── */
+.builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(26px,5vw,80px);align-items:start}
+.builder .sec-head{position:sticky;top:calc(var(--nav-h) + 28px);margin-bottom:0}
+@media (max-width:900px){.builder{grid-template-columns:1fr}.builder .sec-head{position:static}}
+
+/* ── delivery on the paper ────────────────────────────────────── */
+.ship-band{padding-block:clamp(56px,8vw,112px)}
+.ship-in{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(26px,4vw,64px);align-items:center}
+.ship-band .ship{color:var(--on-paper)}
+.ship-band .ship small{color:var(--on-paper);opacity:.78}
+.ship-band .did li{color:var(--on-paper)}
+.ship-band .did li::before{background:var(--on-paper)}
+@media (max-width:760px){.ship-in{grid-template-columns:1fr}}
+
+/* ── overlays ─────────────────────────────────────────────────── */
+html:has(dialog[open]){overflow:hidden}
+dialog{color:var(--ink)}
+dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
+@media (prefers-reduced-transparency:reduce){dialog::backdrop{backdrop-filter:none;background:rgb(18 2 2 / .82)}}
+
+.x{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:99px;
+  border:1px solid var(--rule-strong);background:var(--bg);color:var(--ink);
+  font:inherit;font-size:1.6rem;line-height:1;cursor:pointer;
+  transition:border-color var(--dur-1) var(--e),color var(--dur-1) var(--e)}
+.x:hover{border-color:var(--accent);color:var(--accent)}
+
+.qty{display:inline-flex;align-items:center;gap:4px}
+.qty button{width:40px;height:40px;border-radius:99px;cursor:pointer;
+  border:1px solid var(--rule-strong);background:transparent;color:var(--ink);
+  font:inherit;font-size:1.15rem;line-height:1;
+  transition:border-color var(--dur-1) var(--e),color var(--dur-1) var(--e)}
+.qty button:hover{border-color:var(--accent);color:var(--accent)}
+.qty output{min-width:2.4ch;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* Product sheet: a centred card on a desk, a bottom sheet on a phone. */
+.qv{padding:0;border:0;border-radius:var(--r);background:var(--bg);overflow:auto;
+  width:min(980px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);
+  box-shadow:0 40px 120px -30px rgb(0 0 0 / .7)}
+.qv > .x{position:absolute;top:14px;right:14px;z-index:2}
+.qv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.qv-shot{background:var(--bg-sunk);line-height:0}
+.qv-shot img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.qv-body{padding:clamp(28px,3.6vw,52px);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.qv-name{font-size:clamp(2rem,1.4rem + 2vw,3rem)}
+.qv-body .card-sub{font-size:1.05rem;margin-top:-6px}
+.qv-buy{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px}
+.qv-incl{font-size:.95rem;color:var(--ink-faint);margin-top:4px}
+@media (max-width:720px){
+  .qv{margin:auto 0 0;width:100%;max-height:94dvh;border-radius:var(--r) var(--r) 0 0}
+  .qv-grid{grid-template-columns:1fr}
+  .qv-shot img{aspect-ratio:4/3;max-height:40dvh;object-position:50% 72%}
+  .qv-body{padding:22px var(--pad) calc(24px + env(safe-area-inset-bottom))}
+  .qv-buy .btn{flex:1;justify-content:center}
+}
+
+/* Cart drawer: full height from the right edge. */
+.drawer{padding:0;border:0;margin:0 0 0 auto;inset:0 0 0 auto;
+  width:min(480px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;
+  background:var(--bg);box-shadow:-30px 0 90px -20px rgb(0 0 0 / .6)}
+.drawer[open]{display:flex;flex-direction:column}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 18px 14px 24px;border-bottom:1px solid var(--rule)}
+.drawer-head h2{font-size:clamp(1.8rem,1.5rem + 1vw,2.3rem)}
+.drawer-body{flex:1;overflow:auto;overscroll-behavior:contain;
+  padding:22px 24px calc(32px + env(safe-area-inset-bottom));display:grid;gap:24px;align-content:start}
+
+.cart-empty{display:grid;justify-items:start;gap:16px;padding-block:12px;color:var(--ink-soft);font-size:1.1rem}
+.cart-empty[hidden]{display:none !important}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.lines:empty{display:none}
+.line{display:grid;grid-template-columns:64px minmax(0,1fr) auto;
+  grid-template-areas:"img name sum" "img qty kill";gap:6px 14px;align-items:center;
+  padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.line img,.line-no-img{grid-area:img;width:64px;height:84px;object-fit:cover;
+  border-radius:var(--radius);box-shadow:0 0 0 1px var(--rule-strong)}
+.line-no-img{background:var(--bg-sunk)}
+.line-name{grid-area:name;font-size:1.02rem;line-height:1.35;align-self:end}
+.line-sub{display:block;font-size:var(--step-small);color:var(--ink-faint);margin-top:2px}
+.line .qty{grid-area:qty;align-self:start}
+.line .qty button{width:34px;height:34px;font-size:1.05rem}
+.line-sum{grid-area:sum;align-self:end;justify-self:end;font-weight:600;white-space:nowrap;
+  font-variant-numeric:lining-nums tabular-nums}
+.line-kill{grid-area:kill;align-self:start;justify-self:end;background:none;border:0;cursor:pointer;
+  padding:8px 0;color:var(--ink-faint);font:inherit;font-size:var(--step-small);
+  text-decoration:underline;text-underline-offset:3px}
+.line-kill:hover{color:var(--accent)}
+.total{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px}
+.total b{font-size:1.05rem;font-weight:500}
+.total .price{font-size:clamp(1.6rem,1.3rem + 1vw,2.1rem)}
+.ship-hint{width:100%;font-size:var(--step-small);color:var(--ink-faint);margin:0}
+.ship-hint[data-free="true"]{color:var(--accent)}
+.checkout{padding-top:22px;border-top:1px solid var(--rule)}
+.checkout-title{font-size:1.7rem;margin-bottom:2px}
+.btn--wide{width:100%;justify-content:center}
+
+/* Added-to-cart: a pill at the bottom, near the thumb, gone on its own. */
+/* Pinned by both edges and centred with auto margins: left:50% would halve the
+   width it may take and wrap a short line onto three. */
+.toast{position:fixed;left:12px;right:12px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:70;
+  width:fit-content;max-width:calc(100vw - 24px);margin-inline:auto;
+  display:flex;align-items:center;gap:14px;
+  padding:10px 10px 10px 20px;border-radius:99px;
+  background:var(--ink);color:var(--bg);box-shadow:0 18px 50px -12px rgb(0 0 0 / .55)}
+.toast[hidden]{display:none}
+.toast-text{font-weight:500;line-height:1.3;min-width:0}
+.toast-btn{flex:none;border:0;border-radius:99px;padding:.65em 1.05em;cursor:pointer;
+  background:var(--accent);color:var(--on-accent);font:inherit;font-weight:600;white-space:nowrap}
+
+@media (prefers-reduced-motion:no-preference){
+  .drawer[open]{animation:drawer-in .5s var(--e)}
+  .drawer.closing{animation:drawer-out .28s cubic-bezier(.4,0,1,1) forwards}
+  .qv[open]{animation:qv-in .5s var(--e)}
+  .qv.closing{animation:qv-out .22s cubic-bezier(.4,0,1,1) forwards}
+  dialog[open]::backdrop{animation:fade .4s ease both}
+  dialog.closing::backdrop{animation:fade .25s ease reverse both}
+  .toast:not([hidden]){animation:toast-in .5s var(--e)}
+  .cart-count.bump{animation:bump .6s var(--e)}
+  @keyframes drawer-in{from{transform:translateX(100%)}to{transform:none}}
+  @keyframes drawer-out{to{transform:translateX(100%)}}
+  @keyframes qv-in{from{opacity:0;transform:translateY(26px) scale(.975)}to{opacity:1;transform:none}}
+  @keyframes qv-out{to{opacity:0;transform:translateY(14px) scale(.985)}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes toast-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes bump{0%{transform:none}35%{transform:scale(1.45)}100%{transform:none}}
+  @media (max-width:720px){
+    .qv[open]{animation:sheet-in .5s var(--e)}
+    .qv.closing{animation:sheet-out .26s cubic-bezier(.4,0,1,1) forwards}
+    @keyframes sheet-in{from{transform:translateY(100%)}to{transform:none}}
+    @keyframes sheet-out{to{transform:translateY(100%)}}
+  }
+}

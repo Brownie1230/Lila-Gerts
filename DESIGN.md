@@ -232,3 +232,37 @@ said it is theirs. Nothing to clear.
 is what the page says now, or by a real payment on the site, which needs self-employment
 registration and a provider; and whether the nine originals should stay in the repository root,
 where they add about 30 MB to every clone.
+
+## Shop pass, 16 Oct
+
+Design read: redesign that preserves the brand, for a handmade-candle shop whose buyers choose a
+gift on a phone. The client's mockup is the brief; this pass makes it behave like a shop. Dials
+`DESIGN_VARIANCE 7` · `MOTION_INTENSITY 7` · `VISUAL_DENSITY 4`. The shop layer lives in
+`assets/css/shop.css`; `app.css` stays the house system.
+
+What changed and why:
+
+- **First screen follows her drawing**: logo and line centred, mascot at the right edge standing
+  on the stripe. The screen stops short of the fold by `--peek`, so the stripe she stands on is
+  visible on first load. This overrides the skill's anti-centre rule: the client drew it centred.
+  It assembles in reading order on load (mark, line, actions, then the mascot rising).
+- **Cart drawer** replaces the cart section at the foot of the page. Buying no longer means
+  scrolling past every section; checkout sits in the drawer under the lines. Native `<dialog>`
+  gives focus trapping, Esc and the backdrop; the script adds only the exit animation.
+- **Product sheet**: every "в корзину" opens it, because every candle needs a scent and a card
+  cannot hold seventeen. Scent is optional ("Подобрать вместе в переписке"). The scent list is
+  read from the constructor's `<select>`, so there is one list to edit. Same product in two
+  scents is two cart lines.
+- **Filters** Все / Свечи / Наборы over the eleven cards, driven by `data-cat`.
+- **Toast** acknowledges an add without opening anything; the counter on the bar bumps.
+- **Pet frames** take her pink, slightly tilted frames instead of repeating the catalogue grid.
+  On a phone they become a swipe row: three tall frames stacked would be a corridor.
+- **Delivery sits on the stripe paper**, between two cherry sheets, echoing the promise band.
+  That removes the second cream panel; "О свечах" stays the one cream block.
+- A constructor candle has no photograph, so its cart line shows the two colours that were
+  picked.
+- **Share card** `og.jpg` (1200×630, logo and mascot on cherry between stripes) with an absolute
+  URL, because the link is passed around in Telegram. Favicon is the logo on cherry.
+
+Buttons and chips are full pill; photographs and cards are 2px; panels and overlays use `--r`.
+That is the documented shape rule.
