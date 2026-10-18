@@ -279,3 +279,27 @@ Compared screen by screen against her five PNGs, three things still differed and
 
 Left out on purpose: her "Коллекция ↓" under the hero buttons. "Посмотреть работы" already
 goes to the catalogue, and two links with one job on one screen is one too many.
+
+## Her answers, 18 Oct
+
+Nina answered the fifteen questions. What went onto the page, in her words where she gave them:
+
+- **Orders go to `lila_gerts@mail.ru`**, her shop address, which also replaces the personal one
+  everywhere on the page. The form posts to FormSubmit's AJAX endpoint for that address: no key,
+  but the first order triggers an "Activate Form" email she must click once. FormSubmit answers
+  200 even when it refuses, so success is read from the body. When sending fails, the order is
+  copied for the buyer to paste into Telegram: an order is never swallowed. The privacy text
+  names the service.
+- **Delivery is a flat 300 ₽** to any Ozon pickup point ("ставь везде 300 рублей"), and free
+  from 5 000 ₽ as on her mockup and promise strip. The cart shows goods, delivery and total.
+- **Product facts** (composition, size, burn time) live as `data-incl`, `data-size`, `data-burn`
+  on each card and fill the product sheet. Pion has none: she gave figures for the sets and Moon
+  only, and none are invented for it.
+- **Every candle takes 10–14 days.** Pet holders keep her own "10–14 рабочих дней со дня
+  отправки фотографий".
+- **Cats only** on the pet holder.
+- **Terms of sale** section: seller (Герцик Нина Евгеньевна, самозанятая; ИНН to follow, marked
+  in an HTML comment), payment, making time, delivery, and her return rule.
+
+Still to come from her: ИНН, the colour palette and customer reviews (promised 19 Oct), links to
+Instagram and TikTok, ЮKassa approval, and the domain, which she wants.
