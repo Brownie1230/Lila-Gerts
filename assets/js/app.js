@@ -123,15 +123,19 @@
      ───────────────────────────────────────────────────────────────── */
   var KEY = "lg-cart";
   var FREE_FROM = 5000;
+  var SHIP = 300; // flat, to any Ozon pickup point; her call, 18 Oct
   var drawer = $("cart-drawer");
   var linesEl = $("cart-lines");
   var emptyEl = $("cart-empty");
   var totalEl = $("cart-total");
   var sumEl = $("cart-sum");
+  var goodsEl = $("cart-goods");
+  var shipEl = $("cart-ship");
   var hintEl = $("ship-hint");
   var countEl = $("cart-count");
   var form = $("order-form");
 
+  function shipFor(goods) { return goods >= FREE_FROM ? 0 : SHIP; }
   function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP) + NBSP + "₽"; }
 
   function read() {
@@ -228,11 +232,14 @@
     if (emptyEl) emptyEl.hidden = count > 0;
     if (totalEl) totalEl.hidden = count === 0;
     if (form) form.hidden = count === 0;
-    if (sumEl) sumEl.textContent = money(total);
+    var ship = shipFor(total);
+    if (goodsEl) goodsEl.textContent = money(total);
+    if (shipEl) shipEl.textContent = ship ? money(ship) : "бесплатно";
+    if (sumEl) sumEl.textContent = money(total + ship);
     if (hintEl) {
-      var free = total >= FREE_FROM;
-      hintEl.dataset.free = String(free);
-      hintEl.textContent = free ? "Доставка бесплатно." : "До бесплатной доставки " + money(FREE_FROM - total) + ".";
+      hintEl.dataset.free = String(!ship);
+      hintEl.textContent = ship ? "Добавьте товаров на " + money(FREE_FROM - total) + ", и доставка станет бесплатной." : "";
+      hintEl.hidden = !ship;
     }
   }
 
@@ -299,7 +306,9 @@
       sub: holder.dataset.sub || "",
       price: parseInt(holder.dataset.price, 10) || 0,
       img: holder.dataset.img || "",
-      scent: holder.dataset.scent !== "no"
+      scent: holder.dataset.scent !== "no",
+      spec: [["Состав", holder.dataset.incl], ["Размер", holder.dataset.size],
+             ["Горение", holder.dataset.burn], ["Изготовление", "10–14 дней"]]
     };
     qtyNow = 1;
     qvQty.textContent = "1";
@@ -310,10 +319,20 @@
     img.src = current.img;
     img.alt = shot ? shot.alt : current.name;
     qvScentField.hidden = !current.scent;
+    var spec = $("qv-spec");
+    if (spec) {
+      spec.textContent = "";
+      current.spec.forEach(function (row) {
+        if (!row[1]) return;
+        var d = el("div");
+        d.append(el("dt", null, row[0]), el("dd", null, row[1]));
+        spec.appendChild(d);
+      });
+    }
     qvScent.value = "";
     $("qv-incl").textContent = current.scent
       ? "В комплекте спички в стеклянной колбе и подарочная упаковка."
-      : "В подарок спички, сменные чайные свечи, подарочная упаковка и открытка с посланием. Фото питомца попросим после оплаты.";
+      : "В подарок спички, сменные чайные свечи, подарочная упаковка и открытка с посланием. Фото кошки попросим после оплаты.";
     openDialog(qv);
   }
 
@@ -429,42 +448,71 @@
 
     var data = new FormData(form);
     var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
+    var ship = shipFor(total);
     var order = {
       items: cart.map(function (l) { return { name: l.name, sub: l.sub, price: l.price, qty: l.qty }; }),
-      total: total, name: data.get("name"), phone: data.get("phone"),
+      total: total, ship: ship, name: data.get("name"), phone: data.get("phone"),
       pvz: data.get("pvz"), note: data.get("note")
     };
 
     status.dataset.state = "sending";
     status.textContent = "Отправляем заказ";
 
-    if (!endpoint) {
-      // No handler yet: the order is handed over rather than swallowed.
-      var text = ["Заказ с сайта Lila Gerts", ""]
-        .concat(cart.map(function (l) {
-          return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
-        }))
-        .concat(["", "Сумма: " + total + " руб.", "Имя: " + (order.name || ""),
-                 "Телефон: " + (order.phone || ""), "ПВЗ Ozon: " + (order.pvz || "")]);
-      if (order.note) text.push("Комментарий: " + order.note);
+    // The order as plain text: what she reads if sending fails and the buyer
+    // pastes it into Telegram instead.
+    var text = ["Заказ с сайта Lila Gerts", ""]
+      .concat(cart.map(function (l) {
+        return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
+      }))
+      .concat(["", "Товары: " + total + " руб.", "Доставка: " + (ship ? ship + " руб." : "бесплатно"),
+               "Итого: " + (total + ship) + " руб.", "Имя: " + (order.name || ""),
+               "Телефон: " + (order.phone || ""), "ПВЗ Ozon: " + (order.pvz || "")]);
+    if (order.note) text.push("Комментарий: " + order.note);
+
+    // Never swallow an order: when it cannot be sent, hand it to the buyer.
+    function handOver(reason) {
       var done = function (copied) {
         status.dataset.state = "sent";
-        status.textContent = copied
-          ? "Заказ собран и скопирован. Отправка на почту ещё не подключена: пришлите текст в Telegram или на почту, и мы оформим."
-          : "Отправка на почту ещё не подключена. Напишите нам в Telegram или на почту, и мы оформим заказ.";
+        status.textContent = reason + (copied
+          ? " Заказ скопирован: вставьте его в сообщение в Telegram или на почту, и мы оформим."
+          : " Напишите нам в Telegram или на почту, и мы оформим заказ.");
       };
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text.join("\n")).then(function () { done(true); }, function () { done(false); });
       } else done(false);
-      return;
     }
 
+    if (!endpoint) { handOver("Отправка на почту ещё не подключена."); return; }
+
+    // FormSubmit mails one table row per field, so the order goes flat and
+    // in Russian; the keys become the row names she reads.
+    var lines = cart.map(function (l) {
+      return l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " = " + (l.price * l.qty) + " руб.";
+    }).join("\n");
+    var payload = {
+      _subject: "Заказ с сайта Lila Gerts: " + (order.name || "") + ", " + (total + ship) + " руб.",
+      _template: "table",
+      _captcha: "false",
+      "Заказ": lines,
+      "Товары": total + " руб.",
+      "Доставка": ship ? ship + " руб." : "бесплатно",
+      "Итого": (total + ship) + " руб.",
+      "Имя": order.name || "",
+      "Телефон": order.phone || "",
+      "ПВЗ Ozon": order.pvz || "",
+      "Комментарий": order.note || "—"
+    };
     fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(order)
+      body: JSON.stringify(payload)
     }).then(function (res) {
       if (!res.ok) throw new Error(String(res.status));
+      return res.json().catch(function () { return {}; });
+    }).then(function (json) {
+      // FormSubmit answers 200 even when it refuses (not yet activated), so
+      // trust the body, not the status.
+      if (json && json.success !== true && json.success !== "true") throw new Error(json.message || "refused");
       status.dataset.state = "sent";
       status.textContent = "Заказ принят. Напишем вам, чтобы подтвердить и прислать счёт на оплату.";
       form.reset();
@@ -472,9 +520,6 @@
       render();
       if (emptyEl) emptyEl.hidden = true; // keep the confirmation on screen, not the empty state
       form.hidden = false;
-    }).catch(function () {
-      status.dataset.state = "sent";
-      status.textContent = "Не удалось отправить. Напишите нам в Telegram или на почту, заказ оформим вручную.";
-    });
+    }).catch(function () { handOver("Не удалось отправить заказ."); });
   });
 })();

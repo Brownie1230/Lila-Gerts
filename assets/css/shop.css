@@ -253,8 +253,11 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
   padding:8px 0;color:var(--ink-faint);font:inherit;font-size:var(--step-small);
   text-decoration:underline;text-underline-offset:3px}
 .line-kill:hover{color:var(--accent)}
-.total{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px}
-.total b{font-size:1.05rem;font-weight:500}
+.total{display:grid;gap:8px}
+.total-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  color:var(--ink-soft);font-variant-numeric:lining-nums tabular-nums}
+.total-row--sum{color:var(--ink);padding-top:10px;margin-top:4px;border-top:1px solid var(--rule)}
+.total-row--sum b{font-size:1.1rem;font-weight:600}
 .total .price{font-size:clamp(1.6rem,1.3rem + 1vw,2.1rem)}
 .ship-hint{width:100%;font-size:var(--step-small);color:var(--ink-faint);margin:0}
 .ship-hint[data-free="true"]{color:var(--accent)}
@@ -328,3 +331,20 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
   border-radius:54% 46% 58% 42% / 48% 60% 40% 56%;transform:rotate(-1.4deg)}
 
 .foot-k{color:var(--ink-faint)}
+
+/* ── facts in the product sheet ───────────────────────────────── */
+.qv-spec{display:grid;gap:8px;margin:2px 0 4px;padding:14px 0;
+  border-block:1px solid var(--rule)}
+.qv-spec:empty{display:none}
+.qv-spec div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;font-size:.98rem;line-height:1.45}
+.qv-spec dt{color:var(--ink-faint)}
+.qv-spec dd{margin:0}
+@media (max-width:420px){.qv-spec div{grid-template-columns:1fr;gap:0}}
+
+/* ── terms of sale ────────────────────────────────────────────── */
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
+  gap:clamp(18px,2.4vw,30px) clamp(26px,4vw,56px);margin:0}
+.terms div{padding-top:14px;border-top:1px solid var(--rule-strong)}
+.terms dt{font-family:var(--fd);font-size:clamp(1.35rem,1.15rem + .6vw,1.7rem);margin-bottom:6px}
+.terms dd{margin:0;color:var(--ink-soft);line-height:1.55}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 22px}
