@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lila Gerts · Свечи и гипсовые подсвечники ручной работы</title>
-<meta name="description" content="Авторские свечи и гипсовые подсвечники ручной работы. Подсвечник по фото питомца, конструктор свечей, 17 ароматов, подарочная упаковка. Доставка в ПВЗ Ozon, от 5 000 ₽ бесплатно.">
+<meta name="description" content="Авторские свечи и гипсовые подсвечники ручной работы. Подсвечник по фото питомца, свечи-пионы в цвете на выбор, 17 ароматов, подарочная упаковка. Доставка в ПВЗ Ozon, от 5 000 ₽ бесплатно.">
 <meta name="theme-color" content="#310907">
 <link rel="canonical" href="https://brownie1230.github.io/Lila-Gerts/">
 <meta property="og:type" content="website">
@@ -24,10 +24,10 @@
 <link rel="preload" href="assets/img/logo.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?v=20251020b">
-<link rel="stylesheet" href="assets/css/tokens.css?v=20251020b">
-<link rel="stylesheet" href="assets/css/app.css?v=20251020b">
-<link rel="stylesheet" href="assets/css/shop.css?v=20251020b">
+<link rel="stylesheet" href="assets/css/fonts.css?v=20251020c">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20251020c">
+<link rel="stylesheet" href="assets/css/app.css?v=20251020c">
+<link rel="stylesheet" href="assets/css/shop.css?v=20251020c">
 <script>
   document.documentElement.classList.add("js");
   try {
@@ -106,7 +106,6 @@
     <nav class="cats" aria-label="Разделы">
       <a class="cat" href="#candles">Свечи</a>
       <a class="cat" href="#holders">Подсвечники</a>
-      <a class="cat" href="#builder">Конструктор свечей</a>
     </nav>
 
     <!-- ═══ СВЕЧИ И НАБОРЫ ═════════════════════════════════════════
@@ -131,8 +130,8 @@
           <figcaption class="card-say"><span class="price">500&nbsp;₽</span><span class="card-name">Свеча «Pion»</span><span class="card-sub">бордо</span></figcaption>
           <button class="btn btn--primary" type="button" data-open aria-label="В корзину: Свеча «Pion», бордо">в корзину</button>
         </figure>
-        <figure class="card" data-sku="pion-choice" data-cat="candle" data-name="Свеча «Pion»" data-sub="цвет на выбор" data-price="500" data-img="assets/img/catalog/pion-choice.webp" data-reveal style="--d:70ms">
-          <button class="card-shot" type="button" data-open tabindex="-1" aria-hidden="true"><img src="assets/img/catalog/pion-choice.webp" srcset="assets/img/catalog/pion-choice-360.webp 360w, assets/img/catalog/pion-choice.webp 720w" sizes="(max-width:560px) 46vw, (max-width:1100px) 30vw, 300px" width="720" height="960" loading="lazy" alt="Три свечи-пиона, розовая, белая и пудровая, на розовом меху"></button>
+        <figure class="card" data-sku="pion-choice" data-cat="candle" data-name="Свеча «Pion»" data-sub="цвет на выбор" data-colors="Малиновый:#8E1F3A;Пыльная роза:#C98790;Белый:#F5F1EA;Нежно-розовый:#F2B4AE" data-price="500" data-img="assets/img/catalog/pion-choice.webp" data-reveal style="--d:70ms">
+          <button class="card-shot" type="button" data-open tabindex="-1" aria-hidden="true"><img src="assets/img/catalog/pion-choice.webp" srcset="assets/img/catalog/pion-choice-360.webp 360w, assets/img/catalog/pion-choice.webp 720w" sizes="(max-width:560px) 46vw, (max-width:1100px) 30vw, 300px" width="720" height="960" loading="lazy" alt="Четыре свечи-пиона, малиновая, пыльно-розовая, белая и нежно-розовая, на розовом меху"></button>
           <figcaption class="card-say"><span class="price">500&nbsp;₽</span><span class="card-name">Свеча «Pion»</span><span class="card-sub">цвет на выбор</span></figcaption>
           <button class="btn btn--primary" type="button" data-open aria-label="В корзину: Свеча «Pion», цвет на выбор">в корзину</button>
         </figure>
@@ -219,97 +218,6 @@
       </div>
     </section>
 
-    <!-- ═══ КОНСТРУКТОР СВЕЧЕЙ ══════════════════════════════════════
-         Ароматы правятся здесь, в <option>: этот же список подхватывает окно
-         товара. Цена формы берётся из data-price у <option>. -->
-    <section class="sec wrap" id="builder">
-      <div class="builder">
-        <div class="builder-side">
-          <div class="sec-head" data-reveal>
-            <h2>Конструктор свечей</h2>
-            <p>Соберите свечу под себя: форма, аромат и сочетание цветов. Получится отдельная позиция в корзине.</p>
-          </div>
-
-          <!-- Превью собирается из того, что выбрано в форме справа. Фото формы
-               берётся из data-img у <option>, цвета — из выбранной кнопки сочетания. -->
-          <figure class="preview" id="preview" data-reveal style="--d:60ms" data-state="empty">
-            <div class="preview-art">
-              <img class="preview-photo" id="pv-photo" alt="" width="360" height="480" hidden>
-              <span class="preview-swatch" id="pv-swatch" aria-hidden="true"></span>
-            </div>
-            <figcaption class="preview-say">
-              <span class="price" id="pv-price">Цена появится, когда выберете форму</span>
-              <span class="card-name" id="pv-name">Ваша свеча</span>
-              <span class="card-sub" id="pv-scent">Аромат: подберём вместе</span>
-              <span class="card-sub" id="pv-colors">Цвета: на ваш вкус</span>
-            </figcaption>
-          </figure>
-        </div>
-
-        <form class="form" id="builder-form" novalidate data-reveal style="--d:90ms">
-          <div class="field" data-field>
-            <label for="b-shape">Форма</label>
-            <select id="b-shape" name="shape" required>
-              <option value="">Выберите форму</option>
-              <option data-price="500" data-img="assets/img/catalog/pion-choice-360.webp" value="Свеча «Pion»">Свеча «Pion», 500&nbsp;₽</option>
-              <option data-price="2999" data-img="assets/img/catalog/juli-rose-green-360.webp" value="Набор «Juli»">Набор «Juli», 2&nbsp;999&nbsp;₽</option>
-              <option data-price="1999" data-img="assets/img/catalog/nina-bordo-360.webp" value="Набор «Nina»">Набор «Nina», 1&nbsp;999&nbsp;₽</option>
-              <option data-price="1999" data-img="assets/img/moon-white-360.webp" value="Свеча «Moon»">Свеча «Moon», 1&nbsp;999&nbsp;₽</option>
-            </select>
-            <span class="err" data-error>Выберите форму свечи.</span>
-          </div>
-
-          <div class="field" data-field>
-            <label for="b-scent">Аромат</label>
-            <select id="b-scent" name="scent">
-              <option value="">Выберите аромат</option>
-            <option>Черничный йогурт</option>
-            <option>Сладкий мёд</option>
-            <option>Макадамия и миндальное масло</option>
-            <option>Розовый перец, ветивер</option>
-            <option>Мёд и воск</option>
-            <option>Молоко и мёд</option>
-            <option>Конопля, ветивер, чёрный перец</option>
-            <option>Чёрный перец</option>
-            <option>Удовое дерево</option>
-            <option>Зелёный чай, лимон, мята</option>
-            <option>Булочка с корицей</option>
-            <option>Еловые шишки и хвоя</option>
-            <option>Кофе со сливками</option>
-            <option>Мимоза</option>
-            <option>Амбра, ветивер</option>
-            <option>Орхидея и морская соль</option>
-            <option>Деревенские яблочки</option>
-            </select>
-            <span class="help">К наборам кладём спички в стеклянной колбе.</span>
-          </div>
-
-          <div class="field" data-field>
-            <label for="b-colors">Сочетание цветов</label>
-            <div class="duos" role="group" aria-label="Выбрать сочетание цветов">
-            <button class="duo" type="button" aria-pressed="false" data-pair="Бордо и крем"><i style="--a:#66001F;--b:#FEFCEF"></i>Бордо и крем</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Вино и мёд"><i style="--a:#44040F;--b:#FBDE9C"></i>Вино и мёд</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Кофе и миндаль"><i style="--a:#2E0D14;--b:#EFE1D5"></i>Кофе и миндаль</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Шоколад и песок"><i style="--a:#3E000C;--b:#FFECD1"></i>Шоколад и песок</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Розовое дерево и роза"><i style="--a:#70020F;--b:#FFDEE2"></i>Розовое дерево и роза</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Матча и ваниль"><i style="--a:#7A8450;--b:#F8EFDA"></i>Матча и ваниль</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Лимон и цветение"><i style="--a:#FAFFC7;--b:#FFD1D5"></i>Лимон и цветение</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Жвачка и мох"><i style="--a:#EFA7C9;--b:#3F481C"></i>Жвачка и мох</button>
-            <button class="duo" type="button" aria-pressed="false" data-pair="Лаванда и сливки"><i style="--a:#CBA1D4;--b:#FEEB9C"></i>Лаванда и сливки</button>
-            </div>
-            <input id="b-colors" name="colors" type="text" placeholder="Или впишите своё: например, бордовый с белым">
-            <span class="help">Нужного сочетания нет в списке? Напишите своё, соберём под вас.</span>
-          </div>
-
-          <div>
-            <button class="btn btn--primary" type="submit">Добавить в корзину
-              <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-
     <!-- ═══ О СВЕЧАХ ════════════════════════════════════════════════ -->
     <section class="sec wrap" id="care">
       <div class="paper" data-reveal>
@@ -334,7 +242,7 @@
         <p>Через корзину, без переписки. Если удобнее голосом или остались вопросы, пишите в Telegram.</p>
       </div>
       <div class="steps">
-        <div class="step" data-reveal><b>Выберите</b><p>Нажмите «в корзину» и выберите аромат. Свечу под себя соберите в конструкторе.</p></div>
+        <div class="step" data-reveal><b>Выберите</b><p>Нажмите «в корзину» и выберите аромат, а у пиона ещё и цвет.</p></div>
         <div class="step" data-reveal style="--d:80ms"><b>Оформите</b><p>Имя, телефон и пункт выдачи Ozon. Счёт на оплату пришлём в ответ.</p></div>
         <div class="step" data-reveal style="--d:160ms"><b>Сделаем</b><p>Отливаем и расписываем под ваш заказ, это занимает 10–14 дней.</p></div>
         <div class="step" data-reveal style="--d:240ms"><b>Упакуем</b><p>Подарочная упаковка и открытка с посланием, к наборам ещё спички в стеклянной колбе.</p></div>
@@ -406,7 +314,6 @@
         <ul>
           <li><a class="quiet" href="#candles">Свечи и наборы</a></li>
           <li><a class="quiet" href="#holders">Подсвечник по фото питомца</a></li>
-          <li><a class="quiet" href="#builder">Конструктор свечей</a></li>
         </ul>
       </div>
       <div>
@@ -438,9 +345,36 @@
       <h2 class="qv-name" id="qv-name"></h2>
       <p class="card-sub" id="qv-sub"></p>
       <dl class="qv-spec" id="qv-spec"></dl>
+      <!-- Цвета берутся из data-colors у карточки: «Название:#цвет;…».
+           Нет data-colors — нет и выбора цвета. -->
+      <fieldset class="field" id="qv-color-field" data-field hidden>
+        <legend>Цвет</legend>
+        <div class="swatches" id="qv-colors"></div>
+        <span class="err" data-error>Выберите цвет пиона.</span>
+      </fieldset>
+      <!-- Ароматы правятся здесь, по строке <option> на аромат. -->
       <div class="field" id="qv-scent-field">
         <label for="qv-scent">Аромат</label>
-        <select id="qv-scent" name="scent"><option value="">Подобрать вместе в переписке</option></select>
+        <select id="qv-scent" name="scent">
+          <option value="">Подобрать вместе в переписке</option>
+          <option>Черничный йогурт</option>
+          <option>Сладкий мёд</option>
+          <option>Макадамия и миндальное масло</option>
+          <option>Розовый перец, ветивер</option>
+          <option>Мёд и воск</option>
+          <option>Молоко и мёд</option>
+          <option>Конопля, ветивер, чёрный перец</option>
+          <option>Чёрный перец</option>
+          <option>Удовое дерево</option>
+          <option>Зелёный чай, лимон, мята</option>
+          <option>Булочка с корицей</option>
+          <option>Еловые шишки и хвоя</option>
+          <option>Кофе со сливками</option>
+          <option>Мимоза</option>
+          <option>Амбра, ветивер</option>
+          <option>Орхидея и морская соль</option>
+          <option>Деревенские яблочки</option>
+        </select>
       </div>
       <div class="qv-buy">
         <div class="qty" role="group" aria-label="Количество">
@@ -533,6 +467,6 @@
   <button class="toast-btn" type="button" id="toast-open">Открыть корзину</button>
 </div>
 
-<script src="assets/js/app.js?v=20251020b" defer></script>
+<script src="assets/js/app.js?v=20251020c" defer></script>
 </body>
 </html>
