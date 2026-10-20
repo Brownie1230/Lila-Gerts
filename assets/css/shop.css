@@ -364,3 +364,19 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 .status .quiet{font-weight:600;white-space:nowrap}
 .btn:disabled{opacity:.6;cursor:progress}
 .status-detail{display:block;margin-top:8px;font-size:.78rem;opacity:.7;overflow-wrap:anywhere}
+
+/* ── reviews: buyers' own words, a quiet grid; a swipe row on a phone ── */
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.review{margin:0;display:flex;flex-direction:column;gap:18px;padding:clamp(22px,2.4vw,32px);
+  border-radius:var(--r);background:var(--bg-raised);box-shadow:0 0 0 1px var(--rule)}
+.review blockquote{margin:0;font-family:var(--fd);font-size:clamp(1.25rem,1.1rem + .45vw,1.5rem);
+  line-height:1.35;color:var(--ink);text-wrap:pretty}
+.review blockquote::before{content:"«";display:block;font-size:2.6em;line-height:.6;color:var(--accent);margin-bottom:.12em}
+.review figcaption{margin-top:auto;font-size:.88rem;color:var(--ink-faint)}
+@media (max-width:900px){.reviews{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){
+  .reviews{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;
+    margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad);padding-bottom:6px;scrollbar-width:none}
+  .reviews::-webkit-scrollbar{display:none}
+  .review{flex:0 0 84%;scroll-snap-align:center}
+}

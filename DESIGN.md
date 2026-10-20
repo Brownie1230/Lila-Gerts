@@ -104,7 +104,7 @@ the subsets the page uses. Emphasis inside a heading uses italic of the same fam
 ## Layout and shape
 
 Order on the page: bar · first screen · promise band and doors · catalogue (stripe) · pet holders ·
-about the candles (cream panel) · how to order · delivery (stripe) · terms of sale ·
+about the candles (cream panel) · reviews · how to order · delivery (stripe) · terms of sale ·
 privacy · footer. Overlays: product sheet, cart drawer, toast.
 
 **Shape rule:** buttons and chips are full pill; photographs and cards are 2px; panels and
@@ -228,3 +228,6 @@ confirm delivery to her inbox.
   pass removing claims that were not hers; saved carts reconciled with the catalogue.
   Wordmark set as in her Word file (Pinyon Script + Tinos Bold). Constructor removed at her
   request; the single pion got colour chips instead. A peach set is coming as a new card.
+  Reviews section from her buyers' Telegram and Instagram messages: text only, no names, no
+  buyers' photos (their consent was not asked); trims marked with an ellipsis. Her 16-colour
+  palette is for future photographed sets, not shown on the page.
