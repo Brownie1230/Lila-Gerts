@@ -388,18 +388,22 @@ button.sw[aria-pressed="true"] i{box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)
 .check input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--accent);cursor:pointer}
 .field--check[data-invalid="true"] .check{color:var(--accent)}
 
-/* ── colour pairs: pick a combination, or write your own ──────── */
-.duos{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-.duo{display:inline-flex;align-items:center;gap:9px;font:inherit;font-size:.9rem;font-weight:600;
+/* ── colour choice in the product sheet: real radios, drawn as chips ── */
+fieldset.field{border:0;margin:0;padding:0;min-width:0}
+fieldset.field>legend{font-size:1rem;font-weight:600;padding:0;margin-bottom:8px}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.pick{position:relative;display:inline-flex}
+.pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.pick span{display:inline-flex;align-items:center;gap:9px;font-size:.9rem;font-weight:600;
   color:var(--ink-soft);background:var(--bg-raised);border:1px solid var(--rule);border-radius:99px;
-  padding:7px 14px 7px 8px;cursor:pointer;
-  transition:border-color .2s var(--e),background .2s var(--e),color .2s var(--e),transform .15s var(--e)}
-.duo i{width:20px;height:20px;border-radius:99px;display:block;flex:none;
-  background:linear-gradient(135deg,var(--a) 0 50%,var(--b) 50% 100%);
-  box-shadow:inset 0 0 0 1px rgb(0 0 0 / .16)}
-.duo:hover{border-color:var(--accent);color:var(--ink)}
-.duo:active{transform:translateY(1px)}
-.duo[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.duo[aria-pressed="true"] i{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .55)}
-@media (prefers-reduced-motion:reduce){.duo{transition:none}.duo:active{transform:none}}
+  padding:7px 14px 7px 8px;pointer-events:none;
+  transition:border-color .2s var(--e),background .2s var(--e),color .2s var(--e)}
+.pick i{width:22px;height:22px;border-radius:99px;display:block;flex:none;background:var(--bg-sunk);
+  box-shadow:inset 0 0 0 1px rgb(0 0 0 / .18)}
+.pick input:hover + span{border-color:var(--accent);color:var(--ink)}
+.pick input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.pick input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pick input:checked + span i{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .6)}
+.field[data-invalid="true"] .pick span{border-color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.pick span{transition:none}}
 

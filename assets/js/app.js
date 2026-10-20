@@ -204,7 +204,7 @@
     var found = cart.filter(function (l) { return l.id === line.id; })[0];
     if (found) found.qty += qty;
     else cart.push({ id: line.id, name: line.name, sub: line.sub || "", price: line.price,
-                     img: line.img || "", swatch: line.swatch || null, qty: qty });
+                     img: line.img || "", qty: qty });
     write(cart);
     render(true);
   }
@@ -244,12 +244,7 @@
       if (l.img) {
         var img = el("img"); img.src = l.img; img.alt = ""; img.loading = "lazy"; li.appendChild(img);
       } else {
-        var box = el("div", "line-no-img");
-        // A constructor candle has no photo; show the colours that were picked.
-        if (l.swatch && l.swatch.length === 2 && /^#[0-9a-f]{6}$/i.test(l.swatch[0]) && /^#[0-9a-f]{6}$/i.test(l.swatch[1])) {
-          box.style.background = "linear-gradient(135deg," + l.swatch[0] + " 0 50%," + l.swatch[1] + " 50% 100%)";
-        }
-        li.appendChild(box);
+        li.appendChild(el("div", "line-no-img"));
       }
       var name = el("div", "line-name", l.name);
       if (l.sub) name.appendChild(el("span", "line-sub", l.sub));
@@ -378,12 +373,32 @@
   var current = null;
   var qtyNow = 1;
 
-  // One list of scents on the page: the constructor's. The sheet borrows it.
-  var builderScent = $("b-scent");
-  if (builderScent && qvScent) {
-    Array.prototype.forEach.call(builderScent.options, function (o) {
-      if (o.value) qvScent.appendChild(new Option(o.textContent, o.value));
+  var qvColorField = $("qv-color-field");
+  var qvColors = $("qv-colors");
+
+  // A card with data-colors ("Name:#hex;Name:#hex") gets a colour choice in the
+  // sheet: one radio per colour, none picked, so the buyer says which one.
+  function paintColors(spec) {
+    qvColors.textContent = "";
+    var list = (spec || "").split(";").map(function (pair) {
+      var bits = pair.split(":");
+      return { name: (bits[0] || "").trim(), hex: (bits[1] || "").trim() };
+    }).filter(function (c) { return c.name; });
+    list.forEach(function (c) {
+      var label = el("label", "pick");
+      var input = el("input");
+      input.type = "radio"; input.name = "color"; input.value = c.name;
+      input.addEventListener("change", function () { qvColorField.dataset.invalid = "false"; });
+      var face = el("span");
+      var dot = el("i");
+      if (/^#[0-9a-f]{6}$/i.test(c.hex)) dot.style.background = c.hex;
+      face.append(dot, document.createTextNode(c.name));
+      label.append(input, face);
+      qvColors.appendChild(label);
     });
+    qvColorField.hidden = !list.length;
+    qvColorField.dataset.invalid = "false";
+    return list.length > 0;
   }
 
   function openProduct(holder) {
@@ -396,6 +411,7 @@
       price: parseInt(holder.dataset.price, 10) || 0,
       img: holder.dataset.img || "",
       scent: holder.dataset.scent !== "no",
+      colors: false,
       set: holder.dataset.cat === "set",
       spec: [["Состав", holder.dataset.incl], ["Размер", holder.dataset.size],
              ["Горение", holder.dataset.burn], ["Изготовление", "10–14 дней"]]
@@ -409,6 +425,7 @@
     img.src = current.img;
     img.alt = shot ? shot.alt : current.name;
     qvScentField.hidden = !current.scent;
+    current.colors = paintColors(holder.dataset.colors);
     var spec = $("qv-spec");
     if (spec) {
       spec.textContent = "";
@@ -443,9 +460,20 @@
     qvForm.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!current) return;
+      var color = "";
+      if (current.colors) {
+        var picked = qvColors.querySelector("input:checked");
+        if (!picked) {
+          qvColorField.dataset.invalid = "true";
+          qvColors.querySelector("input").focus();
+          return;
+        }
+        color = picked.value;
+      }
       var scent = current.scent ? qvScent.value : "";
-      var sub = [current.sub, scent ? "аромат: " + scent : ""].filter(Boolean).join(" · ");
-      add({ id: current.sku + (scent ? "|" + scent : ""), name: current.name, sub: sub,
+      var sub = [color ? "цвет: " + color.toLowerCase() : current.sub,
+                 scent ? "аромат: " + scent : ""].filter(Boolean).join(" · ");
+      add({ id: [current.sku, color, scent].filter(Boolean).join("|"), name: current.name, sub: sub,
             price: current.price, img: current.img }, qtyNow);
       var label = current.name + (qtyNow > 1 ? " × " + qtyNow : "") + " в корзине";
       closeDialog(qv, function () { say(label); });
@@ -455,29 +483,20 @@
   /* ── the cart against today's catalogue ──
      A cart can sit in a browser for weeks while prices and the range change.
      On every visit each line takes its price, name and photo from the current
-     card (or constructor option); a line whose product is gone is dropped.
+     card; a line whose product is gone is dropped.
      Either way the buyer is told, never surprised at checkout. */
   (function reconcile() {
     var cart = read();
     if (!cart.length) return;
     var dropped = 0, repriced = 0;
-    var options = Array.prototype.slice.call(document.querySelectorAll("#b-shape option[data-price]"));
     var kept = cart.filter(function (l) {
-      var price;
-      if (l.id.indexOf("custom:") === 0) {
-        var shapeName = l.id.slice(7).split("|")[0];
-        var opt = options.filter(function (o) { return o.value === shapeName; })[0];
-        if (!opt) { dropped++; return false; }
-        price = parseInt(opt.dataset.price, 10);
-      } else {
-        var sku = l.id.split("|")[0];
-        var card = null;
-        try { card = document.querySelector('[data-sku="' + (window.CSS && CSS.escape ? CSS.escape(sku) : sku) + '"]'); } catch (e) { card = null; }
-        if (!card) { dropped++; return false; }
-        price = parseInt(card.dataset.price, 10);
-        l.name = card.dataset.name || l.name;
-        l.img = card.dataset.img || l.img;
-      }
+      var sku = l.id.split("|")[0];
+      var card = null;
+      try { card = document.querySelector('[data-sku="' + (window.CSS && CSS.escape ? CSS.escape(sku) : sku) + '"]'); } catch (e) { card = null; }
+      if (!card) { dropped++; return false; }
+      var price = parseInt(card.dataset.price, 10);
+      l.name = card.dataset.name || l.name;
+      l.img = card.dataset.img || l.img;
       if (price && price !== l.price) { l.price = price; repriced++; }
       return true;
     });
@@ -489,76 +508,6 @@
   })();
 
   render();
-
-  /* ── constructor ── */
-  var colorField = $("b-colors");
-  document.querySelectorAll(".duos").forEach(function (group) {
-    group.querySelectorAll("button.duo").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var was = btn.getAttribute("aria-pressed") === "true";
-        group.querySelectorAll("button.duo").forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
-        btn.setAttribute("aria-pressed", String(!was));
-        if (colorField) colorField.value = was ? "" : btn.dataset.pair;
-      });
-    });
-  });
-  if (colorField) {
-    colorField.addEventListener("input", function () {
-      document.querySelectorAll("button.duo").forEach(function (o) {
-        o.setAttribute("aria-pressed", String(o.dataset.pair === colorField.value));
-      });
-    });
-  }
-
-  /* ── constructor preview: what is being built, as it is built ── */
-  var pv = $("preview");
-  function swap(node) {
-    if (!node || reduce) return;
-    node.classList.remove("swap"); void node.offsetWidth; node.classList.add("swap");
-  }
-  function updatePreview(changed) {
-    if (!pv) return;
-    var shape = $("b-shape");
-    var opt = shape && shape.selectedIndex > 0 ? shape.options[shape.selectedIndex] : null;
-    var scent = builderScent ? builderScent.value : "";
-    var colors = colorField ? colorField.value.trim() : "";
-    var chip = document.querySelector('.duo[aria-pressed="true"] i');
-    var photo = $("pv-photo");
-    var sw = $("pv-swatch");
-
-    pv.dataset.state = opt ? "set" : "empty";
-    $("pv-name").textContent = opt ? opt.value : "Ваша свеча";
-    $("pv-price").textContent = opt ? money(parseInt(opt.dataset.price, 10) || 0) : "Цена появится, когда выберете форму";
-    $("pv-scent").textContent = "Аромат: " + (scent || "подберём вместе");
-    $("pv-colors").textContent = "Цвета: " + (colors || "на ваш вкус");
-
-    if (opt && opt.dataset.img) {
-      if (photo.getAttribute("src") !== opt.dataset.img) { photo.src = opt.dataset.img; if (changed === "shape") swap(photo); }
-      photo.alt = opt.value;
-      photo.hidden = false;
-    } else { photo.hidden = true; photo.removeAttribute("src"); photo.alt = ""; }
-
-    // Only a preset pair has two colours to show; free text stays words.
-    if (chip && chip.parentNode.dataset.pair === colors) {
-      sw.style.setProperty("--a", chip.style.getPropertyValue("--a"));
-      sw.style.setProperty("--b", chip.style.getPropertyValue("--b"));
-      pv.dataset.pair = "set";
-    } else {
-      sw.style.removeProperty("--a"); sw.style.removeProperty("--b");
-      pv.dataset.pair = "none";
-    }
-    if (changed === "colors") swap(sw);
-  }
-  if (pv) {
-    var shapeField = $("b-shape");
-    if (shapeField) shapeField.addEventListener("change", function () { updatePreview("shape"); });
-    if (builderScent) builderScent.addEventListener("change", function () { updatePreview("scent"); });
-    if (colorField) colorField.addEventListener("input", function () { updatePreview("colors"); });
-    document.querySelectorAll(".duos .duo").forEach(function (btn) {
-      btn.addEventListener("click", function () { updatePreview("colors"); });
-    });
-    updatePreview();
-  }
 
   function fieldOf(input) { return input.closest("[data-field]"); }
   function validate(input) {
@@ -578,33 +527,6 @@
       else input.setAttribute("aria-describedby", err.id);
     }
     return ok;
-  }
-
-  var builder = $("builder-form");
-  if (builder) {
-    builder.addEventListener("submit", function (event) {
-      event.preventDefault();
-      var shape = $("b-shape");
-      if (!validate(shape)) { shape.focus(); return; }
-      var price = parseInt(shape.options[shape.selectedIndex].dataset.price, 10) || 0;
-      var scent = builderScent ? builderScent.value : "";
-      var colors = colorField ? colorField.value.trim() : "";
-      var pressed = builder.querySelector(".duo[aria-pressed=\"true\"] i");
-      var swatch = null;
-      if (pressed && colors === pressed.parentNode.dataset.pair) {
-        var a = pressed.style.getPropertyValue("--a").trim(), b = pressed.style.getPropertyValue("--b").trim();
-        if (a && b) swatch = [a, b];
-      }
-      var parts = [];
-      if (scent) parts.push("аромат: " + scent);
-      if (colors) parts.push("цвета: " + colors);
-      add({ id: "custom:" + shape.value + "|" + scent + "|" + colors, name: shape.value,
-            sub: parts.join(" · ") || "аромат и цвет подберём в переписке",
-            price: price, img: "", swatch: swatch });
-      say(shape.value + " в корзине");
-    });
-    var shapeSel = $("b-shape");
-    if (shapeSel) shapeSel.addEventListener("change", function () { validate(shapeSel); });
   }
 
   /* ── checkout ── */

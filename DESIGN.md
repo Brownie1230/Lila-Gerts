@@ -104,7 +104,7 @@ the subsets the page uses. Emphasis inside a heading uses italic of the same fam
 ## Layout and shape
 
 Order on the page: bar · first screen · promise band and doors · catalogue (stripe) · pet holders ·
-constructor · about the candles (cream panel) · how to order · delivery (stripe) · terms of sale ·
+about the candles (cream panel) · how to order · delivery (stripe) · terms of sale ·
 privacy · footer. Overlays: product sheet, cart drawer, toast.
 
 **Shape rule:** buttons and chips are full pill; photographs and cards are 2px; panels and
@@ -116,25 +116,25 @@ No eyebrows above headings. Lists use a hairline dash marker. Numbers and sums n
 
 - **Every "в корзину" opens the product sheet**: big photo, her facts, scent (optional:
   "Подобрать вместе в переписке"), quantity. A card cannot hold seventeen scents, and every candle
-  needs one. Same product in two scents is two cart lines. The scent list is read from the
-  constructor's `<select>`, so there is one list.
+  needs one. Same product in two scents is two cart lines. The scent list lives in the sheet's
+  own `<select id="qv-scent">`.
+- **Colour on the single pion only.** A card with `data-colors="Name:#hex;…"` gets colour chips
+  (real radios) in the sheet, none preselected; adding without a colour shows "Выберите цвет
+  пиона." The cart line reads "цвет: белый · аромат: …". Her call on 20 Oct: the photo shows
+  four pions, so without a choice nobody knew which one they bought.
 - **Cart drawer** from the right, reachable from anywhere; checkout sits under the lines. Goods,
   delivery and total are shown separately. The cart lives in `localStorage` only.
 - **Toast** after an add, with "Открыть корзину"; the bar count bumps. Nothing opens on its own.
 - **Filters** Все / Свечи / Наборы over the cards, by `data-cat`.
-- **Constructor**: form, scent and a colour pair become one custom line; its cart line shows the
-  two chosen colours in place of a photo. A **live preview** shows the candle being built: the
-  form's photograph (from `data-img` on the `<option>`), the chosen pair as a two-tone disc over
-  its corner, the scent and the price. Free-text colours stay words; only a preset pair has two
-  colours to draw. On a phone the preview becomes a compact strip that sticks under the bar
-  while the form is filled, because a long form would scroll it away exactly when it matters.
+- **No constructor.** Removed on 20 Oct at her request: buyers could not picture a candle
+  without a photograph. New colourways come as photographed sets with their own cards.
 - **Checkout** (name, phone, Ozon point, note, consent). The phone needs 10–15 digits in any
   format. Name, phone and pickup point are remembered in the browser for next time. Each order
   gets a number `LG-ДДММ-NNNN`, used in the email subject, in the thank-you screen and in the
   copied text, so buyer and seller can refer to it in a chat. The button locks while sending.
 - **The cart is reconciled with the catalogue on every visit.** A cart can sit in a browser for
   weeks while prices and the range change: each line takes its current price, name and photo
-  from its card (or constructor option), a line whose product is gone is dropped, and a toast
+  from its card, a line whose product is gone is dropped, and a toast
   says which of the two happened. Nobody checks out at a stale price.
 - After an order, and when sending fails, there is a real "Написать в Telegram" link, not only
   the words "write to us".
@@ -226,3 +226,5 @@ confirm delivery to her inbox.
   numbers, thank-you screen, phone check, remembered details; responsive images; grain 366→17 KB;
   structured data; 404 page; axe-core clean; this file rewritten; live constructor preview; copy
   pass removing claims that were not hers; saved carts reconciled with the catalogue.
+  Wordmark set as in her Word file (Pinyon Script + Tinos Bold). Constructor removed at her
+  request; the single pion got colour chips instead. A peach set is coming as a new card.
