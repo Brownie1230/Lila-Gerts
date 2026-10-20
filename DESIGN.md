@@ -122,7 +122,11 @@ No eyebrows above headings. Lists use a hairline dash marker. Numbers and sums n
 - **Toast** after an add, with "Открыть корзину"; the bar count bumps. Nothing opens on its own.
 - **Filters** Все / Свечи / Наборы over the cards, by `data-cat`.
 - **Constructor**: form, scent and a colour pair become one custom line; its cart line shows the
-  two chosen colours in place of a photo.
+  two chosen colours in place of a photo. A **live preview** shows the candle being built: the
+  form's photograph (from `data-img` on the `<option>`), the chosen pair as a two-tone disc over
+  its corner, the scent and the price. Free-text colours stay words; only a preset pair has two
+  colours to draw. On a phone the preview becomes a compact strip that sticks under the bar
+  while the form is filled, because a long form would scroll it away exactly when it matters.
 - **Checkout** (name, phone, Ozon point, note, consent). The phone needs 10–15 digits in any
   format. Name, phone and pickup point are remembered in the browser for next time. Each order
   gets a number `LG-ДДММ-NNNN`, used in the email subject, in the thank-you screen and in the
@@ -143,7 +147,7 @@ No eyebrows above headings. Lists use a hairline dash marker. Numbers and sums n
 | Stage rides over the sticky first screen; the hero recedes (`animation-timeline: scroll()`) | storytelling, the page's one authorial device |
 | Scroll reveal (IntersectionObserver), staggered in cards | storytelling |
 | Drawer slides in, sheet rises, both play an exit | state change |
-| Toast, counter bump | feedback |
+| Toast, counter bump, preview photo and disc pop in on change | feedback |
 | Card photo slow zoom, pet frames straighten on hover | feedback |
 | Promise ticker (the only marquee) | ambient brand line, pauses on hover |
 
@@ -206,4 +210,4 @@ confirm delivery to her inbox.
   terms of sale with seller and returns; FormSubmit wired.
 - **20 Oct** Quality pass: mascot recut; burger icon centring bug; old-browser fallbacks; order
   numbers, thank-you screen, phone check, remembered details; responsive images; grain 366→17 KB;
-  structured data; 404 page; axe-core clean; this file rewritten.
+  structured data; 404 page; axe-core clean; this file rewritten; live constructor preview.

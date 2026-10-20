@@ -470,6 +470,56 @@
     });
   }
 
+  /* ── constructor preview: what is being built, as it is built ── */
+  var pv = $("preview");
+  function swap(node) {
+    if (!node || reduce) return;
+    node.classList.remove("swap"); void node.offsetWidth; node.classList.add("swap");
+  }
+  function updatePreview(changed) {
+    if (!pv) return;
+    var shape = $("b-shape");
+    var opt = shape && shape.selectedIndex > 0 ? shape.options[shape.selectedIndex] : null;
+    var scent = builderScent ? builderScent.value : "";
+    var colors = colorField ? colorField.value.trim() : "";
+    var chip = document.querySelector('.duo[aria-pressed="true"] i');
+    var photo = $("pv-photo");
+    var sw = $("pv-swatch");
+
+    pv.dataset.state = opt ? "set" : "empty";
+    $("pv-name").textContent = opt ? opt.value : "Ваша свеча";
+    $("pv-price").textContent = opt ? money(parseInt(opt.dataset.price, 10) || 0) : "Цена появится, когда выберете форму";
+    $("pv-scent").textContent = "Аромат: " + (scent || "подберём вместе");
+    $("pv-colors").textContent = "Цвета: " + (colors || "на ваш вкус");
+
+    if (opt && opt.dataset.img) {
+      if (photo.getAttribute("src") !== opt.dataset.img) { photo.src = opt.dataset.img; if (changed === "shape") swap(photo); }
+      photo.alt = opt.value;
+      photo.hidden = false;
+    } else { photo.hidden = true; photo.removeAttribute("src"); photo.alt = ""; }
+
+    // Only a preset pair has two colours to show; free text stays words.
+    if (chip && chip.parentNode.dataset.pair === colors) {
+      sw.style.setProperty("--a", chip.style.getPropertyValue("--a"));
+      sw.style.setProperty("--b", chip.style.getPropertyValue("--b"));
+      pv.dataset.pair = "set";
+    } else {
+      sw.style.removeProperty("--a"); sw.style.removeProperty("--b");
+      pv.dataset.pair = "none";
+    }
+    if (changed === "colors") swap(sw);
+  }
+  if (pv) {
+    var shapeField = $("b-shape");
+    if (shapeField) shapeField.addEventListener("change", function () { updatePreview("shape"); });
+    if (builderScent) builderScent.addEventListener("change", function () { updatePreview("scent"); });
+    if (colorField) colorField.addEventListener("input", function () { updatePreview("colors"); });
+    document.querySelectorAll(".duos .duo").forEach(function (btn) {
+      btn.addEventListener("click", function () { updatePreview("colors"); });
+    });
+    updatePreview();
+  }
+
   function fieldOf(input) { return input.closest("[data-field]"); }
   function validate(input) {
     var wrap = fieldOf(input);

@@ -224,9 +224,26 @@
          товара. Цена формы берётся из data-price у <option>. -->
     <section class="sec wrap" id="builder">
       <div class="builder">
-        <div class="sec-head" data-reveal>
-          <h2>Конструктор свечей</h2>
-          <p>Соберите свечу под себя: форма, аромат и сочетание цветов. Получится отдельная позиция в корзине.</p>
+        <div class="builder-side">
+          <div class="sec-head" data-reveal>
+            <h2>Конструктор свечей</h2>
+            <p>Соберите свечу под себя: форма, аромат и сочетание цветов. Получится отдельная позиция в корзине.</p>
+          </div>
+
+          <!-- Превью собирается из того, что выбрано в форме справа. Фото формы
+               берётся из data-img у <option>, цвета — из выбранной кнопки сочетания. -->
+          <figure class="preview" id="preview" data-reveal style="--d:60ms" data-state="empty">
+            <div class="preview-art">
+              <img class="preview-photo" id="pv-photo" alt="" width="360" height="480" hidden>
+              <span class="preview-swatch" id="pv-swatch" aria-hidden="true"></span>
+            </div>
+            <figcaption class="preview-say">
+              <span class="price" id="pv-price">Цена появится, когда выберете форму</span>
+              <span class="card-name" id="pv-name">Ваша свеча</span>
+              <span class="card-sub" id="pv-scent">Аромат: подберём вместе</span>
+              <span class="card-sub" id="pv-colors">Цвета: на ваш вкус</span>
+            </figcaption>
+          </figure>
         </div>
 
         <form class="form" id="builder-form" novalidate data-reveal style="--d:90ms">
@@ -234,10 +251,10 @@
             <label for="b-shape">Форма</label>
             <select id="b-shape" name="shape" required>
               <option value="">Выберите форму</option>
-              <option data-price="500" value="Свеча «Pion»">Свеча «Pion», 500&nbsp;₽</option>
-              <option data-price="2999" value="Набор «Juli»">Набор «Juli», 2&nbsp;999&nbsp;₽</option>
-              <option data-price="1999" value="Набор «Nina»">Набор «Nina», 1&nbsp;999&nbsp;₽</option>
-              <option data-price="1999" value="Свеча «Moon»">Свеча «Moon», 1&nbsp;999&nbsp;₽</option>
+              <option data-price="500" data-img="assets/img/catalog/pion-choice-360.webp" value="Свеча «Pion»">Свеча «Pion», 500&nbsp;₽</option>
+              <option data-price="2999" data-img="assets/img/catalog/juli-rose-green-360.webp" value="Набор «Juli»">Набор «Juli», 2&nbsp;999&nbsp;₽</option>
+              <option data-price="1999" data-img="assets/img/catalog/nina-bordo-360.webp" value="Набор «Nina»">Набор «Nina», 1&nbsp;999&nbsp;₽</option>
+              <option data-price="1999" data-img="assets/img/moon-white-360.webp" value="Свеча «Moon»">Свеча «Moon», 1&nbsp;999&nbsp;₽</option>
             </select>
             <span class="err" data-error>Выберите форму свечи.</span>
           </div>
@@ -417,7 +434,7 @@
 <dialog class="qv" id="qv" aria-labelledby="qv-name">
   <button class="x" type="button" data-close aria-label="Закрыть">×</button>
   <div class="qv-grid">
-    <div class="qv-shot"><img id="qv-img" src="" alt="" width="720" height="960"></div>
+    <div class="qv-shot"><img id="qv-img" alt="" width="720" height="960"></div>
     <form class="qv-body" id="qv-form" novalidate>
       <p class="price price--big" id="qv-price"></p>
       <h2 class="qv-name" id="qv-name"></h2>
