@@ -730,8 +730,11 @@
       delete status.dataset.state;
       status.textContent = "";
       $("done-no").textContent = no;
-      $("done-text").textContent = "Напишем вам по номеру " + order.phone +
-        ", чтобы подтвердить заказ и прислать счёт на оплату. Номер заказа пригодится в переписке.";
+      // A phone number never breaks across lines.
+      var doneText = $("done-text");
+      doneText.textContent = "Напишем вам по номеру ";
+      doneText.appendChild(el("span", "nw", order.phone));
+      doneText.appendChild(document.createTextNode(", чтобы подтвердить заказ и прислать счёт на оплату. Номер заказа пригодится в переписке."));
       $("f-note").value = "";
       $("f-ok").checked = false;
       write([]);
