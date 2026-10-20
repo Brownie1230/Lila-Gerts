@@ -396,6 +396,7 @@
       price: parseInt(holder.dataset.price, 10) || 0,
       img: holder.dataset.img || "",
       scent: holder.dataset.scent !== "no",
+      set: holder.dataset.cat === "set",
       spec: [["Состав", holder.dataset.incl], ["Размер", holder.dataset.size],
              ["Горение", holder.dataset.burn], ["Изготовление", "10–14 дней"]]
     };
@@ -419,9 +420,12 @@
       });
     }
     qvScent.value = "";
-    $("qv-incl").textContent = current.scent
-      ? "В комплекте спички в стеклянной колбе и подарочная упаковка."
-      : "В подарок спички, сменные чайные свечи, подарочная упаковка и открытка с посланием. Фото кошки попросим после оплаты.";
+    // Matches in a glass tube are promised with every candle set, not with a
+    // single candle; the gift wrap goes with every order.
+    $("qv-incl").textContent = !current.scent
+      ? "В подарок спички, сменные чайные свечи, подарочная упаковка и открытка с посланием. Фото кошки попросим после оплаты."
+      : current.set ? "В комплекте спички в стеклянной колбе и подарочная упаковка."
+      : "Отправим в подарочной упаковке.";
     openDialog(qv);
   }
 

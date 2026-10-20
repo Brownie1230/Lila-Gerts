@@ -186,11 +186,18 @@ tile is 17 KB (was 366 KB): its constant alpha is folded into `opacity`. A phone
 - The skill bans the em-dash; in Russian the тире is orthography, so the ban holds for decoration
   (headings, labels, buttons, captions) and is lifted in body copy.
 - No invented facts or precision. A product with no figures from her shows none.
+- No claims beyond hers. Copy written for the first build said a candle "can be burned near
+  children" and that safety is "the first thing we check"; neither was hers, and the first is
+  advice about open flame. Removed on 20 Oct, with "size and inscription chosen for the occasion".
 
 ## Open items
 
 From Nina: ИНН · colour palette · real reviews · Instagram and TikTok links · whether single
-Pion matches the set candles · confirmation of the delivery reading · ЮKassa approval · a domain.
+Pion matches the set candles · whether single candles (Pion, Moon) also come with matches (the
+site promises matches with sets only) · confirmation of the delivery reading · ЮKassa approval ·
+a domain.
+For the owner: the privacy text describes what the form actually does; it has not been checked
+by a lawyer. That note used to sit on the page itself, in front of buyers, and was moved here.
 From the developer: one test order to trigger FormSubmit's activation email, then a second to
 confirm delivery to her inbox.
 
