@@ -452,6 +452,42 @@
     });
   }
 
+  /* ── the cart against today's catalogue ──
+     A cart can sit in a browser for weeks while prices and the range change.
+     On every visit each line takes its price, name and photo from the current
+     card (or constructor option); a line whose product is gone is dropped.
+     Either way the buyer is told, never surprised at checkout. */
+  (function reconcile() {
+    var cart = read();
+    if (!cart.length) return;
+    var dropped = 0, repriced = 0;
+    var options = Array.prototype.slice.call(document.querySelectorAll("#b-shape option[data-price]"));
+    var kept = cart.filter(function (l) {
+      var price;
+      if (l.id.indexOf("custom:") === 0) {
+        var shapeName = l.id.slice(7).split("|")[0];
+        var opt = options.filter(function (o) { return o.value === shapeName; })[0];
+        if (!opt) { dropped++; return false; }
+        price = parseInt(opt.dataset.price, 10);
+      } else {
+        var sku = l.id.split("|")[0];
+        var card = null;
+        try { card = document.querySelector('[data-sku="' + (window.CSS && CSS.escape ? CSS.escape(sku) : sku) + '"]'); } catch (e) { card = null; }
+        if (!card) { dropped++; return false; }
+        price = parseInt(card.dataset.price, 10);
+        l.name = card.dataset.name || l.name;
+        l.img = card.dataset.img || l.img;
+      }
+      if (price && price !== l.price) { l.price = price; repriced++; }
+      return true;
+    });
+    if (!dropped && !repriced) return;
+    write(kept);
+    say(dropped
+      ? (dropped === 1 ? "Одного товара больше нет в каталоге, он убран из корзины." : "Некоторых товаров больше нет в каталоге, они убраны из корзины.")
+      : "Цены в корзине обновлены по каталогу.");
+  })();
+
   render();
 
   /* ── constructor ── */
@@ -647,8 +683,11 @@
         if (submitBtn) submitBtn.disabled = false;
         status.dataset.state = "sent";
         status.textContent = reason + (copied
-          ? " Заказ скопирован: вставьте его в сообщение в Telegram или на почту, и мы оформим."
-          : " Напишите нам в Telegram или на почту, и мы оформим заказ.");
+          ? " Заказ скопирован: вставьте его в сообщение в Telegram или на почту, и мы оформим. "
+          : " Напишите нам в Telegram или на почту, и мы оформим заказ. ");
+        var tg = el("a", "quiet", "Написать в Telegram");
+        tg.href = "https://t.me/Nina.G1999"; tg.target = "_blank"; tg.rel = "noopener";
+        status.appendChild(tg);
       };
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text.join("\n")).then(function () { done(true); }, function () { done(false); });

@@ -131,6 +131,12 @@ No eyebrows above headings. Lists use a hairline dash marker. Numbers and sums n
   format. Name, phone and pickup point are remembered in the browser for next time. Each order
   gets a number `LG-ДДММ-NNNN`, used in the email subject, in the thank-you screen and in the
   copied text, so buyer and seller can refer to it in a chat. The button locks while sending.
+- **The cart is reconciled with the catalogue on every visit.** A cart can sit in a browser for
+  weeks while prices and the range change: each line takes its current price, name and photo
+  from its card (or constructor option), a line whose product is gone is dropped, and a toast
+  says which of the two happened. Nobody checks out at a stale price.
+- After an order, and when sending fails, there is a real "Написать в Telegram" link, not only
+  the words "write to us".
 - **Sending**: FormSubmit's AJAX endpoint for `lila_gerts@mail.ru`, one flat table row per field.
   It answers 200 even when it refuses, so success is read from the body. **An order is never
   swallowed**: on any failure, or with no endpoint, the order text is copied for the buyer to
@@ -217,4 +223,5 @@ confirm delivery to her inbox.
   terms of sale with seller and returns; FormSubmit wired.
 - **20 Oct** Quality pass: mascot recut; burger icon centring bug; old-browser fallbacks; order
   numbers, thank-you screen, phone check, remembered details; responsive images; grain 366→17 KB;
-  structured data; 404 page; axe-core clean; this file rewritten; live constructor preview.
+  structured data; 404 page; axe-core clean; this file rewritten; live constructor preview; copy
+  pass removing claims that were not hers; saved carts reconciled with the catalogue.
