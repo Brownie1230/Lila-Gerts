@@ -600,7 +600,7 @@
     if (order.note) text.push("Комментарий: " + order.note);
 
     // Never swallow an order: when it cannot be sent, hand it to the buyer.
-    function handOver(reason) {
+    function handOver(reason, detail) {
       var done = function (copied) {
         if (submitBtn) submitBtn.disabled = false;
         status.dataset.state = "sent";
@@ -610,6 +610,9 @@
         var tg = el("a", "quiet", "Написать в Telegram");
         tg.href = "https://t.me/Nina.G1999"; tg.target = "_blank"; tg.rel = "noopener";
         status.appendChild(tg);
+        // The service's own words, small: enough to tell "not activated" from
+        // "could not reach it" when someone sends a screenshot.
+        if (detail) status.appendChild(el("small", "status-detail", "Причина: " + detail));
       };
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text.join("\n")).then(function () { done(true); }, function () { done(false); });
@@ -663,6 +666,6 @@
       justOrdered = true;
       render();
       if (doneEl) doneEl.focus();
-    }).catch(function () { handOver("Не удалось отправить заказ."); });
+    }).catch(function (err) { handOver("Не удалось отправить заказ.", err && err.message ? String(err.message).slice(0, 200) : ""); });
   });
 })();
