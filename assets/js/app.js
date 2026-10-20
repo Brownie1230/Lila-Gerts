@@ -79,27 +79,71 @@
     document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
   }
 
-  /* ── dialogs: native <dialog> for focus trap and Esc; we only add the exit ── */
+  /* ── dialogs: native <dialog> for focus trap and Esc; we only add the exit ──
+     Old Safari (before iOS 15.4) has no <dialog>: there the open attribute is
+     toggled by hand, a scrim stands in for the backdrop and Esc is ours. */
+  var nativeDialog = typeof HTMLDialogElement === "function" &&
+                     typeof HTMLDialogElement.prototype.showModal === "function";
+  if (!nativeDialog) root.classList.add("no-dialog");
+  var scrim = null;
+  var lastFocus = null;
+
+  function isOpen(d) { return !!d && d.hasAttribute("open"); }
+  function anyOpen() { return Array.prototype.some.call(document.querySelectorAll("dialog"), isOpen); }
+  function syncLock() { root.classList.toggle("is-locked", anyOpen()); }
+
   function openDialog(d) {
-    if (!d || d.open) return;
+    if (!d || isOpen(d)) return;
     d.classList.remove("closing");
-    d.showModal();
+    lastFocus = document.activeElement;
+    if (nativeDialog) d.showModal();
+    else {
+      if (!scrim) {
+        scrim = document.createElement("div");
+        scrim.className = "scrim";
+        scrim.addEventListener("click", function () {
+          document.querySelectorAll("dialog[open]").forEach(function (x) { closeDialog(x); });
+        });
+      }
+      document.body.appendChild(scrim);
+      d.setAttribute("open", "");
+      var first = d.querySelector("button, select, input, a[href]");
+      if (first) first.focus();
+    }
+    syncLock();
+  }
+  function shut(d) {
+    if (nativeDialog) d.close();
+    else {
+      d.removeAttribute("open");
+      if (scrim && !anyOpen() && scrim.parentNode) scrim.parentNode.removeChild(scrim);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    syncLock();
   }
   function closeDialog(d, then) {
-    if (!d || !d.open) { if (then) then(); return; }
-    if (reduce) { d.close(); if (then) then(); return; }
+    if (!isOpen(d)) { if (then) then(); return; }
+    if (reduce) { shut(d); if (then) then(); return; }
     d.classList.add("closing");
     var done = false;
     var finish = function () {
       if (done) return; done = true;
-      d.classList.remove("closing"); d.close(); if (then) then();
+      d.classList.remove("closing"); shut(d); if (then) then();
     };
     d.addEventListener("animationend", finish, { once: true });
     window.setTimeout(finish, 400); // in case the animation never runs
   }
+  if (!nativeDialog) {
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      document.querySelectorAll("dialog[open]").forEach(function (x) { closeDialog(x); });
+    });
+  }
   document.querySelectorAll("dialog").forEach(function (d) {
     // Esc: play the exit instead of vanishing.
     d.addEventListener("cancel", function (e) { e.preventDefault(); closeDialog(d); });
+    // A native close (form method=dialog, browser UI) must release the page too.
+    d.addEventListener("close", syncLock);
     // A click on the backdrop lands on the dialog element itself.
     d.addEventListener("click", function (e) { if (e.target === d) closeDialog(d); });
     d.querySelectorAll("[data-close]").forEach(function (b) {
@@ -134,6 +178,8 @@
   var hintEl = $("ship-hint");
   var countEl = $("cart-count");
   var form = $("order-form");
+  var doneEl = $("order-done");
+  var justOrdered = false; // keep the thank-you on screen until the cart is reopened
 
   function shipFor(goods) { return goods >= FREE_FROM ? 0 : SHIP; }
   function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP) + NBSP + "₽"; }
@@ -153,6 +199,7 @@
   }
   function add(line, qty) {
     qty = qty || 1;
+    justOrdered = false;
     var cart = read();
     var found = cart.filter(function (l) { return l.id === line.id; })[0];
     if (found) found.qty += qty;
@@ -229,7 +276,8 @@
       linesEl.appendChild(li);
     });
 
-    if (emptyEl) emptyEl.hidden = count > 0;
+    if (emptyEl) emptyEl.hidden = count > 0 || justOrdered;
+    if (doneEl) doneEl.hidden = !(justOrdered && count === 0);
     if (totalEl) totalEl.hidden = count === 0;
     if (form) form.hidden = count === 0;
     var ship = shipFor(total);
@@ -243,7 +291,7 @@
     }
   }
 
-  function openCart() { render(); openDialog(drawer); }
+  function openCart() { justOrdered = false; render(); openDialog(drawer); }
   var cartOpen = $("cart-open");
   if (cartOpen) cartOpen.addEventListener("click", openCart);
 
@@ -263,8 +311,49 @@
     toast.hidden = true; openCart();
   });
 
+  /* ── structured data for search: built from the cards themselves, so a price
+     edited on a card is the price the search engines read. One source. ── */
+  (function () {
+    var base = location.href.split("#")[0].replace(/index\.html$/, "");
+    var abs = function (u) { try { return new URL(u, base).href; } catch (e) { return u; } };
+    var items = Array.prototype.map.call(document.querySelectorAll("[data-sku][data-price]"), function (c, i) {
+      var desc = [c.dataset.incl, c.dataset.size, c.dataset.burn].filter(Boolean).join(". ");
+      return {
+        "@type": "ListItem", position: i + 1,
+        item: {
+          "@type": "Product",
+          name: c.dataset.name + (c.dataset.sub ? ", " + c.dataset.sub : ""),
+          image: abs(c.dataset.img),
+          description: desc || "Ручная работа Lila Gerts. Изготовление 10–14 дней.",
+          brand: { "@type": "Brand", name: "Lila Gerts" },
+          offers: {
+            "@type": "Offer", price: c.dataset.price, priceCurrency: "RUB",
+            availability: "https://schema.org/MadeToOrder", url: base + "#" + (c.closest("section") || {}).id
+          }
+        }
+      };
+    });
+    var data = [{
+      "@context": "https://schema.org", "@type": "OnlineStore",
+      name: "Lila Gerts", url: base, logo: abs("assets/img/logo.png"), image: abs("assets/img/og.jpg"),
+      description: "Авторские свечи и гипсовые подсвечники ручной работы.",
+      email: "lila_gerts@mail.ru", sameAs: ["https://t.me/Nina.G1999"], areaServed: "RU", currenciesAccepted: "RUB"
+    }, { "@context": "https://schema.org", "@type": "ItemList", name: "Свечи, наборы и подсвечники", itemListElement: items }];
+    var tag = document.createElement("script");
+    tag.type = "application/ld+json";
+    tag.textContent = JSON.stringify(data);
+    document.head.appendChild(tag);
+  })();
+
   /* ── catalogue filters ── */
   var shop = $("shop");
+  // Counts come from the cards, so adding or removing a card never leaves a stale number.
+  if (shop) document.querySelectorAll(".chip[data-filter]").forEach(function (chip) {
+    var f = chip.dataset.filter;
+    var n = shop.querySelectorAll(f === "all" ? ".card" : '.card[data-cat="' + f + '"]').length;
+    var badge = chip.querySelector("span");
+    if (badge) badge.textContent = String(n);
+  });
   document.querySelectorAll(".chip[data-filter]").forEach(function (chip, _, all) {
     chip.addEventListener("click", function () {
       var f = chip.dataset.filter;
@@ -385,6 +474,10 @@
   function validate(input) {
     var wrap = fieldOf(input);
     if (!wrap) return true;
+    if (input.id === "f-phone") {
+      var digits = input.value.replace(/\D/g, "").length;
+      input.setCustomValidity(input.value && (digits < 10 || digits > 15) ? "phone" : "");
+    }
     var ok = input.checkValidity();
     wrap.dataset.invalid = String(!ok);
     input.setAttribute("aria-invalid", String(!ok));
@@ -429,6 +522,28 @@
   var status = $("form-status");
   var endpoint = form.dataset.endpoint || "";
 
+  // The buyer's details survive a closed drawer and come back for the next order.
+  var BUYER = "lg-buyer";
+  var remembered = ["f-name", "f-phone", "f-pvz"];
+  try {
+    var saved = JSON.parse(localStorage.getItem(BUYER) || "{}");
+    remembered.forEach(function (id) { if (typeof saved[id] === "string" && $(id)) $(id).value = saved[id]; });
+  } catch (e) { /* private mode or junk: start empty */ }
+  function rememberBuyer() {
+    var o = {};
+    remembered.forEach(function (id) { if ($(id)) o[id] = $(id).value; });
+    try { localStorage.setItem(BUYER, JSON.stringify(o)); } catch (e) { /* private mode */ }
+  }
+  remembered.forEach(function (id) { if ($(id)) $(id).addEventListener("input", rememberBuyer); });
+
+  // Short, readable, said aloud in a chat: LG-ДДММ-NNNN.
+  function orderNumber() {
+    var d = new Date();
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    return "LG-" + pad(d.getDate()) + pad(d.getMonth() + 1) + "-" + String(1000 + Math.floor(Math.random() * 9000));
+  }
+  var submitBtn = form.querySelector("button[type=submit]");
+
   form.querySelectorAll("input, select, textarea").forEach(function (input) {
     input.addEventListener("blur", function () { validate(input); });
     input.addEventListener("input", function () {
@@ -449,7 +564,9 @@
     var data = new FormData(form);
     var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
     var ship = shipFor(total);
+    var no = orderNumber();
     var order = {
+      no: no,
       items: cart.map(function (l) { return { name: l.name, sub: l.sub, price: l.price, qty: l.qty }; }),
       total: total, ship: ship, name: data.get("name"), phone: data.get("phone"),
       pvz: data.get("pvz"), note: data.get("note")
@@ -457,10 +574,11 @@
 
     status.dataset.state = "sending";
     status.textContent = "Отправляем заказ";
+    if (submitBtn) submitBtn.disabled = true; // one tap, one order
 
     // The order as plain text: what she reads if sending fails and the buyer
     // pastes it into Telegram instead.
-    var text = ["Заказ с сайта Lila Gerts", ""]
+    var text = ["Заказ " + no + " с сайта Lila Gerts", ""]
       .concat(cart.map(function (l) {
         return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
       }))
@@ -472,6 +590,7 @@
     // Never swallow an order: when it cannot be sent, hand it to the buyer.
     function handOver(reason) {
       var done = function (copied) {
+        if (submitBtn) submitBtn.disabled = false;
         status.dataset.state = "sent";
         status.textContent = reason + (copied
           ? " Заказ скопирован: вставьте его в сообщение в Telegram или на почту, и мы оформим."
@@ -490,9 +609,10 @@
       return l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " = " + (l.price * l.qty) + " руб.";
     }).join("\n");
     var payload = {
-      _subject: "Заказ с сайта Lila Gerts: " + (order.name || "") + ", " + (total + ship) + " руб.",
+      _subject: "Заказ " + no + ": " + (order.name || "") + ", " + (total + ship) + " руб.",
       _template: "table",
       _captcha: "false",
+      "Номер заказа": no,
       "Заказ": lines,
       "Товары": total + " руб.",
       "Доставка": ship ? ship + " руб." : "бесплатно",
@@ -513,13 +633,18 @@
       // FormSubmit answers 200 even when it refuses (not yet activated), so
       // trust the body, not the status.
       if (json && json.success !== true && json.success !== "true") throw new Error(json.message || "refused");
-      status.dataset.state = "sent";
-      status.textContent = "Заказ принят. Напишем вам, чтобы подтвердить и прислать счёт на оплату.";
-      form.reset();
+      if (submitBtn) submitBtn.disabled = false;
+      delete status.dataset.state;
+      status.textContent = "";
+      $("done-no").textContent = no;
+      $("done-text").textContent = "Напишем вам по номеру " + order.phone +
+        ", чтобы подтвердить заказ и прислать счёт на оплату. Номер заказа пригодится в переписке.";
+      $("f-note").value = "";
+      $("f-ok").checked = false;
       write([]);
+      justOrdered = true;
       render();
-      if (emptyEl) emptyEl.hidden = true; // keep the confirmation on screen, not the empty state
-      form.hidden = false;
+      if (doneEl) doneEl.focus();
     }).catch(function () { handOver("Не удалось отправить заказ."); });
   });
 })();
