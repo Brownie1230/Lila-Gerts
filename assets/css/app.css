@@ -59,11 +59,14 @@ a{color:inherit}
 .sec-head p{margin-top:18px;color:var(--ink-soft);max-width:48ch;font-size:clamp(1.1rem, 1rem + .35vw, 1.35rem)}
 
 /* Grain stays fixed and inert; never on a scrolling box. */
+/* The texture carries no alpha: the old PNG held a constant 34/255 alpha, now
+   folded into the opacity, which shrinks the file from 366 KB to 17. The tile
+   is shown at 1:1 instead of halved, so its noise is no longer averaged away;
+   .037 matches the old texture as measured on the stripe. One look for every
+   visitor: it follows the site's theme, not the phone's. */
 .grain{position:fixed;inset:0;z-index:60;pointer-events:none;
-  background-image:url("../img/grain.png");background-size:180px 180px;
-  opacity:.45;mix-blend-mode:multiply}
-@media (prefers-color-scheme:dark){.grain{mix-blend-mode:screen;opacity:.2}}
-:root[data-theme="dark"] .grain{mix-blend-mode:screen;opacity:.2}
+  background-image:url("../img/grain.webp");background-size:180px 180px;
+  opacity:.037;mix-blend-mode:multiply}
 
 /* ── buttons: one shape, one accent ───────────────────────────── */
 .btn{
@@ -94,7 +97,7 @@ a{color:inherit}
 
 /* ── navigation ───────────────────────────────────────────────── */
 .nav{position:sticky;top:0;z-index:40;height:72px;display:flex;align-items:center;
-  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px) saturate(150%);
+  background:var(--bg);background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px) saturate(150%);
   border-bottom:1px solid transparent;transition:border-color .4s var(--e)}
 .nav[data-stuck="true"]{border-bottom-color:var(--rule)}
 @media (prefers-reduced-transparency:reduce){.nav{background:var(--bg);backdrop-filter:none}}
@@ -109,13 +112,15 @@ a{color:inherit}
 .tgl:hover{border-color:var(--accent);color:var(--accent)}
 .burger{display:none;width:38px;height:38px;border:1px solid var(--rule-strong);border-radius:99px;
   background:none;color:var(--ink);cursor:pointer;padding:0;place-items:center}
-.burger span{display:block;width:16px;height:1px;background:currentColor;position:relative}
-.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:1px;
+/* Only the drawn icon: a bare "span" here also caught the screen-reader label,
+   undid its hiding and made it a second grid row that pushed the icon up. */
+.burger > span[aria-hidden]{display:block;width:16px;height:1px;background:currentColor;position:relative}
+.burger > span[aria-hidden]::before,.burger > span[aria-hidden]::after{content:"";position:absolute;left:0;width:16px;height:1px;
   background:currentColor;transition:transform .4s var(--e)}
-.burger span::before{top:-5px}.burger span::after{top:5px}
-.burger[aria-expanded="true"] span{background:transparent}
-.burger[aria-expanded="true"] span::before{transform:translateY(5px) rotate(45deg)}
-.burger[aria-expanded="true"] span::after{transform:translateY(-5px) rotate(-45deg)}
+.burger > span[aria-hidden]::before{top:-5px}.burger > span[aria-hidden]::after{top:5px}
+.burger[aria-expanded="true"] > span[aria-hidden]{background:transparent}
+.burger[aria-expanded="true"] > span[aria-hidden]::before{transform:translateY(5px) rotate(45deg)}
+.burger[aria-expanded="true"] > span[aria-hidden]::after{transform:translateY(-5px) rotate(-45deg)}
 @media (max-width:900px){
   .burger{display:inline-grid}
   .nav-right .btn{display:none}
@@ -254,11 +259,11 @@ a.shot:hover .inset{transform:translateY(-10px)}
 .paper{background:var(--c-cream);color:var(--c-inferno);border-radius:var(--r);padding:clamp(28px,4vw,56px)}
 .paper h2{color:var(--c-inferno)}
 .paper-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(26px,4vw,64px);align-items:start}
-.paper .did li{color:color-mix(in srgb,var(--c-inferno) 80%,transparent)}
+.paper .did li{color:var(--c-inferno);color:color-mix(in srgb,var(--c-inferno) 80%,transparent)}
 .paper .did li::before{background:var(--c-cherry)}
 .ship{font-family:var(--fd);font-size:clamp(2.4rem, 1.4rem + 3.4vw, 4.6rem);line-height:1.1;color:var(--c-inferno)}
 .ship small{display:block;font-family:var(--ft);font-size:1rem;font-weight:500;letter-spacing:.08em;
-  text-transform:uppercase;color:color-mix(in srgb,var(--c-inferno) 60%,transparent);margin-top:12px}
+  text-transform:uppercase;color:var(--c-inferno);color:color-mix(in srgb,var(--c-inferno) 60%,transparent);margin-top:12px}
 @media (max-width:860px){.paper-grid{grid-template-columns:1fr}}
 
 /* ── contact ──────────────────────────────────────────────────── */

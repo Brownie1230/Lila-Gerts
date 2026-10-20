@@ -169,8 +169,55 @@
 
 /* ── constructor: headline holds while the form scrolls ───────── */
 .builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(26px,5vw,80px);align-items:start}
-.builder .sec-head{position:sticky;top:calc(var(--nav-h) + 28px);margin-bottom:0}
-@media (max-width:900px){.builder{grid-template-columns:1fr}.builder .sec-head{position:static}}
+.builder-side{position:sticky;top:calc(var(--nav-h) + 28px);display:grid;gap:clamp(24px,3vw,36px)}
+.builder .sec-head{margin-bottom:0}
+@media (max-width:900px){.builder{grid-template-columns:1fr}.builder-side{position:static}}
+
+/* The candle being built: the form's photograph with the chosen pair laid
+   over its corner, and the choices spelled out beside it. */
+.preview{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(18px,2.4vw,28px);
+  align-items:center;padding:clamp(18px,2vw,24px);border-radius:var(--r);
+  background:var(--bg-raised);box-shadow:0 0 0 1px var(--rule)}
+.preview-art{position:relative;width:clamp(120px,12vw,150px);aspect-ratio:3/4;border-radius:var(--radius);
+  background:var(--bg-sunk);box-shadow:0 0 0 1px var(--rule-strong)}
+.preview-photo{width:100%;height:100%;object-fit:cover;border-radius:var(--radius)}
+.preview-swatch{position:absolute;right:-18px;bottom:-18px;width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,var(--a,var(--c-rose)) 0 50%,var(--b,var(--c-cream)) 50% 100%);
+  box-shadow:0 0 0 3px var(--bg-raised),0 10px 22px -8px rgb(0 0 0 / .6)}
+/* No pair yet: a quiet ring instead of two colours someone did not choose. */
+.preview[data-pair="none"] .preview-swatch{background:var(--bg-sunk);
+  box-shadow:0 0 0 3px var(--bg-raised),inset 0 0 0 2px var(--rule-strong)}
+.preview-say{display:grid;gap:4px;min-width:0}
+.preview-say .card-name{font-family:var(--fd);font-size:clamp(1.5rem,1.2rem + 1vw,2rem);line-height:1.1}
+.preview[data-state="empty"] #pv-price{font-family:var(--ft);font-size:var(--step-small);font-weight:400;
+  color:var(--ink-faint);white-space:normal}
+@media (prefers-reduced-motion:no-preference){
+  .preview-swatch.swap,.preview-photo.swap{animation:swap .5s var(--e)}
+  @keyframes swap{0%{transform:scale(.82);opacity:.4}100%{transform:none;opacity:1}}
+}
+/* Empty frame: the brand's stripe, faint, and a dashed edge that says "here". */
+.preview[data-state="empty"] .preview-art{background-image:var(--stripes);background-size:auto;
+  box-shadow:inset 0 0 0 1px var(--rule-strong)}
+.preview[data-state="empty"] .preview-art::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:color-mix(in srgb,var(--bg-raised) 86%,transparent);outline:1px dashed var(--rule-strong);outline-offset:-6px}
+@supports not (background:color-mix(in srgb,red 50%,blue)){
+  .preview[data-state="empty"] .preview-art::after{background:var(--bg-raised);opacity:.86}
+}
+
+/* On a phone the form is long and the preview would scroll away above it, so it
+   rides under the bar as a compact strip while the form is being filled. The
+   side column dissolves into the grid so the strip can stick within the section. */
+@media (max-width:900px){
+  .builder-side{display:contents}
+  .preview{position:sticky;top:calc(var(--nav-h) + 10px);z-index:5;gap:14px;padding:12px 16px 12px 12px;
+    box-shadow:0 0 0 1px var(--rule),0 16px 32px -16px rgb(0 0 0 / .75)}
+  .preview-art{width:64px}
+  .preview-swatch{width:32px;height:32px;right:-10px;bottom:-10px;box-shadow:0 0 0 2px var(--bg-raised),0 6px 14px -6px rgb(0 0 0 / .6)}
+  .preview-say{gap:1px}
+  .preview-say .card-name{font-size:1.2rem}
+  .preview .card-sub{font-size:.8rem}
+  .preview .price{font-size:1rem}
+}
 
 /* ── delivery on the paper ────────────────────────────────────── */
 .ship-band{padding-block:clamp(56px,8vw,112px)}
@@ -182,7 +229,7 @@
 @media (max-width:760px){.ship-in{grid-template-columns:1fr}}
 
 /* ── overlays ─────────────────────────────────────────────────── */
-html:has(dialog[open]){overflow:hidden}
+html.is-locked{overflow:hidden}
 dialog{color:var(--ink)}
 dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 @media (prefers-reduced-transparency:reduce){dialog::backdrop{backdrop-filter:none;background:rgb(18 2 2 / .82)}}
@@ -203,7 +250,7 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 
 /* Product sheet: a centred card on a desk, a bottom sheet on a phone. */
 .qv{padding:0;border:0;border-radius:var(--r);background:var(--bg);overflow:auto;
-  width:min(980px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);
+  width:min(980px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);
   box-shadow:0 40px 120px -30px rgb(0 0 0 / .7)}
 .qv > .x{position:absolute;top:14px;right:14px;z-index:2}
 .qv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
@@ -224,7 +271,7 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 
 /* Cart drawer: full height from the right edge. */
 .drawer{padding:0;border:0;margin:0 0 0 auto;inset:0 0 0 auto;
-  width:min(480px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;
+  width:min(480px,100vw);max-width:100vw;height:100vh;max-height:100vh;height:100dvh;max-height:100dvh;
   background:var(--bg);box-shadow:-30px 0 90px -20px rgb(0 0 0 / .6)}
 .drawer[open]{display:flex;flex-direction:column}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -307,14 +354,14 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
    stripe, dark text, maroon buttons, a thin dark rule round every photo. */
 .paper-shop{padding-top:clamp(40px,6vw,88px)}
 .paper-shop .sec-head{text-align:center;margin-inline:auto}
-.paper-shop .sec-head p{margin-inline:auto;color:color-mix(in srgb,var(--on-paper) 84%,transparent)}
+.paper-shop .sec-head p{margin-inline:auto;color:var(--on-paper);color:color-mix(in srgb,var(--on-paper) 84%,transparent)}
 .paper-shop .filters{justify-content:center}
 .paper-shop .chip{border-color:var(--on-paper);color:var(--on-paper)}
 .paper-shop .chip:hover{background:color-mix(in srgb,var(--on-paper) 10%,transparent);color:var(--on-paper)}
 .paper-shop .chip[aria-pressed="true"]{background:var(--on-paper);border-color:var(--on-paper);color:var(--stripe-b)}
 .paper-shop .card-shot{box-shadow:0 0 0 1.5px var(--on-paper),0 18px 34px -22px rgb(49 9 7 / .55)}
 .paper-shop .card-name,.paper-shop .price{color:var(--on-paper)}
-.paper-shop .card-sub{color:color-mix(in srgb,var(--on-paper) 78%,transparent)}
+.paper-shop .card-sub{color:var(--on-paper);color:color-mix(in srgb,var(--on-paper) 78%,transparent)}
 .paper-shop .btn--primary{background:#35000B;color:#FCEEEC}
 .paper-shop .btn--primary:hover{background:#5D0703}
 .paper-shop :focus-visible,.cats :focus-visible{outline-color:var(--on-paper)}
@@ -348,3 +395,23 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 .terms dt{font-family:var(--fd);font-size:clamp(1.35rem,1.15rem + .6vw,1.7rem);margin-bottom:6px}
 .terms dd{margin:0;color:var(--ink-soft);line-height:1.55}
 .foot-links{display:flex;flex-wrap:wrap;gap:8px 22px}
+
+/* ── no <dialog> support (iOS before 15.4) ─────────────────────── */
+/* The element is unknown there: no top layer, no backdrop, no open state.
+   The script toggles the attribute; these rules make it a fixed panel. */
+.no-dialog dialog{display:none;position:fixed;z-index:80}
+.no-dialog dialog[open]{display:block}
+.no-dialog .drawer[open]{display:flex;top:0;right:0;bottom:0}
+.no-dialog .qv[open]{top:16px;left:50%;transform:translateX(-50%);overflow:auto}
+.no-dialog .scrim{position:fixed;inset:0;z-index:79;background:rgb(18 2 2 / .7)}
+
+/* ── after the order ──────────────────────────────────────────── */
+.done{display:grid;gap:12px;justify-items:start;padding:8px 0}
+.done[hidden]{display:none}
+.done:focus{outline:none}
+.done-no{font-size:1.1rem}
+.done-no b{font-variant-numeric:tabular-nums;letter-spacing:.02em;color:var(--accent)}
+.done-text{color:var(--ink-soft);line-height:1.55}
+.done-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.status .quiet{font-weight:600;white-space:nowrap}
+.btn:disabled{opacity:.6;cursor:progress}
