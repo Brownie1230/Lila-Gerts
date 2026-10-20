@@ -363,3 +363,4 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 .done-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .status .quiet{font-weight:600;white-space:nowrap}
 .btn:disabled{opacity:.6;cursor:progress}
+.status-detail{display:block;margin-top:8px;font-size:.78rem;opacity:.7;overflow-wrap:anywhere}
