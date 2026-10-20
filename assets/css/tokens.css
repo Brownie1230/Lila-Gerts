@@ -35,7 +35,8 @@
   /* Type */
   --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-text: "Onest", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
-  --font-script: "Grand Hotel", "Cormorant Garamond", cursive; /* Latin only */
+  --font-script: "Pinyon Script", "Cormorant Garamond", cursive; /* Latin only: "Lila" */
+  --font-mark: "Tinos", "Times New Roman", Times, serif; /* Latin only: "Gerts", bold */
 
   --step-display: clamp(2.6rem, 1.25rem + 4.5vw, 5rem);
   --step-h2:      clamp(2rem, 1.2rem + 3.2vw, 3.5rem);
