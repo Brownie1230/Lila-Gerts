@@ -59,8 +59,9 @@ top. The site follows them:
   свечей), the whole catalogue (dark text, maroon buttons, a thin dark rule round each photo) and
   the delivery band. Everything else sits on the cherry sheet.
 - **Pet holders** in her tilted pink frames, the heading in her pink cloud.
-- **The logo is the supplied sticker**, cut to transparency; never retyped. The bar wordmark is
-  Grand Hotel.
+- **The logo is the supplied sticker**, cut to transparency; never retyped. The bar wordmark follows
+  her Word file: "Lila" in Pinyon Script (stand-in for CommercialScript BT), "Gerts" in Tinos
+  Bold (Times New Roman metrics).
 - **The mascot is the studio's own illustration.** Recut on 20 Oct: holes in the hair (enclosed
   bits of the original black ground) removed, rim decontaminated, so it sits clean on any ground.
 
@@ -95,7 +96,7 @@ The grain overlay follows the site's theme too, so every visitor sees the same p
 |---|---|---|
 | Headings | Cormorant Garamond 400–600 | High-contrast old-style serif with real Cyrillic; fits a heritage-craft gift brand. |
 | Body, UI, forms, **prices** | Onest 400–600 | Grotesque drawn for Cyrillic first. Prices use lining tabular figures: Cormorant's old-style zeros read as letters. |
-| Script | Grand Hotel | **Latin only.** Bar wordmark and "Lila Gerts" inside the hero line. Never Russian text. |
+| Script | Pinyon Script + Tinos 700 | **Latin only.** "Lila" in the script, "Gerts" in bold Tinos, as in her Word file. Bar wordmark and the hero line. Never Russian text. |
 
 Self-hosted from `assets/fonts/` (SIL OFL 1.1), split by `unicode-range` so a browser fetches only
 the subsets the page uses. Emphasis inside a heading uses italic of the same family.

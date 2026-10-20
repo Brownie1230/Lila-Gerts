@@ -1,8 +1,9 @@
 # Upstream licences
 
 `phosphor-icons.LICENSE` (MIT) covers the icons in `assets/icons.svg`. The webfonts in
-`assets/fonts/` are under the SIL Open Font License 1.1; each family's licence travels with it
-upstream at Google Fonts (Cormorant Garamond, Onest, Grand Hotel).
+`assets/fonts/` come from Google Fonts: Cormorant Garamond, Onest and Pinyon Script under the SIL
+Open Font License 1.1, Tinos under the Apache License 2.0; each family's licence travels with it
+upstream.
 
 The skills under `.claude/skills/` are third-party content. Each file here is the root licence of
 one source repository, copied verbatim at the commit pinned in [../SKILLS.md](../SKILLS.md).

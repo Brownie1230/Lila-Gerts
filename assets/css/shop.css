@@ -57,7 +57,7 @@
 .hero-word img{width:clamp(250px,30vw,440px);height:auto;
   filter:drop-shadow(0 22px 36px rgb(0 0 0 / .45))}
 .hero-lead{max-width:30ch;margin-inline:auto;color:var(--ink);opacity:.92}
-.hero-lead .script{font-family:var(--font-script);color:var(--accent);font-size:1.18em;white-space:nowrap}
+.hero-lead .script{font-family:var(--font-script);color:var(--accent);font-size:1.3em;white-space:nowrap}
 .hero-actions{justify-content:center}
 .hero-mascot{grid-column:3;align-self:end;justify-self:end;margin:0;pointer-events:none;line-height:0}
 .hero-mascot img{width:100%;max-width:clamp(250px,26vw,400px);height:auto;
