@@ -30,7 +30,7 @@ nothing is added to it without her word.
 - **Making time:** every candle 10–14 days; a pet holder 10–14 working days from the day the
   photographs arrive. Pet holders: **cats only**.
 - **Returns:** the buyer sends the piece back; the money is returned once it arrives.
-- **Seller:** Герцик Нина Евгеньевна, самозанятая. ИНН to follow (marked in `index.html`).
+- **Seller:** Герцик Нина Евгеньевна, самозанятая, ИНН 281301727380.
 - **No testimonials** until she sends real ones. Invented reviews on a real shop are false claims,
   not placeholder text.
 
@@ -199,10 +199,9 @@ tile is 17 KB (was 366 KB): its constant alpha is folded into `opacity`. A phone
 
 ## Open items
 
-From Nina: ИНН · colour palette · real reviews · Instagram and TikTok links · whether single
-Pion matches the set candles · whether single candles (Pion, Moon) also come with matches (the
-site promises matches with sets only) · confirmation of the delivery reading · ЮKassa approval ·
-a domain.
+From Nina: photographed sets in the new palette · whether single candles (Pion, Moon) also come
+with matches (the site promises matches with sets only) · ЮKassa · a domain. No social links on
+the site (her answer, 21 Oct). Pion: 8 × 8 × 3,5 cm, burns up to 4 hours.
 For the owner: the privacy text describes what the form actually does; it has not been checked
 by a lawyer. That note used to sit on the page itself, in front of buyers, and was moved here.
 From the developer: one test order to trigger FormSubmit's activation email, then a second to
