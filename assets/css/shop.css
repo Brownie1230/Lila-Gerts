@@ -359,7 +359,7 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 .done:focus{outline:none}
 .done-no{font-size:1.1rem}
 .done-no b{font-variant-numeric:tabular-nums;letter-spacing:.02em;color:var(--accent)}
-.done-text{color:var(--ink-soft);line-height:1.55}
+.done-text{color:var(--ink-soft);line-height:1.55;overflow-wrap:anywhere}
 .done-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .status .quiet{font-weight:600;white-space:nowrap}
 .btn:disabled{opacity:.6;cursor:progress}

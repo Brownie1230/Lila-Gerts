@@ -666,11 +666,12 @@
       delete status.dataset.state;
       status.textContent = "";
       $("done-no").textContent = no;
-      // A phone number never breaks across lines.
+      // No "we will call you": she works alone. The buyer is told where the
+      // payment link goes, and that questions go to Telegram.
       var doneText = $("done-text");
-      doneText.textContent = "Напишем вам по номеру ";
-      doneText.appendChild(el("span", "nw", order.phone));
-      doneText.appendChild(document.createTextNode(", чтобы подтвердить заказ и прислать счёт на оплату. Номер заказа пригодится в переписке."));
+      doneText.textContent = "Ссылку на оплату пришлём на ";
+      doneText.appendChild(el("b", null, order.email));
+      doneText.appendChild(document.createTextNode(". Если появятся вопросы, напишите в Telegram и укажите номер заказа."));
       $("f-note").value = "";
       $("f-ok").checked = false;
       write([]);

@@ -24,10 +24,10 @@
 <link rel="preload" href="assets/img/logo.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?v=20251022a">
-<link rel="stylesheet" href="assets/css/tokens.css?v=20251022a">
-<link rel="stylesheet" href="assets/css/app.css?v=20251022a">
-<link rel="stylesheet" href="assets/css/shop.css?v=20251022a">
+<link rel="stylesheet" href="assets/css/fonts.css?v=20251023a">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20251023a">
+<link rel="stylesheet" href="assets/css/app.css?v=20251023a">
+<link rel="stylesheet" href="assets/css/shop.css?v=20251023a">
 <script>
   document.documentElement.classList.add("js");
   try {
@@ -285,7 +285,7 @@
       </div>
       <div class="steps">
         <div class="step" data-reveal><b>Выберите</b><p>Нажмите «в корзину» и выберите аромат, а у пиона ещё и цвет.</p></div>
-        <div class="step" data-reveal style="--d:80ms"><b>Оформите</b><p>Имя, телефон и пункт выдачи Ozon. Счёт на оплату пришлём в ответ.</p></div>
+        <div class="step" data-reveal style="--d:80ms"><b>Оформите</b><p>Имя, телефон, почта и пункт выдачи Ozon. Ссылка на оплату придёт на почту.</p></div>
         <div class="step" data-reveal style="--d:160ms"><b>Сделаем</b><p>Отливаем и расписываем под ваш заказ, это занимает 10–14 дней.</p></div>
         <div class="step" data-reveal style="--d:240ms"><b>Упакуем</b><p>Подарочная упаковка и открытка с посланием, к наборам ещё спички в стеклянной колбе.</p></div>
       </div>
@@ -297,7 +297,7 @@
   <section class="ship-band" id="delivery">
     <div class="wrap ship-in" data-reveal>
       <p class="ship">Бесплатная доставка<br>от <span class="nw">5 000 ₽</span>
-        <small>До 5 000 ₽ доставка 300 ₽, в любой ПВЗ Ozon</small>
+        <small>До 5 000 ₽ доставка 300 ₽, в любой ПВЗ Ozon. Только по России</small>
       </p>
       <ul class="did">
         <li>Хрупкое пакуем так, чтобы доехало целым</li>
@@ -314,9 +314,9 @@
       </div>
       <dl class="terms" data-reveal>
         <div><dt>Продавец</dt><dd>Герцик Нина Евгеньевна, самозанятая, ИНН&nbsp;281301727380</dd></div>
-        <div><dt>Оплата</dt><dd>После подтверждения заказа пришлём счёт в Telegram или на почту.</dd></div>
+        <div><dt>Оплата</dt><dd>Ссылка на оплату приходит на почту, указанную в заказе. Чек ЮKassa присылает туда же.</dd></div>
         <div><dt>Изготовление</dt><dd>10–14 дней. Подсвечник по фото — от 10 до 14 рабочих дней со дня, когда пришлёте фотографии.</dd></div>
-        <div><dt>Доставка</dt><dd>В удобный вам ПВЗ Ozon, 300 ₽. От 5 000 ₽ бесплатно.</dd></div>
+        <div><dt>Доставка</dt><dd>Только по России, в удобный вам ПВЗ Ozon: 300 ₽, от 5 000 ₽ бесплатно. Доставку в другие страны обсудим отдельно, напишите в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a> до заказа.</dd></div>
         <div><dt>Возврат</dt><dd>Если передумали, отправьте изделие обратно. Деньги вернём, как только получим его.</dd></div>
         <div><dt>Связь</dt><dd><a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">t.me/Nina.G1999</a>, <a class="quiet" href="mailto:lila_gerts@mail.ru">lila_gerts@mail.ru</a></dd></div>
       </dl>
@@ -363,7 +363,7 @@
         <ul>
           <li><span class="foot-k">Telegram:</span> <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">t.me/Nina.G1999</a></li>
           <li><span class="foot-k">Эл. почта:</span> <a class="quiet" href="mailto:lila_gerts@mail.ru">lila_gerts@mail.ru</a></li>
-          <li>ПВЗ Ozon по всей России</li>
+          <li>ПВЗ Ozon, только по России</li>
           <li>Доставка <span class="nw">300 ₽</span>, от <span class="nw">5 000 ₽</span> бесплатно</li>
         </ul>
       </div>
@@ -479,6 +479,7 @@
       <div class="field" data-field>
         <label for="f-pvz">Пункт выдачи Ozon</label>
         <input id="f-pvz" name="pvz" type="text" autocomplete="street-address" required placeholder="Город, улица, дом">
+        <span class="help">Доставляем только по России. В другие страны — напишите в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a> до заказа.</span>
         <span class="err" data-error>Напишите адрес пункта выдачи.</span>
       </div>
       <div class="field" data-field>
@@ -496,7 +497,7 @@
       <button class="btn btn--primary btn--wide" type="submit">Оформить заказ
         <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
       </button>
-      <p class="help">Счёт на оплату пришлём в Telegram или на почту после подтверждения.</p>
+      <p class="help">Ссылка на оплату придёт на почту. Вопросы — в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a>.</p>
     </form>
 
     <div class="done" id="order-done" tabindex="-1" hidden>
@@ -516,6 +517,6 @@
   <button class="toast-btn" type="button" id="toast-open">Открыть корзину</button>
 </div>
 
-<script src="assets/js/app.js?v=20251022a" defer></script>
+<script src="assets/js/app.js?v=20251023a" defer></script>
 </body>
 </html>
