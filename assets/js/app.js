@@ -710,11 +710,12 @@
 
     // What rides with the payment: the whole order, short, so the ЮKassa
     // notice alone is enough to make and send it.
-    var details = [no, lines,
+    // ЮKassa's notice drops line breaks, so every part also ends with ";".
+    var details = [no, lines.split("\n").join(";\n"),
       "Доставка: " + (ship ? ship + " руб." : "бесплатно") + ", итого " + sum + " руб.",
       "Имя: " + (order.name || ""), "Телефон: " + (order.phone || ""),
       "ПВЗ Ozon: " + (order.pvz || "")]
-      .concat(order.note ? ["Комментарий: " + order.note] : []).join("\n");
+      .concat(order.note ? ["Комментарий: " + order.note] : []).join(";\n");
 
     // Her letter, sent only once the buyer is back from a successful payment.
     // FormSubmit mails one table row per field; the keys are the row names.
