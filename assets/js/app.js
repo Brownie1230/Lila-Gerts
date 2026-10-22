@@ -538,6 +538,61 @@
   }
 
   /* ── checkout ── */
+  /* ── payment: the ЮKassa form she built, posted with this order's sum ──
+     The shop has no server, so the order goes to her mail first and then the
+     buyer pays on ЮKassa's page. The order number rides in the comment, so her
+     payment notice says which order it is. ЮKassa mails the receipt. */
+  var PAY = {
+    action: "https://yookassa.ru/integration/simplepay/payment",
+    shopId: "1503798",
+    ok: "https://lila-gerts.github.io/?oplata=ok",
+    fail: "https://lila-gerts.github.io/?oplata=oshibka"
+  };
+  var LAST = "lg-last-order";
+  function pay(o) {
+    var f = document.createElement("form");
+    f.method = "post"; f.action = PAY.action; f.acceptCharset = "utf-8"; f.hidden = true;
+    [["shopId", PAY.shopId], ["sum", String(o.sum)], ["cps_email", o.email || ""],
+     ["orderDetails", "Заказ " + o.no], ["shopSuccessURL", PAY.ok], ["shopFailURL", PAY.fail]
+    ].forEach(function (kv) {
+      var i = document.createElement("input");
+      i.type = "hidden"; i.name = kv[0]; i.value = kv[1];
+      f.appendChild(i);
+    });
+    document.body.appendChild(f);
+    f.submit();
+  }
+  function lastOrder() {
+    try { var o = JSON.parse(localStorage.getItem(LAST) || "null"); return o && o.no && o.sum ? o : null; }
+    catch (e) { return null; }
+  }
+  var payNow = $("pay-now");
+  if (payNow) payNow.addEventListener("click", function () { var o = lastOrder(); if (o) pay(o); });
+
+  // Back from ЮKassa: say how it went, then drop the parameter from the address.
+  (function () {
+    var m = /[?&]oplata=(ok|oshibka)/.exec(location.search);
+    var note = $("pay-note");
+    if (!m || !note) return;
+    var o = lastOrder();
+    var again = $("pay-again");
+    if (m[1] === "ok") {
+      $("pay-note-title").textContent = "Оплата прошла, спасибо!";
+      $("pay-note-text").textContent = (o ? "Заказ " + o.no + " оплачен. " : "") +
+        "Чек придёт на почту. Как только заказ будет готов, отправим его в ваш пункт выдачи Ozon.";
+      try { localStorage.removeItem(LAST); } catch (e) { /* private mode */ }
+    } else {
+      $("pay-note-title").textContent = "Оплата не прошла";
+      $("pay-note-text").textContent = o
+        ? "Заказ " + o.no + " сохранён, деньги не списаны. Попробуйте оплатить ещё раз или напишите в Telegram."
+        : "Деньги не списаны. Напишите в Telegram, поможем с оплатой.";
+      if (o && again) { again.hidden = false; again.addEventListener("click", function () { pay(o); }); }
+    }
+    note.hidden = false;
+    $("pay-note-close").addEventListener("click", function () { note.hidden = true; });
+    if (window.history && history.replaceState) history.replaceState(null, "", location.pathname + location.hash);
+  })();
+
   if (!form) return;
   var status = $("form-status");
   var endpoint = form.dataset.endpoint || "";
@@ -666,10 +721,13 @@
       delete status.dataset.state;
       status.textContent = "";
       $("done-no").textContent = no;
-      // No "we will call you": she works alone. The buyer is told where the
-      // payment link goes, and that questions go to Telegram.
+      // No "we will call you": she works alone. The buyer pays right here;
+      // ЮKassa mails the receipt; questions go to Telegram.
+      var sum = total + ship;
+      try { localStorage.setItem(LAST, JSON.stringify({ no: no, sum: sum, email: order.email })); } catch (e) { /* private mode */ }
+      if (payNow) payNow.textContent = "Оплатить " + money(sum);
       var doneText = $("done-text");
-      doneText.textContent = "Ссылку на оплату пришлём на ";
+      doneText.textContent = "Осталось оплатить: картой, через СБП или SberPay на странице ЮKassa. Чек придёт на ";
       doneText.appendChild(el("b", null, order.email));
       doneText.appendChild(document.createTextNode(". Если появятся вопросы, напишите в Telegram и укажите номер заказа."));
       $("f-note").value = "";

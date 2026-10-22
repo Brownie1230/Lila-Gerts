@@ -24,10 +24,10 @@
 <link rel="preload" href="assets/img/logo.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?v=20251023a">
-<link rel="stylesheet" href="assets/css/tokens.css?v=20251023a">
-<link rel="stylesheet" href="assets/css/app.css?v=20251023a">
-<link rel="stylesheet" href="assets/css/shop.css?v=20251023a">
+<link rel="stylesheet" href="assets/css/fonts.css?v=20251023b">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20251023b">
+<link rel="stylesheet" href="assets/css/app.css?v=20251023b">
+<link rel="stylesheet" href="assets/css/shop.css?v=20251023b">
 <script>
   document.documentElement.classList.add("js");
   try {
@@ -285,7 +285,7 @@
       </div>
       <div class="steps">
         <div class="step" data-reveal><b>Выберите</b><p>Нажмите «в корзину» и выберите аромат, а у пиона ещё и цвет.</p></div>
-        <div class="step" data-reveal style="--d:80ms"><b>Оформите</b><p>Имя, телефон, почта и пункт выдачи Ozon. Ссылка на оплату придёт на почту.</p></div>
+        <div class="step" data-reveal style="--d:80ms"><b>Оформите</b><p>Имя, телефон, почта и пункт выдачи Ozon. Оплата сразу, картой, через СБП или SberPay.</p></div>
         <div class="step" data-reveal style="--d:160ms"><b>Сделаем</b><p>Отливаем и расписываем под ваш заказ, это занимает 10–14 дней.</p></div>
         <div class="step" data-reveal style="--d:240ms"><b>Упакуем</b><p>Подарочная упаковка и открытка с посланием, к наборам ещё спички в стеклянной колбе.</p></div>
       </div>
@@ -314,7 +314,7 @@
       </div>
       <dl class="terms" data-reveal>
         <div><dt>Продавец</dt><dd>Герцик Нина Евгеньевна, самозанятая, ИНН&nbsp;281301727380</dd></div>
-        <div><dt>Оплата</dt><dd>Ссылка на оплату приходит на почту, указанную в заказе. Чек ЮKassa присылает туда же.</dd></div>
+        <div><dt>Оплата</dt><dd>Сразу после оформления заказа, через ЮKassa: картой, через СБП или SberPay. Чек приходит на почту, указанную в заказе.</dd></div>
         <div><dt>Изготовление</dt><dd>10–14 дней. Подсвечник по фото — от 10 до 14 рабочих дней со дня, когда пришлёте фотографии.</dd></div>
         <div><dt>Доставка</dt><dd>По России в удобный вам ПВЗ Ozon: 300 ₽, от 5 000 ₽ бесплатно. В другие страны тоже отправляем, но стоимость доставки считаем отдельно: напишите в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a> до заказа.</dd></div>
         <div><dt>Возврат</dt><dd>Если передумали, отправьте изделие обратно. Деньги вернём, как только получим его.</dd></div>
@@ -335,7 +335,7 @@
           <li>Корзина хранится только в вашем браузере и никуда не уходит, пока вы не оформите заказ. Имя, телефон, почта и пункт выдачи тоже запоминаются там, чтобы в следующий раз не вводить их заново.</li>
         </ul>
         <ul class="did" data-reveal style="--d:90ms">
-          <li>Третьим лицам не передаём и в рассылки не добавляем.</li>
+          <li>Для оплаты сумма, номер заказа и почта передаются платёжному сервису ЮKassa: он проводит платёж и присылает чек. Больше никому не передаём и в рассылки не добавляем.</li>
           <li>Отозвать согласие и попросить удалить переписку можно в любой момент, написав на ту же почту.</li>
           <li>Если писать через Telegram напрямую, форма не участвует вовсе.</li>
         </ul>
@@ -497,7 +497,7 @@
       <button class="btn btn--primary btn--wide" type="submit">Оформить заказ
         <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
       </button>
-      <p class="help">Ссылка на оплату придёт на почту. Вопросы — в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a>.</p>
+      <p class="help">После оформления откроется оплата: картой, через СБП или SberPay. Вопросы — в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a>.</p>
     </form>
 
     <div class="done" id="order-done" tabindex="-1" hidden>
@@ -505,6 +505,7 @@
       <p class="done-no">Номер заказа <b id="done-no"></b></p>
       <p class="done-text" id="done-text"></p>
       <div class="done-actions">
+        <button class="btn btn--primary" type="button" id="pay-now">Оплатить</button>
         <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
         <a class="btn btn--ghost" href="#candles" data-close>Вернуться в каталог</a>
       </div>
@@ -512,11 +513,22 @@
   </div>
 </dialog>
 
+<!-- Возврат с оплаты ЮKassa: ?oplata=ok или ?oplata=oshibka (адреса заданы в форме ЮKassa). -->
+<div class="pay-note" id="pay-note" role="status" aria-live="polite" hidden>
+  <p class="pay-note-title" id="pay-note-title"></p>
+  <p class="pay-note-text" id="pay-note-text"></p>
+  <div class="pay-note-actions">
+    <button class="btn btn--primary" type="button" id="pay-again" hidden>Оплатить ещё раз</button>
+    <a class="btn btn--ghost" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Написать в Telegram</a>
+    <button class="btn btn--ghost" type="button" id="pay-note-close">Закрыть</button>
+  </div>
+</div>
+
 <div class="toast" id="toast" hidden>
   <span class="toast-text" id="toast-text" role="status" aria-live="polite"></span>
   <button class="toast-btn" type="button" id="toast-open">Открыть корзину</button>
 </div>
 
-<script src="assets/js/app.js?v=20251023a" defer></script>
+<script src="assets/js/app.js?v=20251023b" defer></script>
 </body>
 </html>

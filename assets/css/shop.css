@@ -380,3 +380,15 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
   .reviews::-webkit-scrollbar{display:none}
   .review{flex:0 0 84%;scroll-snap-align:center}
 }
+
+/* ── back from ЮKassa: a card at the bottom that stays until closed ── */
+.pay-note{position:fixed;left:12px;right:12px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:75;
+  max-width:520px;margin-inline:auto;display:grid;gap:10px;padding:22px 22px 20px;border-radius:var(--r);
+  background:var(--bg-raised);color:var(--ink);box-shadow:0 0 0 1px var(--rule-strong),0 24px 60px -16px rgb(0 0 0 / .65)}
+.pay-note[hidden]{display:none}
+.pay-note-title{font-family:var(--fd);font-size:1.6rem;line-height:1.15;margin:0}
+.pay-note-text{margin:0;color:var(--ink-soft);line-height:1.5}
+.pay-note-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.pay-note-actions .btn[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){.pay-note:not([hidden]){animation:toast-in .5s var(--e)}}
+

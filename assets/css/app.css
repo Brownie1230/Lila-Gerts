@@ -78,7 +78,7 @@ a{color:inherit}
 }
 .btn--primary{background:var(--accent);color:var(--on-accent)}
 .btn--primary:hover{background:var(--accent-lift)}
-.btn--ghost{border-color:var(--rule-strong);color:var(--ink)}
+.btn--ghost{border-color:var(--rule-strong);color:var(--ink);background:transparent}
 .btn--ghost:hover{border-color:var(--accent);color:var(--accent)}
 .btn:active{transform:translateY(1px)}
 .btn .arw{transition:transform .45s var(--e)}
