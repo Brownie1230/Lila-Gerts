@@ -184,9 +184,11 @@
   function shipFor(goods) { return goods >= FREE_FROM ? 0 : SHIP; }
   function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP) + NBSP + "₽"; }
 
+  // When the browser refuses storage, the cart still lives for this visit.
+  var memCart = null;
   function read() {
     try {
-      var raw = JSON.parse(localStorage.getItem(KEY) || "[]");
+      var raw = memCart || JSON.parse(localStorage.getItem(KEY) || "[]");
       if (!Array.isArray(raw)) return [];
       return raw.filter(function (l) {
         return l && typeof l.id === "string" && typeof l.name === "string" &&
@@ -195,7 +197,8 @@
     } catch (e) { return []; }
   }
   function write(cart) {
-    try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) { /* private mode */ }
+    try { localStorage.setItem(KEY, JSON.stringify(cart)); memCart = null; }
+    catch (e) { memCart = cart; }
   }
   function add(line, qty) {
     qty = qty || 1;
@@ -566,8 +569,11 @@
     try { var o = JSON.parse(localStorage.getItem(LAST) || "null"); return o && o.no && o.sum ? o : null; }
     catch (e) { return null; }
   }
+  // The order just placed is kept in memory too: some in-app browsers refuse
+  // localStorage, and the button must still work there.
+  var justPlaced = null;
   var payNow = $("pay-now");
-  if (payNow) payNow.addEventListener("click", function () { var o = lastOrder(); if (o) pay(o); });
+  if (payNow) payNow.addEventListener("click", function () { var o = justPlaced || lastOrder(); if (o) pay(o); });
 
   // Back from ЮKassa: say how it went, then drop the parameter from the address.
   (function () {
@@ -619,6 +625,26 @@
   }
   var submitBtn = form.querySelector("button[type=submit]");
 
+  // A slow network tempts a second tap, and a send that "failed" in the browser
+  // may still have reached her mail. So: one send at a time, and a retry of the
+  // same cart by the same buyer keeps the same order number, so a duplicate
+  // letter is plainly the same order, not a new one.
+  var sending = false;
+  var PEND = "lg-pending";
+  var pending = null;
+  function numberFor(sig) {
+    var p = pending;
+    if (!p) { try { p = JSON.parse(localStorage.getItem(PEND) || "null"); } catch (e) { p = null; } }
+    if (p && p.sig === sig && Date.now() - p.at < 3 * 3600 * 1000) return p.no;
+    pending = { no: orderNumber(), sig: sig, at: Date.now() };
+    try { localStorage.setItem(PEND, JSON.stringify(pending)); } catch (e) { /* private mode */ }
+    return pending.no;
+  }
+  function forgetPending() {
+    pending = null;
+    try { localStorage.removeItem(PEND); } catch (e) { /* private mode */ }
+  }
+
   form.querySelectorAll("input, select, textarea").forEach(function (input) {
     input.addEventListener("blur", function () { validate(input); });
     input.addEventListener("input", function () {
@@ -629,6 +655,7 @@
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    if (sending) return;
     var cart = read();
     if (!cart.length) return;
 
@@ -639,7 +666,10 @@
     var data = new FormData(form);
     var total = cart.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
     var ship = shipFor(total);
-    var no = orderNumber();
+    var no = numberFor(JSON.stringify([
+      cart.map(function (l) { return [l.id, l.qty]; }),
+      data.get("name"), data.get("phone"), data.get("email"), data.get("pvz")
+    ]));
     var order = {
       no: no,
       items: cart.map(function (l) { return { name: l.name, sub: l.sub, price: l.price, qty: l.qty }; }),
@@ -649,6 +679,7 @@
 
     status.dataset.state = "sending";
     status.textContent = "Отправляем заказ";
+    sending = true;
     if (submitBtn) submitBtn.disabled = true; // one tap, one order
 
     // The order as plain text: what she reads if sending fails and the buyer
@@ -666,6 +697,7 @@
     // Never swallow an order: when it cannot be sent, hand it to the buyer.
     function handOver(reason, detail) {
       var done = function (copied) {
+        sending = false;
         if (submitBtn) submitBtn.disabled = false;
         status.dataset.state = "sent";
         status.textContent = reason + (copied
@@ -717,6 +749,8 @@
       // FormSubmit answers 200 even when it refuses (not yet activated), so
       // trust the body, not the status.
       if (json && json.success !== true && json.success !== "true") throw new Error(json.message || "refused");
+      sending = false;
+      forgetPending();
       if (submitBtn) submitBtn.disabled = false;
       delete status.dataset.state;
       status.textContent = "";
@@ -724,7 +758,8 @@
       // No "we will call you": she works alone. The buyer pays right here;
       // ЮKassa mails the receipt; questions go to Telegram.
       var sum = total + ship;
-      try { localStorage.setItem(LAST, JSON.stringify({ no: no, sum: sum, email: order.email })); } catch (e) { /* private mode */ }
+      justPlaced = { no: no, sum: sum, email: order.email };
+      try { localStorage.setItem(LAST, JSON.stringify(justPlaced)); } catch (e) { /* private mode */ }
       if (payNow) payNow.textContent = "Оплатить " + money(sum);
       var doneText = $("done-text");
       doneText.textContent = "Осталось оплатить: картой, через СБП или SberPay на странице ЮKassa. Чек придёт на ";
