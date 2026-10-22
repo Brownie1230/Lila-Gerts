@@ -369,6 +369,7 @@
   var qvForm = $("qv-form");
   var qvScent = $("qv-scent");
   var qvScentField = $("qv-scent-field");
+  if (qvScent) qvScent.addEventListener("change", function () { qvScentField.dataset.invalid = "false"; });
   var qvQty = $("qv-qty");
   var current = null;
   var qtyNow = 1;
@@ -437,6 +438,7 @@
       });
     }
     qvScent.value = "";
+    qvScentField.dataset.invalid = "false";
     // Matches in a glass tube are promised with every candle set, not with a
     // single candle; the gift wrap goes with every order.
     $("qv-incl").textContent = !current.scent
@@ -469,6 +471,12 @@
           return;
         }
         color = picked.value;
+      }
+      // Every candle needs a scent: no "decide later in a chat" any more.
+      if (current.scent && !qvScent.value) {
+        qvScentField.dataset.invalid = "true";
+        qvScent.focus();
+        return;
       }
       var scent = current.scent ? qvScent.value : "";
       var sub = [color ? "цвет: " + color.toLowerCase() : current.sub,
@@ -536,7 +544,7 @@
 
   // The buyer's details survive a closed drawer and come back for the next order.
   var BUYER = "lg-buyer";
-  var remembered = ["f-name", "f-phone", "f-pvz"];
+  var remembered = ["f-name", "f-phone", "f-email", "f-pvz"];
   try {
     var saved = JSON.parse(localStorage.getItem(BUYER) || "{}");
     remembered.forEach(function (id) { if (typeof saved[id] === "string" && $(id)) $(id).value = saved[id]; });
@@ -581,7 +589,7 @@
       no: no,
       items: cart.map(function (l) { return { name: l.name, sub: l.sub, price: l.price, qty: l.qty }; }),
       total: total, ship: ship, name: data.get("name"), phone: data.get("phone"),
-      pvz: data.get("pvz"), note: data.get("note")
+      email: data.get("email"), pvz: data.get("pvz"), note: data.get("note")
     };
 
     status.dataset.state = "sending";
@@ -596,7 +604,8 @@
       }))
       .concat(["", "Товары: " + total + " руб.", "Доставка: " + (ship ? ship + " руб." : "бесплатно"),
                "Итого: " + (total + ship) + " руб.", "Имя: " + (order.name || ""),
-               "Телефон: " + (order.phone || ""), "ПВЗ Ozon: " + (order.pvz || "")]);
+               "Телефон: " + (order.phone || ""), "Почта: " + (order.email || ""),
+               "ПВЗ Ozon: " + (order.pvz || "")]);
     if (order.note) text.push("Комментарий: " + order.note);
 
     // Never swallow an order: when it cannot be sent, hand it to the buyer.
@@ -637,6 +646,8 @@
       "Итого": (total + ship) + " руб.",
       "Имя": order.name || "",
       "Телефон": order.phone || "",
+      "Почта для чека": order.email || "",
+      _replyto: order.email || "",
       "ПВЗ Ozon": order.pvz || "",
       "Комментарий": order.note || "—"
     };

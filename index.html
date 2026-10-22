@@ -24,10 +24,10 @@
 <link rel="preload" href="assets/img/logo.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?v=20251021b">
-<link rel="stylesheet" href="assets/css/tokens.css?v=20251021b">
-<link rel="stylesheet" href="assets/css/app.css?v=20251021b">
-<link rel="stylesheet" href="assets/css/shop.css?v=20251021b">
+<link rel="stylesheet" href="assets/css/fonts.css?v=20251022a">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20251022a">
+<link rel="stylesheet" href="assets/css/app.css?v=20251022a">
+<link rel="stylesheet" href="assets/css/shop.css?v=20251022a">
 <script>
   document.documentElement.classList.add("js");
   try {
@@ -329,10 +329,10 @@
       </div>
       <div class="paper-grid">
         <ul class="did" data-reveal>
-          <li>Форма собирает имя, телефон, пункт выдачи и состав заказа. Больше ничего.</li>
-          <li>Данные нужны ровно для одного: собрать заказ и довезти его до вас.</li>
+          <li>Форма собирает имя, телефон, почту, пункт выдачи и состав заказа. Больше ничего.</li>
+          <li>Данные нужны ровно для одного: собрать заказ, прислать чек и довезти заказ до вас.</li>
           <li>Заказ уходит на почту lila_gerts@mail.ru через сервис отправки форм FormSubmit и хранится там же. Переписка идёт в Telegram или на эту почту.</li>
-          <li>Корзина хранится только в вашем браузере и никуда не уходит, пока вы не оформите заказ. Имя, телефон и пункт выдачи тоже запоминаются там, чтобы в следующий раз не вводить их заново.</li>
+          <li>Корзина хранится только в вашем браузере и никуда не уходит, пока вы не оформите заказ. Имя, телефон, почта и пункт выдачи тоже запоминаются там, чтобы в следующий раз не вводить их заново.</li>
         </ul>
         <ul class="did" data-reveal style="--d:90ms">
           <li>Третьим лицам не передаём и в рассылки не добавляем.</li>
@@ -395,10 +395,10 @@
         <span class="err" data-error>Выберите цвет пиона.</span>
       </fieldset>
       <!-- Ароматы правятся здесь, по строке <option> на аромат. -->
-      <div class="field" id="qv-scent-field">
+      <div class="field" id="qv-scent-field" data-field>
         <label for="qv-scent">Аромат</label>
         <select id="qv-scent" name="scent">
-          <option value="">Подобрать вместе в переписке</option>
+          <option value="" disabled selected>Выберите аромат</option>
           <option>Черничный йогурт</option>
           <option>Сладкий мёд</option>
           <option>Макадамия и миндальное масло</option>
@@ -417,6 +417,7 @@
           <option>Орхидея и морская соль</option>
           <option>Деревенские яблочки</option>
         </select>
+        <span class="err" data-error>Выберите аромат.</span>
       </div>
       <div class="qv-buy">
         <div class="qty" role="group" aria-label="Количество">
@@ -470,6 +471,12 @@
         <span class="err" data-error>Проверьте номер телефона, например +7 900 123-45-67.</span>
       </div>
       <div class="field" data-field>
+        <label for="f-email">Эл. почта для чека</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="name@mail.ru">
+        <span class="help">Сюда придёт чек после оплаты.</span>
+        <span class="err" data-error>Проверьте адрес почты, например name@mail.ru.</span>
+      </div>
+      <div class="field" data-field>
         <label for="f-pvz">Пункт выдачи Ozon</label>
         <input id="f-pvz" name="pvz" type="text" autocomplete="street-address" required placeholder="Город, улица, дом">
         <span class="err" data-error>Напишите адрес пункта выдачи.</span>
@@ -481,7 +488,7 @@
       <div class="field field--check" data-field>
         <label class="check" for="f-ok">
           <input id="f-ok" name="consent" type="checkbox" required>
-          <span>Даю согласие на обработку имени, телефона и адреса для оформления заказа. <a class="quiet" href="#privacy" data-close>Что это значит</a> и <a class="quiet" href="#terms" data-close>условия покупки</a></span>
+          <span>Даю согласие на обработку имени, телефона, почты и адреса для оформления заказа. <a class="quiet" href="#privacy" data-close>Что это значит</a> и <a class="quiet" href="#terms" data-close>условия покупки</a></span>
         </label>
         <span class="err" data-error>Без согласия мы не сможем оформить заказ.</span>
       </div>
@@ -509,6 +516,6 @@
   <button class="toast-btn" type="button" id="toast-open">Открыть корзину</button>
 </div>
 
-<script src="assets/js/app.js?v=20251021b" defer></script>
+<script src="assets/js/app.js?v=20251022a" defer></script>
 </body>
 </html>
