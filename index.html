@@ -24,10 +24,10 @@
 <link rel="preload" href="assets/img/logo.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?v=20251023d">
-<link rel="stylesheet" href="assets/css/tokens.css?v=20251023d">
-<link rel="stylesheet" href="assets/css/app.css?v=20251023d">
-<link rel="stylesheet" href="assets/css/shop.css?v=20251023d">
+<link rel="stylesheet" href="assets/css/fonts.css?v=20251023e">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20251023e">
+<link rel="stylesheet" href="assets/css/app.css?v=20251023e">
+<link rel="stylesheet" href="assets/css/shop.css?v=20251023e">
 <script>
   document.documentElement.classList.add("js");
   try {
@@ -331,7 +331,7 @@
         <ul class="did" data-reveal>
           <li>Форма собирает имя, телефон, почту, пункт выдачи и состав заказа. Больше ничего.</li>
           <li>Данные нужны ровно для одного: собрать заказ, прислать чек и довезти заказ до вас.</li>
-          <li>Заказ уходит на почту lila_gerts@mail.ru через сервис отправки форм FormSubmit и хранится там же. Переписка идёт в Telegram или на эту почту.</li>
+          <li>Заказ передаётся вместе с оплатой в ЮKassa, а после оплаты копия приходит на почту lila_gerts@mail.ru через сервис отправки форм FormSubmit. Переписка идёт в Telegram или на эту почту.</li>
           <li>Корзина хранится только в вашем браузере и никуда не уходит, пока вы не оформите заказ. Имя, телефон, почта и пункт выдачи тоже запоминаются там, чтобы в следующий раз не вводить их заново.</li>
         </ul>
         <ul class="did" data-reveal style="--d:90ms">
@@ -433,10 +433,9 @@
 </dialog>
 
 <!-- ═══ КОРЗИНА ═══════════════════════════════════════════════════
-     Заказы уходят на lila_gerts@mail.ru через FormSubmit (data-endpoint ниже).
-     Первый заказ присылает на эту почту письмо «Activate Form»: нажмите кнопку
-     в нём один раз, и дальше заказы приходят сами. Если data-endpoint очистить,
-     заказ снова будет копироваться в буфер, а форма честно скажет об этом. -->
+     «Оформить заказ» сразу открывает оплату ЮKassa (магазин 1503798, см. PAY в app.js),
+     весь заказ едет в комментарии к платежу. После успешной оплаты копия заказа
+     с пометкой «Оплачен» уходит на lila_gerts@mail.ru через FormSubmit (data-endpoint ниже). -->
 <dialog class="drawer" id="cart-drawer" aria-labelledby="cart-title">
   <div class="drawer-head">
     <h2 id="cart-title">Корзина</h2>
@@ -494,10 +493,10 @@
         <span class="err" data-error>Без согласия мы не сможем оформить заказ.</span>
       </div>
       <div class="status" id="form-status" role="status" aria-live="polite"></div>
-      <button class="btn btn--primary btn--wide" type="submit">Оформить заказ
+      <button class="btn btn--primary btn--wide" type="submit">Перейти к оплате
         <svg class="arw" aria-hidden="true"><use href="#arw"></use></svg>
       </button>
-      <p class="help">После оформления откроется оплата: картой, через СБП или SberPay. Вопросы — в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a>.</p>
+      <p class="help">Откроется страница ЮKassa: картой, через СБП или SberPay. Заказ уйдёт в работу после оплаты. Вопросы — в <a class="quiet" href="https://t.me/Nina.G1999" target="_blank" rel="noopener">Telegram</a>.</p>
     </form>
 
     <div class="done" id="order-done" tabindex="-1" hidden>
@@ -529,6 +528,6 @@
   <button class="toast-btn" type="button" id="toast-open">Открыть корзину</button>
 </div>
 
-<script src="assets/js/app.js?v=20251023d" defer></script>
+<script src="assets/js/app.js?v=20251023e" defer></script>
 </body>
 </html>

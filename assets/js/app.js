@@ -556,10 +556,12 @@
     var f = document.createElement("form");
     f.method = "post"; f.action = PAY.action; f.acceptCharset = "utf-8"; f.hidden = true;
     [["shopId", PAY.shopId], ["sum", String(o.sum)], ["cps_email", o.email || ""],
-     ["orderDetails", "Заказ " + o.no], ["shopSuccessURL", PAY.ok], ["shopFailURL", PAY.fail]
+     ["orderDetails", (o.details || "Заказ " + o.no).slice(0, 1000)],
+     ["shopSuccessURL", PAY.ok], ["shopFailURL", PAY.fail]
     ].forEach(function (kv) {
-      var i = document.createElement("input");
-      i.type = "hidden"; i.name = kv[0]; i.value = kv[1];
+      var i = document.createElement(kv[0] === "orderDetails" ? "textarea" : "input");
+      if (i.tagName === "INPUT") i.type = "hidden";
+      i.name = kv[0]; i.value = kv[1];
       f.appendChild(i);
     });
     document.body.appendChild(f);
@@ -583,9 +585,28 @@
     var o = lastOrder();
     var again = $("pay-again");
     if (m[1] === "ok") {
-      $("pay-note-title").textContent = "Оплата прошла, спасибо!";
-      $("pay-note-text").textContent = (o ? "Заказ " + o.no + " оплачен. " : "") +
-        "Чек придёт на почту. Как только заказ будет готов, отправим его в ваш пункт выдачи Ozon.";
+      $("pay-note-title").textContent = o ? "Оплата прошла, спасибо!" : "Спасибо!";
+      $("pay-note-text").textContent = o
+        ? "Заказ " + o.no + " оплачен. Чек придёт на почту. Как только заказ будет готов, отправим его в ваш пункт выдачи Ozon."
+        : "Если вы оплатили заказ, чек придёт на почту. Вопросы — в Telegram.";
+      if (o) {
+        // Paid: now the cart is done with, and her copy of the order goes out,
+        // marked paid. The ЮKassa notice already carries the full order, so a
+        // failed letter loses nothing.
+        write([]);
+        render();
+        try { localStorage.removeItem("lg-pending"); } catch (e) { /* private mode */ }
+        var to = (document.getElementById("order-form") || {}).dataset;
+        if (o.payload && to && to.endpoint) {
+          try {
+            fetch(to.endpoint, {
+              method: "POST", keepalive: true,
+              headers: { "Content-Type": "application/json", "Accept": "application/json" },
+              body: JSON.stringify(o.payload)
+            }).catch(function () { /* the ЮKassa notice has it */ });
+          } catch (e) { /* the ЮKassa notice has it */ }
+        }
+      }
       try { localStorage.removeItem(LAST); } catch (e) { /* private mode */ }
     } else {
       $("pay-note-title").textContent = "Оплата не прошла";
@@ -630,6 +651,15 @@
   // same cart by the same buyer keeps the same order number, so a duplicate
   // letter is plainly the same order, not a new one.
   var sending = false;
+  function unlock() {
+    sending = false;
+    if (submitBtn) submitBtn.disabled = false;
+    delete status.dataset.state;
+    status.textContent = "";
+  }
+  // Back from the payment page with the browser's Back button: the page may be
+  // restored frozen, so unlock the form for another try.
+  window.addEventListener("pageshow", function (e) { if (e.persisted) unlock(); });
   var PEND = "lg-pending";
   var pending = null;
   function numberFor(sig) {
@@ -639,10 +669,6 @@
     pending = { no: orderNumber(), sig: sig, at: Date.now() };
     try { localStorage.setItem(PEND, JSON.stringify(pending)); } catch (e) { /* private mode */ }
     return pending.no;
-  }
-  function forgetPending() {
-    pending = null;
-    try { localStorage.removeItem(PEND); } catch (e) { /* private mode */ }
   }
 
   form.querySelectorAll("input, select, textarea").forEach(function (input) {
@@ -677,60 +703,31 @@
       email: data.get("email"), pvz: data.get("pvz"), note: data.get("note")
     };
 
-    status.dataset.state = "sending";
-    status.textContent = "Отправляем заказ";
-    sending = true;
-    if (submitBtn) submitBtn.disabled = true; // one tap, one order
-
-    // The order as plain text: what she reads if sending fails and the buyer
-    // pastes it into Telegram instead.
-    var text = ["Заказ " + no + " с сайта Lila Gerts", ""]
-      .concat(cart.map(function (l) {
-        return "— " + l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " — " + (l.price * l.qty) + " руб.";
-      }))
-      .concat(["", "Товары: " + total + " руб.", "Доставка: " + (ship ? ship + " руб." : "бесплатно"),
-               "Итого: " + (total + ship) + " руб.", "Имя: " + (order.name || ""),
-               "Телефон: " + (order.phone || ""), "Почта: " + (order.email || ""),
-               "ПВЗ Ozon: " + (order.pvz || "")]);
-    if (order.note) text.push("Комментарий: " + order.note);
-
-    // Never swallow an order: when it cannot be sent, hand it to the buyer.
-    function handOver(reason, detail) {
-      var done = function (copied) {
-        sending = false;
-        if (submitBtn) submitBtn.disabled = false;
-        status.dataset.state = "sent";
-        status.textContent = reason + (copied
-          ? " Заказ скопирован: вставьте его в сообщение в Telegram или на почту, и мы оформим. "
-          : " Напишите нам в Telegram или на почту, и мы оформим заказ. ");
-        var tg = el("a", "quiet", "Написать в Telegram");
-        tg.href = "https://t.me/Nina.G1999"; tg.target = "_blank"; tg.rel = "noopener";
-        status.appendChild(tg);
-        // The service's own words, small: enough to tell "not activated" from
-        // "could not reach it" when someone sends a screenshot.
-        if (detail) status.appendChild(el("small", "status-detail", "Причина: " + detail));
-      };
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text.join("\n")).then(function () { done(true); }, function () { done(false); });
-      } else done(false);
-    }
-
-    if (!endpoint) { handOver("Отправка на почту ещё не подключена."); return; }
-
-    // FormSubmit mails one table row per field, so the order goes flat and
-    // in Russian; the keys become the row names she reads.
+    var sum = total + ship;
     var lines = cart.map(function (l) {
       return l.name + (l.sub ? " (" + l.sub + ")" : "") + " × " + l.qty + " = " + (l.price * l.qty) + " руб.";
     }).join("\n");
+
+    // What rides with the payment: the whole order, short, so the ЮKassa
+    // notice alone is enough to make and send it.
+    var details = [no, lines,
+      "Доставка: " + (ship ? ship + " руб." : "бесплатно") + ", итого " + sum + " руб.",
+      "Имя: " + (order.name || ""), "Телефон: " + (order.phone || ""),
+      "ПВЗ Ozon: " + (order.pvz || "")]
+      .concat(order.note ? ["Комментарий: " + order.note] : []).join("\n");
+
+    // Her letter, sent only once the buyer is back from a successful payment.
+    // FormSubmit mails one table row per field; the keys are the row names.
     var payload = {
-      _subject: "Заказ " + no + ": " + (order.name || "") + ", " + (total + ship) + " руб.",
+      _subject: "Оплачен заказ " + no + ": " + (order.name || "") + ", " + sum + " руб.",
       _template: "table",
       _captcha: "false",
       "Номер заказа": no,
+      "Оплата": "оплачен через ЮKassa",
       "Заказ": lines,
       "Товары": total + " руб.",
       "Доставка": ship ? ship + " руб." : "бесплатно",
-      "Итого": (total + ship) + " руб.",
+      "Итого": sum + " руб.",
       "Имя": order.name || "",
       "Телефон": order.phone || "",
       "Почта для чека": order.email || "",
@@ -738,39 +735,17 @@
       "ПВЗ Ozon": order.pvz || "",
       "Комментарий": order.note || "—"
     };
-    fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
-    }).then(function (res) {
-      if (!res.ok) throw new Error(String(res.status));
-      return res.json().catch(function () { return {}; });
-    }).then(function (json) {
-      // FormSubmit answers 200 even when it refuses (not yet activated), so
-      // trust the body, not the status.
-      if (json && json.success !== true && json.success !== "true") throw new Error(json.message || "refused");
-      sending = false;
-      forgetPending();
-      if (submitBtn) submitBtn.disabled = false;
-      delete status.dataset.state;
-      status.textContent = "";
-      $("done-no").textContent = no;
-      // No "we will call you": she works alone. The buyer pays right here;
-      // ЮKassa mails the receipt; questions go to Telegram.
-      var sum = total + ship;
-      justPlaced = { no: no, sum: sum, email: order.email };
-      try { localStorage.setItem(LAST, JSON.stringify(justPlaced)); } catch (e) { /* private mode */ }
-      if (payNow) payNow.textContent = "Оплатить " + money(sum);
-      var doneText = $("done-text");
-      doneText.textContent = "Осталось оплатить: картой, через СБП или SberPay на странице ЮKassa. Чек придёт на ";
-      doneText.appendChild(el("b", null, order.email));
-      doneText.appendChild(document.createTextNode(". Если появятся вопросы, напишите в Telegram и укажите номер заказа."));
-      $("f-note").value = "";
-      $("f-ok").checked = false;
-      write([]);
-      justOrdered = true;
-      render();
-      if (doneEl) doneEl.focus();
-    }).catch(function (err) { handOver("Не удалось отправить заказ.", err && err.message ? String(err.message).slice(0, 200) : ""); });
+
+    sending = true;
+    if (submitBtn) submitBtn.disabled = true; // one tap, one payment
+    status.dataset.state = "sending";
+    status.textContent = "Переходим к оплате…";
+
+    justPlaced = { no: no, sum: sum, email: order.email, details: details, payload: payload };
+    try { localStorage.setItem(LAST, JSON.stringify(justPlaced)); } catch (e) { /* private mode */ }
+    // The cart stays until the payment succeeds: a failed or abandoned payment
+    // leaves it as it was, and a retry keeps the same order number.
+    pay(justPlaced);
+    window.setTimeout(unlock, 8000);
   });
 })();
