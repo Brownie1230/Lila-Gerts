@@ -390,5 +390,14 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 .pay-note-text{margin:0;color:var(--ink-soft);line-height:1.5}
 .pay-note-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .pay-note-actions .btn[hidden]{display:none}
+.pay-note-sticker{width:132px;height:132px;border-radius:50%;justify-self:center;margin-top:-4px;
+  box-shadow:0 0 0 4px #fff,0 14px 34px -10px rgb(0 0 0 / .6)}
+.pay-note-sticker[hidden]{display:none}
+.pay-note--thanks{text-align:center}
+.pay-note--thanks .pay-note-actions{justify-content:center}
+@media (prefers-reduced-motion:no-preference){
+  .pay-note--thanks .pay-note-sticker{animation:sticker-in .7s cubic-bezier(.2,1.4,.4,1) both .1s}
+  @keyframes sticker-in{from{opacity:0;transform:scale(.6) rotate(-12deg)}to{opacity:1;transform:none}}
+}
 @media (prefers-reduced-motion:no-preference){.pay-note:not([hidden]){animation:toast-in .5s var(--e)}}
 

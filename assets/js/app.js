@@ -585,7 +585,9 @@
     var o = lastOrder();
     var again = $("pay-again");
     if (m[1] === "ok") {
-      $("pay-note-title").textContent = o ? "Оплата прошла, спасибо!" : "Спасибо!";
+      $("pay-note-title").textContent = o ? "Спасибо за заказ!" : "Спасибо!";
+      // Her sticker, only when there really is a paid order to thank for.
+      if (o) { $("pay-note-sticker").hidden = false; note.classList.add("pay-note--thanks"); }
       $("pay-note-text").textContent = o
         ? "Заказ " + o.no + " оплачен. Чек придёт на почту. Как только заказ будет готов, отправим его в ваш пункт выдачи Ozon."
         : "Если вы оплатили заказ, чек придёт на почту. Вопросы — в Telegram.";
