@@ -390,8 +390,8 @@ dialog::backdrop{background:rgb(18 2 2 / .62);backdrop-filter:blur(3px)}
 .pay-note-text{margin:0;color:var(--ink-soft);line-height:1.5}
 .pay-note-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .pay-note-actions .btn[hidden]{display:none}
-.pay-note-sticker{width:132px;height:132px;border-radius:50%;justify-self:center;margin-top:-4px;
-  box-shadow:0 0 0 4px #fff,0 14px 34px -10px rgb(0 0 0 / .6)}
+.pay-note-sticker{width:min(260px,62vw);height:auto;border-radius:22px;justify-self:center;
+  box-shadow:0 0 0 4px #fff,0 18px 40px -12px rgb(0 0 0 / .65)}
 .pay-note-sticker[hidden]{display:none}
 .pay-note--thanks{text-align:center}
 .pay-note--thanks .pay-note-actions{justify-content:center}
